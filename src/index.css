@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    border: none;
+}
+
+:root {
+    --primary-color: #fff;
+    --secondary-color: #000;
+    --success-color: #00B207;
+    --success-secondary: #56AC59;
+  }
