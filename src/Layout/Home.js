@@ -2,8 +2,8 @@ import React from 'react';
 import TopNav from '../Shared/Navigation/TopNav/TopNav';
 import MiddleNav from '../Shared/Navigation/MiddleNav/MiddleNav';
 import BottomNav from '../Shared/Navigation/BottomNav/BottomNav';
-import Hero from '../Components/Home/Hero/Hero';
 import Feature from '../Components/Home/Feature/Feature';
+import HeaderSection from '../Components/Home/HeaderSection/HeaderSection';
 
 const Home = () => {
     return (
@@ -15,7 +15,7 @@ const Home = () => {
                     <BottomNav></BottomNav>
                 </nav>
                 <section>
-                    <Hero></Hero>
+                    <HeaderSection></HeaderSection>
                     <Feature></Feature>
                 </section>
             </header>
