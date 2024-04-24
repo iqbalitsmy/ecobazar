@@ -110,8 +110,8 @@ const HeaderSection = () => {
                     className="mySwiper h-full w-full"
                 >
                     {
-                        bannerDetails.map(bannerDetail => (
-                            <SwiperSlide>
+                        bannerDetails.map((bannerDetail, i) => (
+                            <SwiperSlide key={i}>
                                 <div className='h-full w-full grid lg:grid-cols-2 items-center justify-center px-8 lg:px-12' style={{ backgroundImage: `url(${bannerDetail.bg})`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
                                     <div className='text-slate-100 space-y-6'>
                                         <h1 className='text-5xl font-bold'>{bannerDetail.title}</h1>

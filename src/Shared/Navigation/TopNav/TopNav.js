@@ -2,7 +2,7 @@ import React from 'react';
 
 const TopNav = () => {
     return (
-        <div className='flex justify-between items-center text-gray-500 py-6 border-solid border-0 border-b-[1.2px] border-gray-200'>
+        <div className='flex justify-between items-center text-gray-500 py-2 border-solid border-0 border-b-[1.2px] border-gray-200'>
             <div className='text-base flex items-center'>
                 <div className='h-8 w-8'>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" xmlSpace="preserve">
