@@ -29,7 +29,7 @@ const ProductCard = ({ productDetail }) => {
     }
 
     return (
-        <div className=' max-h-[320px] max-w-[280px] border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-lg hover:shadow-green-300 cursor-pointer'>
+        <div className='max-h-[320px] max-w-[280px] border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-lg hover:shadow-green-300 cursor-pointer mx-auto md:mb-6'>
             <div
                 className='h-full w-full relative'
                 onMouseEnter={() => setIsHovered(true)}

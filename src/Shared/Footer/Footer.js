@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
+        <section className='container mx-auto'>
             Footer
-        </div> 
+        </section> 
     );
 };
 

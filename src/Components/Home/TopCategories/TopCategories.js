@@ -26,24 +26,32 @@ const categoriesImgs = [category1, category2, category3, category4, category5, c
 
 const TopCategories = () => {
     return (
-        <section>
+        <section className='mb-8 container mx-auto'>
             <h2 className='text-3xl font-bold pb-8 text-center'>Top Categories</h2>
             <Swiper
-                slidesPerView={6}
-                spaceBetween={30}
+                slidesPerView={2}
+                spaceBetween={20}
                 pagination={{
                     clickable: true,
+                    dynamicBullets: true,
+                }}
+                breakpoints={{
+                    320: { slidesPerView: 3, spaceBetween: 20 },
+                    480: { slidesPerView: 4, spaceBetween: 20 },
+                    768: { slidesPerView: 6, spaceBetween: 30 },
+                    1024: { slidesPerView: 8, spaceBetween: 30 },
+                    1200: { slidesPerView: 10, spaceBetween: 30 },
                 }}
                 modules={[Pagination]}
                 className='flex flex-wrap gap-4 mySwiper'
             >
                 {
                     categoriesImgs.map((categoriesImg, i) => (<SwiperSlide
-                        className='p-2 border-solid border-[1px] border-gray-200 hover:border-[#00B207] shadow-sm hover:shadow-lg hover:shadow-green-100 cursor-pointer'
+                        className='p-2 border-solid border-[1px] border-gray-200 hover:border-[#00B207] shadow-sm hover:shadow-lg hover:shadow-green-100 hover:text-green-800 cursor-pointer'
                         key={i}
                     >
                         <img className='p-2' src={categoriesImg} alt="" />
-                        <p className='text-center'>Fresh Fruit</p>
+                        <p className='text-center font-semibold'>Fresh Fruit</p>                                       
                     </SwiperSlide>))
                 }
             </Swiper>
