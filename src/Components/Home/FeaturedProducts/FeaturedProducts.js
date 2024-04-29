@@ -1,7 +1,6 @@
 import React from 'react';
 import banner from '../../../assets/banner/bannar2.png'
 
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -12,10 +11,11 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
-import ProductCard from '../../../Shared/ProductCard/ProductCard';
 
 // fake product data
 import productDetails from '../../../assets/fakeData/fakeData';
+
+import ProductCard from '../../../Shared/ProductCard/ProductCard';
 import MiniProductCard from '../MiniProductCard/MiniProductCard';
 
 
