@@ -3,26 +3,48 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Pagination } from 'swiper/modules';
+
 const ProductDetails = ({ productDetail }) => {
     const { title, newPrice, price, offPercentage, rating, brandImg, description, quantity, category, tags, images } = productDetail;
     const [productImage, setProductImage] = useState(images[0]);
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-6 lg:m-6'>
-            <div className='flex w-full gap-4'>
-                <div className='flex flex-col gap-4'>
-                    {
-                        images.map((image, i) => (<figure
-                            className='h-[5vh] w-14 border-solid border-[1px] hover:border-2 border-gray-300 hover:shadow-md cursor-pointer'
-                            key={i}
-                            onClick={() => setProductImage(image)}>
-                            <img className='h-full w-full' src={image} alt="Product" />
-                        </figure>))
-                    }
-                </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-6 lg:m-6 pb-6'>
+            <div className=''>
                 <figure className='h-full w-full'>
                     <img className='max-h-[400px] w-auto mx-auto' src={productImage} alt="Product" />
                 </figure>
+                <Swiper
+                    slidesPerView={4}
+                    spaceBetween={10}
+                    // pagination={{
+                    //     clickable: true,
+                    // }}
+                    modules={[Pagination]}
+                    className='mySwiper max-h-40'>
+                    {
+                        images.map((image, i) => {
+                            return (
+                                <SwiperSlide
+                                    className='max-w-14  border-solid border-[1px] hover:border-2 border-gray-300 hover:shadow-md cursor-pointer'
+                                    key={i}
+                                    onClick={() => setProductImage(image)}
+                                >
+                                    <img className='h-16' src={image} alt="Product" />
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+                </Swiper>
             </div>
             <div className=''>
                 <div className='space-y-4 pb-6 mb-4 border-solid border-0 border-b-[1px] border-gray-300'>
