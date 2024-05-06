@@ -12,7 +12,7 @@ const Reviewers = ({ name, avatar, rating, time, review }) => {
                         <img
                             src={avatar}
                             alt="avatar"
-                            class="relative inline-block h-12 w-12 !rounded-full  object-cover object-center"
+                            className="relative inline-block h-12 w-12 !rounded-full  object-cover object-center"
                         />
                     </div>
                     <div>

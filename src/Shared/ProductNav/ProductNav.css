@@ -1,0 +1,7 @@
+.parent .child:last-child {
+    color: var(--success-color);
+}
+
+.parent .child:last-child .arrow {
+    display: none;
+}

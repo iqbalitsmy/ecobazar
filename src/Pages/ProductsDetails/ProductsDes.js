@@ -1,8 +1,9 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Rating } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import Reviewers from '../../Shared/Reviewers/Reviewers';
+import Pagination from '../../Shared/Pagination/Pagination ';
 
 const ratings = [
     {
@@ -27,7 +28,7 @@ const ratings = [
     },
 ]
 
-const reviewes = [
+const reviews = [
     {
         name: "Kristin Watson",
         avatar: "https://docs.material-tailwind.com/img/face-2.jpg",
@@ -43,10 +44,17 @@ const reviewes = [
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
     },
     {
-        name: "Jacob Jones",
+        name: "Jacob Jones 3",
         avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436185.jpg",
         rating: 3.4,
         time: Date.now() - (1 * 365.25 * 24 * 60 * 60 * 1000),
+        review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
+    },
+    {
+        name: "Ralph Edwards 4",
+        avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg",
+        rating: 3.4,
+        time: Date.now() - (1 * 30.44 * 24 * 60 * 60 * 1000),
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
     },
     {
@@ -59,6 +67,26 @@ const reviewes = [
 ]
 
 const ProductsDes = () => {
+
+    // Define initial state
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPageData, setCurrentPageData] = useState(reviews.slice(0, 2));
+    const itemsPerPage = 3; // Change this value according to your requirement
+
+    // Function to handle page change
+    const handlePageChange = (page) => {
+        // Calculate the index range for current page
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, reviews.length);
+
+        setCurrentPage(page);
+        setCurrentPageData(reviews.slice(startIndex, endIndex))
+    };
+
+    const handleLoadMoreReviews = () => {
+        setCurrentPageData(reviews.slice(0, 3))
+    }
+
     return (
         <div className='grid grid-cols-2 pt-5 border-solid border-0 border-t-[1px] border-opacity-20 border-gray-500'>
             <div className='md:w-[90%]'>
@@ -116,22 +144,29 @@ const ProductsDes = () => {
                 </div>
                 <div>
                     {
-                        reviewes.map(({ name, avatar, rating, time, review }, i) => {
+                        currentPageData.map((data, i) => {
                             return (
                                 <Reviewers
                                     key={i}
-                                    name={name}
-                                    avatar={avatar}
-                                    rating={rating}
-                                    time={time}
-                                    review={review}
+                                    {...data}
                                 />
                             )
                         })
                     }
-                    <div>
-                        <button className='rounded-2xl bg-green-100 text-green-600 px-5 py-2 font-semibold'>Load More</button>
-                    </div>
+                    {
+                        currentPageData.length <= 2 && currentPage === 1 && (<div>
+                            <button
+                                className='rounded-2xl bg-green-100 text-green-600 px-5 py-2 font-semibold'
+                                onClick={handleLoadMoreReviews}
+                            >Load More</button>
+                        </div>)
+                    }
+                    {
+                        (currentPageData.length === 3 || currentPage !== 1) && (<div className='absolute right-0'>
+                            {/* Pagination component */}
+                            <Pagination currentPage={currentPage} totalPages={Math.ceil(reviews.length / itemsPerPage)} onPageChange={handlePageChange} />
+                        </div>)
+                    }
                 </div>
             </div>
         </div>
