@@ -3,6 +3,7 @@ import Home from "../Layout/Home";
 import HomePage from "../Pages/Home/HomePage";
 import ProductsDetailsPage from "../Pages/ProductsDetails/ProductsDetailsPage";
 import ProductsLayout from "../Layout/ProductsLayout";
+import ProductsPage from "../Pages/ProductsPage/ProductsPage";
 
 
 const router = createBrowserRouter([
@@ -14,14 +15,6 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <HomePage></HomePage>,
             },
-            {
-                path: "/category",
-                element: <HomePage></HomePage>,
-            },
-            {
-                path: "/category/:id",
-                element: <ProductsDetailsPage></ProductsDetailsPage>,
-            },
         ]
     },
     {
@@ -29,7 +22,11 @@ const router = createBrowserRouter([
         element: <ProductsLayout></ProductsLayout>,
         children: [
             {
-                path: ":id", 
+                path: "",
+                element: <ProductsPage></ProductsPage>,
+            },
+            {
+                path: ":id",
                 element: <ProductsDetailsPage></ProductsDetailsPage>,
             },
         ]
