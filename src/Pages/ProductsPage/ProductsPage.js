@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
 import productDetails from '../../assets/fakeData/fakeData';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { Box, Rating, Slider } from '@mui/material';
+import { faAngleDown, faAngleUp, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { Box, FormControlLabel, Radio, Rating, Slider, colors } from '@mui/material';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 
 // Import Swiper React components
@@ -54,19 +54,31 @@ const bannerDetails = [
 ]
 
 const ProductsPage = () => {
-    const [value, setValue] = React.useState([20, 37]);
+    const [selectedValue, setSelectedValue] = useState('');
+    const [value, setValue] = useState([20, 37]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    const handleRadioBtnChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+    const controlProps = (item) => ({
+        checked: selectedValue === item,
+        onChange: handleRadioBtnChange,
+        value: item,
+        name: 'color-radio-button',
+        inputProps: { 'aria-label': item },
+    });
 
 
     return (
         <section className='container mx-auto'>
             <ProductNav titles={["Category", "Vegetables"]}></ProductNav>
-            <div className='flex'>
+            <div className='flex mt-8 px-4 md:px-6'>
                 <aside>
-                    <div className='inline-block'>
+                    <div className='inline-block mb-4'>
                         <div className='flex items-center gap-1 text-gray-100 bg-[#00B207] py-1 px-5 rounded-full'>
                             <p className='font-semibold'>Filter</p>
                             <div className='fill-white'>
@@ -74,84 +86,116 @@ const ProductsPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div className='flex items-center justify-between'>
-                            <h4>All Categories</h4>
-                            <div>
+                    <div className='mb-3 pb-3 border-1px border-solid border-gray-200 border-0 border-b-2'>
+                        <div className='flex items-center justify-between text-xl font-semibold mb-4'>
+                            <h4 className=''>All Categories</h4>
+                            <div className=''>
                                 <FontAwesomeIcon icon={faAngleDown} />
                                 {/* <FontAwesomeIcon icon={faAngleUp} /> */}
                             </div>
                         </div>
-                        <div>
+                        <div className='space-y-2'>
                             {
                                 allCategories.map((allCategori, i) => (
-                                    <div key={i}>
-                                        <input type="radio" id="html" name="fav_language" value={allCategori} />
-                                        <label htmlFor="html">{allCategori}</label><br />
+                                    <div key={i} className='flex items-center gap-2'>
+                                        <FormControlLabel
+                                            value={allCategori}
+                                            control={
+                                                <Radio
+                                                    {...controlProps(allCategori)}
+                                                    sx={{
+                                                        color: "#ccc",
+                                                        '&.Mui-checked': {
+                                                            color: "#00B207",
+                                                        },
+                                                    }}
+                                                />}
+                                            label={allCategori}
+                                        />
                                     </div>
                                 ))
                             }
                         </div>
                     </div>
-                    <div>
-                        <div className='flex items-center justify-between'>
+                    <div className='mb-3 pb-6 border-1px border-solid border-gray-200 border-0 border-b-2'>
+                        <div className='flex items-center justify-between text-xl font-semibold mb-4'>
                             <h4>Price</h4>
                             <div>
                                 <FontAwesomeIcon icon={faAngleDown} />
                                 {/* <FontAwesomeIcon icon={faAngleUp} /> */}
                             </div>
                         </div>
-                        <Box sx={{ width: 300 }}>
+                        <Box sx={{}}>
                             <Slider
                                 getAriaLabel={() => "Minimum distance shift"}
                                 value={value}
                                 onChange={handleChange}
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
+                                sx={{
+                                    color: "#00B207",
+                                    height: 8,
+                                    '& .MuiSlider-thumb': {
+                                        backgroundColor: '#fff',
+                                        border: '2px solid currentColor',
+                                    },
+                                    '& .MuiSlider-rail': {
+                                        backgroundColor: '#ccc',
+                                    }
+                                }}
+                                disableSwap
                             />
                         </Box>
-                        <p>Price: <span>50-1,500</span></p>
+                        <p className=''><span className='text-gray-500'>Price:</span> 50 <span className=''><FontAwesomeIcon icon={faMinus} /></span> 1,500</p>
                     </div>
-                    <div>
-                        <div className='flex items-center justify-between'>
+                    <div className='mb-3 pb-6 border-1px border-solid border-gray-200 border-0 border-b-2'>
+                        <div className='flex items-center justify-between text-xl font-semibold mb-4'>
                             <h4>Rating</h4>
                             <div>
                                 <FontAwesomeIcon icon={faAngleDown} />
                                 {/* <FontAwesomeIcon icon={faAngleUp} /> */}
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                                <label htmlFor="vehicle1">
+                        <div className='space-y-2'>
+                            <div className='flex items-center gap-2'>
+                                <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="5" name="rating" value="5" />
+                                <label className='flex items-center gap-2 cursor-pointer' htmlFor="5">
                                     <Rating name="read-only" size='small' value={5} readOnly />
-                                    <span>5.0</span>
-                                </label><br />
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                                <label htmlFor="vehicle1">
+                                    <span className=''>5.0</span>
+                                </label>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="4" name="rating" value="4" />
+                                <label className='flex items-center gap-2 cursor-pointer' htmlFor="4">
                                     <Rating name="read-only" size='small' value={4} readOnly />
                                     <span>4.0 & up</span>
-                                </label><br />
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                                <label htmlFor="vehicle1">
+                                </label>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="3" name="rating" value="3" />
+                                <label className='flex items-center gap-2 cursor-pointer' htmlFor="3">
                                     <Rating name="read-only" size='small' value={3} readOnly />
                                     <span>3.0 & up</span>
-                                </label><br />
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                                <label htmlFor="vehicle1">
+                                </label>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="2" name="rating" value="2" />
+                                <label className='flex items-center gap-2 cursor-pointer' htmlFor="2">
                                     <Rating name="read-only" size='small' value={2} readOnly />
                                     <span>2.0 & up</span>
-                                </label><br />
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                                <label htmlFor="vehicle1">
+                                </label>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="1" name="rating" value="1" />
+                                <label className='flex items-center gap-2 cursor-pointer' htmlFor="1">
                                     <Rating name="read-only" size='small' value={1} readOnly />
                                     <span>1.0 & up</span>
-                                </label><br />
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div className='flex items-center justify-between'>
+                    <div className='mb-3 pb-6'>
+                        <div className='flex items-center justify-between text-xl font-semibold mb-4'>
                             <h4>Popular Tag</h4>
                             <div>
                                 <FontAwesomeIcon icon={faAngleDown} />
@@ -193,7 +237,7 @@ const ProductsPage = () => {
                         </Swiper>
                     </div>
                     <div className=''>
-                        <h2 className='text-lg font-semibold mb-3 text-gray-600'>Sale Products</h2>
+                        <h2 className='text-xl font-semibold mb-4'>Sale Products</h2>
                         {
                             productDetails.slice(0, 3).map((productDetail, i) => (
                                 <MiniProductCard key={i} productDetail={productDetail} >
