@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Modal, Rating } from '@mui/material';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const MiniProductCard = ({ productDetail }) => {
+const MiniProductCard = ({ productDetail, productPage }) => {
     const { title, newPrice, price, offPercentage, thumbnail, rating, brandImg, description, quantity, category, tags, images } = productDetail;
     const [isHovered, setIsHovered] = useState(false);
     const [productImage, setProductImage] = useState(images[0]);
@@ -30,18 +30,18 @@ const MiniProductCard = ({ productDetail }) => {
 
     return (
         <div
-            className='max-h-[120px] min-h-24 border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-lg hover:shadow-green-300 cursor-pointer flex gap-4 mb-3'
-            onMouseEnter={() => setIsHovered(true)}
+            className={`max-h-[120px] min-h-24 w-full border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-lg hover:shadow-green-300 cursor-pointer flex mb-3 ${productPage ? "gap-0 lg:gap-4": "gap-4"}`}
+            onMouseEnter={() => setIsHovered(!productPage && true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <figure className='max-h-[140px] w-full'>
-                <img className='h-full w-full object-contain mx-auto' src={thumbnail} alt="Product" />
+                <img className='h-full min-w-full object-contain mx-auto' src={thumbnail} alt="Product" />
             </figure>
-            <div className='p-2 w-full'>
+            <div className={`${productPage ? "px-0 py-1 lg:p-2": "p-2"} w-full`}>
                 <div className='text-base text-slate-600 font-medium'>
                     <h1>{title}</h1>
                 </div>
-                <div className='relative'>
+                <div className={`${productPage ? "" : "relative"}`}>
                     <div className={`flex gap-2 mt-4 ${isHovered ? `block` : `hidden`}`}>
                         <div className='p-1 lg:p-2 border-solid border-[1px] hover:border-0 border-slate-200 rounded-full hover:bg-[#00B207] fill-slate-700 hover:fill-white'>
                             <svg height={"22px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -197,10 +197,10 @@ const MiniProductCard = ({ productDetail }) => {
                     </Modal>
                     <div className={`${isHovered ? `hidden` : `block`}`}>
                         <div className=''>
-                            <p className='text-lg font-semibold'>${price.toFixed(2)}</p>
+                            <p className={`${productPage ? "text-base font-semibold" : "text-lg font-semibold"}`}>${price.toFixed(2)}</p>
                         </div>
                         <div>
-                            <Rating name="read-only" value={rating} readOnly precision={0.5} />
+                            <Rating name="read-only" size='small' value={rating} readOnly precision={0.5} />
                         </div>
                     </div>
                 </div>
