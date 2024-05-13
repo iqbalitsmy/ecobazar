@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange, PAGE_RANGE }) => {
     const pages = [];
 
     // Generate page numbers based on total pages
@@ -10,11 +10,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
     return (
         <nav className="flex justify-center">
-            <ul className="flex list-none">
+            <ul className="flex items-center gap-2 list-none">
                 {/* Render "Previous" button */}
-                <li className={`prev-next-btn cursor-pointer ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                <li className={`cursor-pointer ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}>
                     <button
-                        className="block py-1 px-4 bg-white hover:bg-gray-100 focus:outline-none"
+                        className="block py-2 px-3 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none"
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={currentPage === 1}
                     >
@@ -23,21 +23,35 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 </li>
 
                 {/* Render page numbers */}
-                {pages.map((page) => (
-                    <li key={page}>
-                        <button
-                            className={`block py-1 px-2 ${currentPage === page ? 'text-[#3bac97]' : 'bg-white'} hover:bg-gray-100 focus:outline-none`}
-                            onClick={() => onPageChange(page)}
-                        >
-                            {page}
-                        </button>
-                    </li>
-                ))}
+                {pages.map((page, index) => {
+                    if (page === currentPage || 
+                        page === 1 || 
+                        page === totalPages || 
+                        (index >= currentPage - PAGE_RANGE && index <= currentPage + PAGE_RANGE)
+                        ) {
+                            return (
+                                <li key={page}>
+                                    <button
+                                        className={`block py-1 px-3 rounded-full ${currentPage === page ? 'bg-[#00B207] text-white' : 'bg-white hover:bg-gray-100'} focus:outline-none`}
+                                        onClick={() => onPageChange(page)}
+                                    >
+                                        {page}
+                                    </button>
+                                </li>
+                            );
+                        } else if (
+                            (page === 2 && currentPage > PAGE_RANGE + 2) || 
+                            (page === totalPages - 1 && currentPage < totalPages - PAGE_RANGE - 1)
+                        ) {
+                            return <li key={page}>...</li>;
+                        }
+                        return null;
+                })}
 
                 {/* Render "Next" button */}
                 <li className={`prev-next-btn cursor-pointer ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}>
                     <button
-                        className="block py-1 px-4 bg-white hover:bg-gray-100 focus:outline-none"
+                        className="block py-2 px-3 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none"
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
                     >

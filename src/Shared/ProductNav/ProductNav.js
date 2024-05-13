@@ -4,10 +4,10 @@ import navBg from '../../assets/navigation-bg.png'
 import './ProductNav.css'
 
 
-const ProductNav = ({ titles }) => {
+const ProductNav = ({ titles, newStyle }) => {
     return (
         <div
-            className='w-full min-h-12 flex items-center'
+            className={`w-full flex items-center ${newStyle ? "min-h-16" : "min-h-12"}`}
             style={{
                 backgroundImage: `url(${navBg})`,
                 backgroundSize: "center",

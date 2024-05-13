@@ -38,7 +38,7 @@ const FeaturedProducts = () => {
                     }}
                     breakpoints={{
                         320: { slidesPerView: 1, spaceBetween: 0 },
-                        480: { slidesPerView: 2, spaceBetween: 20 },
+                        480: { slidesPerView: 2, spaceBetween:20 },
                         768: { slidesPerView: 3, spaceBetween: 30 },
                         1024: { slidesPerView: 4, spaceBetween: 30 },
                         1200: { slidesPerView: 5, spaceBetween: 30 },
@@ -48,7 +48,7 @@ const FeaturedProducts = () => {
                 >
                     {
                         productDetails.map((productDetail, i) => (
-                            <SwiperSlide key={i}>
+                            <SwiperSlide className='pb-4' key={i}>
                                 <ProductCard productDetail={productDetail}></ProductCard>
                             </SwiperSlide>
                         ))

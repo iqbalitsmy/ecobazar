@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-
 import { Box, Modal, Rating } from '@mui/material';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -29,7 +27,7 @@ const ProductCard = ({ productDetail }) => {
     }
 
     return (
-        <div className='max-h-[320px] max-w-[280px] border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-lg hover:shadow-green-300 cursor-pointer mx-auto md:mb-6'>
+        <div className='max-h-[320px] max-w-[280px] border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-sm shadow-lg hover:shadow-green-300 cursor-pointer mx-auto'>
             <div
                 className='h-full w-full relative'
                 onMouseEnter={() => setIsHovered(true)}
@@ -185,7 +183,7 @@ const ProductCard = ({ productDetail }) => {
                 </div>
                 <img className='h-full max-h-[200px] w-full object-contain mx-auto' src={thumbnail} alt="" />
             </div>
-            <div className='px-2 space-y-2'>
+            <div className='px-2 space-y-1'>
                 <div className='text-xl text-slate-600 font-medium'>
                     <h1>{title}</h1>
                 </div>

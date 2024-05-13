@@ -16,7 +16,6 @@ const ProductsLayout = () => {
                 </nav>
             </header>
             <main className=''>
-                
                 <Outlet></Outlet>
             </main>
             <footer>

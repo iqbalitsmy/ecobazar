@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import ProductNav from '../../Shared/ProductNav/ProductNav';
-import productDetails from '../../assets/fakeData/fakeData';
-import ProductCard from '../../Shared/ProductCard/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Box, FormControlLabel, Radio, Rating, Slider } from '@mui/material';
+import productDetails from '../../assets/fakeData/fakeData';
+import ProductNav from '../../Shared/ProductNav/ProductNav';
+import ProductCard from '../../Shared/ProductCard/ProductCard';
+import Pagination from '../../Shared/Pagination/Pagination ';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 import adBanner from '../../assets/banner/bannar-produc-page.png'
 
@@ -19,6 +20,22 @@ function valuetext(value) {
 const ProductsPage = () => {
     const [selectedValue, setSelectedValue] = useState('');
     const [value, setValue] = useState([20, 37]);
+
+    // pagination part
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20;
+
+    // Calculate the index range for current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, productDetails.length);
+    // Get the current page data
+    const currentPageData = productDetails.slice(startIndex, endIndex);
+
+    // Function to handle page change
+    const handlePageChange = (page) => {
+        console.log(page)
+        setCurrentPage(page);
+    };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -37,10 +54,10 @@ const ProductsPage = () => {
 
 
     return (
-        <section className='container mx-auto'>
+        <section className='container mx-auto mb-10'>
             <ProductNav titles={["Category", "Vegetables"]}></ProductNav>
-            <div className='grid grid-cols-12 mt-6'>
-                <aside className='col-start-1 col-end-5 sm:col-end-4 xl:col-end-3 px-4 md:px-6'>
+            <div className='grid grid-cols-12 mt-6 h-full'>
+                <aside className='col-start-1 col-end-5 md:col-end-4 xl:col-end-3 px-4 md:px-6'>
                     <div className='inline-block mb-4'>
                         <div className='flex items-center gap-1 text-gray-100 bg-[#00B207] py-1 px-5 rounded-full'>
                             <p className='font-semibold'>Filter</p>
@@ -188,54 +205,42 @@ const ProductsPage = () => {
                         <h2 className='text-xl font-semibold mb-4'>Sale Products</h2>
                         {
                             productDetails.slice(0, 3).map((productDetail, i) => (
-                                <MiniProductCard key={i} productPage = {true} productDetail={productDetail} >
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
                                 </MiniProductCard>
                             ))
                         }
                         {
                             productDetails.slice(0, 3).map((productDetail, i) => (
-                                <MiniProductCard key={i} productPage = {true} productDetail={productDetail} >
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
                                 </MiniProductCard>
                             ))
                         }
                     </div>
                 </aside>
-                <aside className='col-start-5 sm:col-start-4 xl:col-start-3 col-end-13'>
-                    <div className='flex justify-between items-center'>
-                        <div>
-                            <label htmlFor="sort-by">Sort by:</label>
-                            <select id="sort-by">
-                                <option value="volvo">Latest</option>
-                                <option value="saab">Top Sales</option>
-                                <option value="opel">Price Low to High</option>
-                                <option value="audi">Price High to Low</option>
+                <aside className='col-start-5 md:col-start-4 xl:col-start-3 col-end-13 h-full relative'>
+                    <div className='flex justify-between items-center mb-8'>
+                        <div className="flex items-center space-x-4">
+                            <label for="sort-by" className="text-gray-600">Sort by:</label>
+                            <select id="sort-by" className="px-4 py-2 rounded-md border border-solid border-gray-300 bg-transparent focus:outline-none focus:border-green-500">
+                                <option value="volvo" className="py-1">Latest</option>
+                                <option value="saab" className="py-1">Top Sales</option>
+                                <option value="opel" className="py-1">Price Low to High</option>
+                                <option value="audi" className="py-1">Price High to Low</option>
                             </select>
                         </div>
                         <div>
-                            <p>{productDetails.length} Results Found</p>
+                            <p className='text-gray-500'><span className='text-black font-semibold'>{productDetails.length}</span> Results Found</p>
                         </div>
                     </div>
-                    <div className='grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 gap-4 justify-center'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-10'>
                         {
-                            productDetails.map((productDetail, i) => (
+                            currentPageData.map((productDetail, i) => (
                                 <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
                             ))
                         }
-                        {
-                            productDetails.map((productDetail, i) => (
-                                <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
-                            ))
-                        }
-                        {
-                            productDetails.map((productDetail, i) => (
-                                <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
-                            ))
-                        }
-                        {
-                            productDetails.map((productDetail, i) => (
-                                <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
-                            ))
-                        }
+                    </div>
+                    <div className='absolute bottom-0 left-0 right-0'>
+                        <Pagination currentPage={currentPage} totalPages={Math.ceil(productDetails.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE={3} />
                     </div>
                 </aside>
             </div>

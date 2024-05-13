@@ -164,7 +164,8 @@ const ProductsDes = () => {
                     {
                         (currentPageData.length === 3 || currentPage !== 1) && (<div className='absolute right-0'>
                             {/* Pagination component */}
-                            <Pagination currentPage={currentPage} totalPages={Math.ceil(reviews.length / itemsPerPage)} onPageChange={handlePageChange} />
+                            <Pagination currentPage={currentPage} totalPages={Math.ceil(reviews.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE = {2} />
+                            {/* <Pagination currentPage={currentPage} totalPages={25} onPageChange={handlePageChange} PAGE_RANGE = {2} /> */}
                         </div>)
                     }
                 </div>
