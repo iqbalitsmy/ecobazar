@@ -5,6 +5,8 @@ import ProductsLayout from "../Layout/ProductsLayout";
 import ProductsPage from "../Pages/ProductsPage/ProductsPage";
 import ProductsDetailsPage from "../Pages/ProductsDetails/ProductsDetailsPage";
 import Wishlist from "../Pages/Wishlist/Wishlist";
+import ShoppingCart from "../Pages/ShoppingCart/ShoppingCart";
+import Checkout from "../Pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
                 path: "wishlist",
                 element: <Wishlist></Wishlist>,
             },
+            {
+                path: "shopping-cart",
+                element: <ShoppingCart></ShoppingCart>,
+            },
+            {
+                path: "checkout",
+                element: <Checkout></Checkout>,
+            }
         ]
     },
 ])
