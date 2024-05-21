@@ -7,6 +7,11 @@ import ProductsDetailsPage from "../Pages/ProductsDetails/ProductsDetailsPage";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import ShoppingCart from "../Pages/ShoppingCart/ShoppingCart";
 import Checkout from "../Pages/Checkout/Checkout";
+import UserLayout from "../Layout/UserLayout";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
+import UserDashboardLayout from "../Layout/UserDashboardLayout";
+import UserDashboard from "../Pages/UserDashboardPages/UserDashboard";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +50,30 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "/user",
+        element: <UserLayout></UserLayout>,
+        children: [
+            {
+                path: 'login',
+                element: <LoginPage></LoginPage>
+            },
+            {
+                path: 'register',
+                element: <RegistrationPage></RegistrationPage>
+            },
+            {
+                path: 'dashboard',
+                element: <UserDashboardLayout></UserDashboardLayout>,
+                children: [
+                    {
+                        path: '',
+                        element: <UserDashboard></UserDashboard>
+                    },
+                ]
+            },
+        ]
+    }
 ])
 
 export default router;

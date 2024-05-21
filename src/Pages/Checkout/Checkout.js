@@ -230,110 +230,205 @@ const Checkout = () => {
     return (
         <section className='container mx-auto min-h-[60vh] lg:min-h-screen mb-10'>
             <ProductNav titles={["Shopping Cart", "Checkout"]} newStyle={true}></ProductNav>
-            <form className='mt-10'>
-                <div>
-                    <h3>Billing Information</h3>
-                    <div>
-                        <div>
-                            <div>
-                                <label htmlFor="fname">First Name</label>
-                                <input type="text" name="fname" id="fname" placeholder='Your first name' />
+            <form className='mt-10 flex justify-between gap-4'>
+                <div className='flex-grow'>
+                    <h3 className='text-2xl font-semibold mb-4'>Billing Information</h3>
+                    <div className='text-gray-700'>
+                        <div className='flex gap-4 justify-between mb-4'>
+                            <div className='space-y-2 w-full'>
+                                <label className='' htmlFor="fname">First Name</label>
+                                <input
+                                    className='pl-3 py-2 border-solid border-2 border-gray-200 rounded-sm w-full'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    type="text" name="fname" id="fname"
+                                    placeholder='Your first name'
+                                />
                             </div>
-                            <div>
+                            <div className='space-y-2 w-full'>
                                 <label htmlFor="lname">Last Name</label>
-                                <input type="text" name="lname" id="lname" placeholder='Your last name' />
+                                <input
+                                    className='pl-3 py-2 border-solid border-2 border-gray-200 rounded-sm w-full'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    type="text" name="lname" id="lname"
+                                    placeholder='Your last name'
+                                />
                             </div>
-                            <div>
+                            <div className='space-y-2 w-full'>
                                 <label htmlFor="cname">Company Name <span>(optional)</span></label>
-                                <input type="text" name="cname" id="cname" placeholder='Company name' />
+                                <input
+                                    className='pl-3 py-2 border-solid border-2 border-gray-200 rounded-sm w-full'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    type="text" name="cname" id="cname"
+                                    placeholder='Company name'
+                                />
                             </div>
                         </div>
-                        <div>
+                        <div className='space-y-2 mb-4 w-full'>
                             <label htmlFor="address">Street Address</label>
-                            <input type="text" name="address" id="address" placeholder='House no / building / street / area' />
+                            <input
+                                className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm'
+                                style={{
+                                    outline: "none"
+                                }}
+                                type="text" name="address" id="address"
+                                placeholder='House no / building / street / area'
+                            />
                         </div>
-                        <div>
-                            <div>
+                        <div className='flex justify-between gap-4 mb-4'>
+                            <div className='space-y-2 w-full'>
                                 <label htmlFor="country">Country / Region</label>
-                                <select id="country">
+                                <select
+                                    className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm bg-transparent'
+                                    id="country"
+                                >
                                     {
                                         countries.map((countrie) => (
-                                            <option value={countrie.name}><span>{countrie.flag}</span> <span>{countrie.name}</span></option>
+                                            <option
+                                                className='bg-white'
+                                                value={countrie.name}
+                                            >
+                                                <span>{countrie.flag}</span> <span>{countrie.name}</span>
+                                            </option>
                                         ))
                                     }
                                 </select>
                             </div>
-                            <div>
+                            <div className='space-y-2 w-full'>
                                 <label htmlFor="country">State</label>
-                                <select id="state">
+                                <select
+                                    className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm bg-transparent'
+                                    id="state"
+                                >
                                     {
                                         bangladeshStates.map((bangladeshStat) => (
-                                            <option value={bangladeshStat}>{bangladeshStat}</option>
+                                            <option
+                                                className='bg-white'
+                                                value={bangladeshStat}
+                                            >
+                                                {bangladeshStat}
+                                            </option>
                                         ))
                                     }
                                 </select>
                             </div>
-                            <div>
+                            <div className='space-y-2 w-full'>
                                 <label htmlFor="zip-code">Zip Code</label>
-                                <input type="text" name="zip-code" id="zip-code" placeholder='Zip Code' />
+                                <input
+                                    className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm bg-transparent'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    type="text" name="zip-code" id="zip-code"
+                                    placeholder='Zip Code'
+                                />
                             </div>
                         </div>
-                        <div>
-                            <div>
+                        <div className='flex justify-between gap-4 mb-4'>
+                            <div className='space-y-2 w-full'>
                                 <label htmlFor="email">Email</label>
-                                <input type="email" name="email" id="email" placeholder='Email Address' />
+                                <input
+                                    className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm bg-transparent'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    type="email" name="email" id="email"
+                                    placeholder='Email Address'
+                                />
                             </div>
-                            <div>
-                                <label htmlFor="phone">Zip Code</label>
-                                <input type="tel" name="phone" id="phone" placeholder='Phone number' />
+                            <div className='space-y-2 w-full'>
+                                <label htmlFor="phone">Phone Number</label>
+                                <input
+                                    className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm bg-transparent'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    type="tel" name="phone" id="phone"
+                                    placeholder='Phone number'
+                                />
                             </div>
                         </div>
-                        <div>
-                            <input type="checkbox" name="differentAddress" id="differentAddress" />
+                        <div className='flex gap-2 items-center mb-4'>
+                            <input
+                                className='h-10 w-5'
+                                type="checkbox" name="differentAddress" id="differentAddress"
+                            />
                             <label htmlFor="differentAddress">Ship to a different address</label>
                         </div>
-                        <div>
-                            <h3>Additional Info</h3>
-                            <div>
+                        <hr className='border-solid border-[1px] border-gray-200 mb-4' />
+                        <div className=''>
+                            <h3 className='text-2xl font-semibold mb-4'>Additional Info</h3>
+                            <div className='mb-4 space-y-2'>
                                 <label htmlFor="note">Order Notes (Optional)</label>
-                                <textarea name="note" id="note" cols="30" rows="10" placeholder='Notes about your order, e.g. special notes for delivery'></textarea>
+                                <textarea
+                                    className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-md bg-transparent resize-none'
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    name="note" id="note" cols="" rows="2"
+                                    placeholder='Notes about your order, e.g. special notes for delivery'
+                                >
+                                </textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h3>Order Summery</h3>
-                    <div>
-                        <div>
-                            <img src={productDetails[0].thumbnail} alt={productDetails[0].title} />
-                            <p>{productDetails[0].title}{" x1"}</p>
+                <div className='p-4 border-solid border-[1px] border-gray-200 min-w-80 rounded-md'>
+                    <h3 className='text-xl font-semibold mb-4'>Order Summery</h3>
+                    <div className='flex items-center justify-between mb-4'>
+                        <div className='flex gap-2 items-center'>
+                            <figure className=''>
+                                <img className='max-h-20 h-full max-w-20' src={productDetails[0].thumbnail} alt={productDetails[0].title} />
+                            </figure>
+                            <p>{productDetails[0].title} x1</p>
                         </div>
                         <div>
-                            <p>${productDetails[0].newPrice.toFixed(2)}</p>
+                            <p className='font-semibold'>${productDetails[0].newPrice.toFixed(2)}</p>
                         </div>
                     </div>
-                    <div>
-                        <p>Subtotal:</p>
-                        <p>${productDetails[0].newPrice.toFixed(2)}</p>
+                    <div className='flex items-center justify-between mb-4'>
+                        <p className='text-gray-600'>Subtotal:</p>
+                        <p className='font-semibold'>${productDetails[0].newPrice.toFixed(2)}</p>
+                    </div>
+                    <hr className='border-solid border-[1px] border-gray-200 mb-4' />
+                    <div className='flex items-center justify-between mb-4'>
+                        <p className='text-gray-600'>Shipping:</p>
+                        <p className='font-semibold'>{productDetails[0].newPrice ? `$${productDetails[0].newPrice.toFixed(2)}` : "Free"}</p>
+                    </div>
+                    <hr className='border-solid border-[1px] border-gray-200 mb-4' />
+                    <div className='flex items-center justify-between mb-4'>
+                        <p className='text-gray-600'>Total:</p>
+                        <p className='font-bold text-lg'>${productDetails[0].newPrice.toFixed(2)}</p>
                     </div>
                     <div>
-                        <p>Shipping:</p>
-                        <p>{productDetails[0].newPrice ? `$${productDetails[0].newPrice.toFixed(2)}` : "Free"}</p>
-                    </div>
-                    <div>
-                        <p>Total:</p>
-                        <p>${productDetails[0].newPrice.toFixed(2)}</p>
-                    </div>
-                    <div>
-                        <h3>Payment Method</h3>
-                        <div>
-                            <div className='space-y-1'>
-                                <div className=''>
+                        <h3 className='text-xl font-semibold mb-4'>Payment Method</h3>
+                        <div className='space-y-1 text-gray-700 mb-4'>
+                            <div className=''>
+                                <FormControlLabel
+                                    value={"Cash on Delivery"}
+                                    control={
+                                        <Radio
+                                            {...controlProps("Cash on Delivery")}
+                                            sx={{
+                                                color: "#ccc",
+                                                '&.Mui-checked': {
+                                                    color: "#00B207",
+                                                },
+                                            }}
+                                        />}
+                                    label={"Cash on Delivery"}
+                                />
+                                <div>
                                     <FormControlLabel
-                                        value={"Cash on Delivery"}
+                                        value={"Paypal"}
                                         control={
                                             <Radio
-                                                {...controlProps("Cash on Delivery")}
+                                                {...controlProps("Paypal")}
                                                 sx={{
                                                     color: "#ccc",
                                                     '&.Mui-checked': {
@@ -341,40 +436,24 @@ const Checkout = () => {
                                                     },
                                                 }}
                                             />}
-                                        label={"Cash on Delivery"}
+                                        label={"Paypal"}
                                     />
-                                    <div>
-                                        <FormControlLabel
-                                            value={"Paypal"}
-                                            control={
-                                                <Radio
-                                                    {...controlProps("Paypal")}
-                                                    sx={{
-                                                        color: "#ccc",
-                                                        '&.Mui-checked': {
-                                                            color: "#00B207",
-                                                        },
-                                                    }}
-                                                />}
-                                            label={"Paypal"}
-                                        />
-                                    </div>
-                                    <div>
-                                        <FormControlLabel
-                                            value={"Amazon Pay"}
-                                            control={
-                                                <Radio
-                                                    {...controlProps("Amazon Pay")}
-                                                    sx={{
-                                                        color: "#ccc",
-                                                        '&.Mui-checked': {
-                                                            color: "#00B207",
-                                                        },
-                                                    }}
-                                                />}
-                                            label={"Amazon Pay"}
-                                        />
-                                    </div>
+                                </div>
+                                <div>
+                                    <FormControlLabel
+                                        value={"Amazon Pay"}
+                                        control={
+                                            <Radio
+                                                {...controlProps("Amazon Pay")}
+                                                sx={{
+                                                    color: "#ccc",
+                                                    '&.Mui-checked': {
+                                                        color: "#00B207",
+                                                    },
+                                                }}
+                                            />}
+                                        label={"Amazon Pay"}
+                                    />
                                 </div>
                             </div>
                         </div>
