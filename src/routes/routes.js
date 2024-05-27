@@ -12,6 +12,9 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 import UserDashboardLayout from "../Layout/UserDashboardLayout";
 import UserDashboard from "../Pages/UserDashboardPages/UserDashboard";
+import UserOrdersHistory from "../Pages/UserDashboardPages/UserOrdersHistoryPage/UserOrdersHistory";
+import DashboardWishlist from "../Pages/UserDashboardPages/DashboardWishlist";
+import UserSetting from "../Pages/UserDashboardPages/UserSetting";
 
 const router = createBrowserRouter([
     {
@@ -69,6 +72,22 @@ const router = createBrowserRouter([
                     {
                         path: '',
                         element: <UserDashboard></UserDashboard>
+                    },
+                    {
+                        path: 'order-history',
+                        element: <UserOrdersHistory></UserOrdersHistory>
+                    },
+                    {
+                        path: 'wishlist',
+                        element: <DashboardWishlist></DashboardWishlist>
+                    },
+                    {
+                        path: 'shopping-cart',
+                        element: <ShoppingCart></ShoppingCart>
+                    },
+                    {
+                        path: 'setting',
+                        element: <UserSetting></UserSetting>
                     },
                 ]
             },
