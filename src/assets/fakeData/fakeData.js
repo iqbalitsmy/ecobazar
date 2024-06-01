@@ -157,3 +157,41 @@ const productDetails = [
 
 
 export default productDetails;
+
+export const orderHistory = [
+    {
+        _id: 333,
+        date: Date.now(),
+        totalPrice: 135,
+        numberOfItems: 5,
+        deliveryStatus: "Processing", 
+    },
+    {
+        _id: 666,
+        date: Date.now(),
+        totalPrice: 135,
+        numberOfItems: 5,
+        deliveryStatus: "on the way", 
+    },
+    {
+        _id: 444,
+        date: Date.now(),
+        totalPrice: 135,
+        numberOfItems: 5,
+        deliveryStatus: "Completed", 
+    },
+    {
+        _id: 344,
+        date: Date.now(),
+        totalPrice: 135,
+        numberOfItems: 5,
+        deliveryStatus: "Completed", 
+    },
+    {
+        _id: 184,
+        date: Date.now(),
+        totalPrice: 135,
+        numberOfItems: 5,
+        deliveryStatus: "on the way", 
+    },
+]

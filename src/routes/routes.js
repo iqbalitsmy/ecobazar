@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import Home from "../Layout/Home";
 import HomePage from "../Pages/Home/HomePage";
 import ProductsLayout from "../Layout/ProductsLayout";
@@ -15,6 +15,7 @@ import UserDashboard from "../Pages/UserDashboardPages/UserDashboard";
 import UserOrdersHistory from "../Pages/UserDashboardPages/UserOrdersHistoryPage/UserOrdersHistory";
 import DashboardWishlist from "../Pages/UserDashboardPages/DashboardWishlist";
 import UserSetting from "../Pages/UserDashboardPages/UserSetting";
+import OrderDetails from "../Pages/UserDashboardPages/UserOrdersHistoryPage/OrderDetails";
 
 const router = createBrowserRouter([
     {
@@ -75,7 +76,17 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'order-history',
-                        element: <UserOrdersHistory></UserOrdersHistory>
+                        element: <Outlet></Outlet>,
+                        children: [
+                            {
+                                path: '',
+                                element: <UserOrdersHistory></UserOrdersHistory>
+                            },
+                            {
+                                path: ':id',
+                                element: <OrderDetails></OrderDetails>
+                            },
+                        ]
                     },
                     {
                         path: 'wishlist',
