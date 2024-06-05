@@ -1,10 +1,259 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Region from '../../Shared/Region/Region';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import productDetails from '../../assets/fakeData/fakeData';
 
 const UserSetting = () => {
+    const [passwordVisible, setPasswordVisible] = useState({
+        currentPassword: false,
+        newPassword: false,
+        confirmPassword: false,
+    });
+
+    const togglePasswordVisibility = (field) => {
+        setPasswordVisible((prevState) => ({
+            ...prevState,
+            [field]: !prevState[field],
+        }));
+    };
+
+    // handle image
+    const [selectedImage, setSelectedImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsPJ9cm0-r5p50py0yUzvM5ZtEB-xWoJRPRA&s");
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setSelectedImage(URL.createObjectURL(file));
+        }
+    };
+
     return (
-        <div>
-            User Setting
-        </div>
+        <section>
+            <div className='mb-4'>
+                <div className='border-solid border-2 border-gray-200 pl-4 py-4 text-xl font-medium rounded-t-md'>
+                    <h2>Account Settings</h2>
+                </div>
+                <div className='border-solid border-2 border-t-0 border-gray-200 pl-4 py-4 rounded-b-md'>
+                    <form action="" className='grid grid-cols-2 gap-4 items-center'>
+                        <div className=''>
+                            <div className='space-y-2 mb-2'>
+                                <label className='text-sm' htmlFor="fname">First name</label><br />
+                                <input
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    className="w-full px-3 py-2  border-solid border-2 border-gray-200 rounded-md pr-10 text-gray-600"
+                                    type="text" name="fname" id=""
+                                    value={"Dianne"}
+                                    placeholder='Enter your first name' required />
+                            </div>
+                            <div className='space-y-2 mb-2'>
+                                <label className='text-sm' htmlFor="lname">Last name</label><br />
+                                <input
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    className="w-full px-3 py-2  border-solid border-2 border-gray-200 rounded-md pr-10 text-gray-600"
+                                    type="text" name="lname" id=""
+                                    value={"Russell"}
+                                    placeholder='Enter your last name' required />
+                            </div>
+                            <div className='space-y-2 mb-2'>
+                                <label className='text-sm' htmlFor="email">Email</label><br />
+                                <input
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    className="w-full px-3 py-2  border-solid border-2 border-gray-200 rounded-md pr-10 text-gray-600"
+                                    type="email" name="email" id=""
+                                    value={"dianne.russell@gmail.com"}
+                                    placeholder='Enter your email' required />
+                            </div>
+                            <div className='space-y-2 mb-4'>
+                                <label className='text-sm' htmlFor="number">Phone Number</label><br />
+                                <input
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    className="w-full px-3 py-2  border-solid border-2 border-gray-200 rounded-md pr-10 text-gray-600"
+                                    type="tel" name="number" id=""
+                                    value={"(603) 555-0123"}
+                                    placeholder='Enter your phone number' required />
+                            </div>
+                            <input className='text-sm font-semibold px-4 md:px-6 py-2 md:py-3 bg-primary-color hover:bg-green-600 text-white rounded-full cursor-pointer' type="submit" value="Save Changes" />
+                        </div>
+                        <div>
+                            <div className="flex flex-col items-center justify-center">
+                                {selectedImage && (
+                                    <div className="mb-4">
+                                        <img src={selectedImage} alt="Selected" className="h-28 w-28 md:h-36 md:w-36 lg:h-52 lg:w-52 rounded-full shadow-md object-contain" />
+                                    </div>
+                                )}
+                                <label className="cursor-pointer px-2 md:px-4 py-2 md:py-2 text-sm font-semibold text-primary-color rounded-full shadow-md border-solid border-2 border-primary-color hover:bg-gray-50">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        onChange={handleImageChange}
+                                    />
+                                    Choose Image
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div className='mb-4'>
+                <div className='border-solid border-2 border-gray-200 pl-4 py-4 text-xl font-medium rounded-t-md'>
+                    <h2>Billing Address</h2>
+                </div>
+                <form action="" className='border-solid border-2 border-t-0 border-gray-200 px-4 py-4 rounded-b-md'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between items-center gap-4'>
+                        <div className='space-y-2 w-full'>
+                            <label className='text-sm' htmlFor="fname">First name</label><br />
+                            <input
+                                style={{
+                                    outline: "none"
+                                }}
+                                className="px-3 py-2 border-solid border-2 border-gray-200 rounded-md text-gray-600 w-full"
+                                type="text" name="fname" id=""
+                                placeholder='Enter your first name' required />
+                        </div>
+                        <div className='space-y-2 w-full'>
+                            <label className='text-sm' htmlFor="lname">Last name</label><br />
+                            <input 
+                            style={{
+                                outline: "none"
+                            }}
+                            className="px-3 py-2 border-solid border-2 border-gray-200 rounded-md text-gray-600 w-full"
+                            type="text" name="lname" id=""
+                            placeholder='Enter your last name' required />
+                        </div>
+                        <div className='space-y-2 w-full'>
+                            <label className='text-sm' htmlFor="cname">Company Name (optional)</label><br />
+                            <input 
+                            style={{
+                                outline: "none"
+                            }}
+                            className="px-3 py-2 border-solid border-2 border-gray-200 rounded-md text-gray-600 w-full"
+                            type="text" name="cname" id="" 
+                            placeholder='Enter your company name' />
+                        </div>
+                    </div>
+                    <div>
+                        <label htmlFor="street">Street Address</label><br />
+                        <input type="text" name="street" id="" placeholder='Enter your address' />
+                    </div>
+                    <div>
+                        <div>
+                            <Region></Region>
+                        </div>
+                        <div>
+                            <label htmlFor="state">States</label><br />
+                            <select name="state" id="">
+                                <option value="alabama">Alabama</option>
+                                <option value="alaska">Alaska</option>
+                                <option value="florida">Florida</option>
+                                <option value="california">California</option>
+                                <option value="hawaii">Hawaii</option>
+                                <option value="new-york">New York</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="zip">Zip Code</label>
+                            <input type="number" name="zip" id="" placeholder='Enter your zip code' />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label htmlFor="email">Email</label>
+                            <input type="email" name="email" id="" placeholder='Enter your email' required />
+                        </div>
+                        <div>
+                            <label htmlFor="number">Phone Number</label>
+                            <input type="tel" name="number" id="" placeholder='Enter your phone number' required />
+                        </div>
+                    </div>
+                    <input type="submit" value="Save Changes" />
+                </form>
+            </div>
+            <div>
+                <div>
+                    <h2>Change Password</h2>
+                </div>
+                <form action="">
+                    <div>
+                        <label htmlFor="currentPassword">Current Password</label>
+                        <div className="relative w-full">
+                            <input
+                                id="currentPassword" name='currentPassword'
+                                type={passwordVisible.currentPassword ? "text" : "password"}
+                                style={{
+                                    outline: "none"
+                                }}
+                                placeholder="Password"
+                                className="w-full px-3 py-3  border-solid border-2 border-gray-200 rounded-md pr-10"
+                            />
+                            <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                                onClick={() => togglePasswordVisibility("currentPassword")}
+                            >
+                                <FontAwesomeIcon icon={passwordVisible.currentPassword ? faEyeSlash : faEye} />
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label htmlFor="newPassword">New Password</label>
+                            <div className="relative w-full">
+                                <input
+                                    id="newPassword" name='newPassword'
+                                    type={passwordVisible.newPassword ? "text" : "password"}
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    placeholder="Password"
+                                    className="w-full px-3 py-3  border-solid border-2 border-gray-200 rounded-md pr-10"
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                                    onClick={() => togglePasswordVisibility("newPassword")}
+                                >
+                                    <FontAwesomeIcon icon={passwordVisible.newPassword ? faEyeSlash : faEye} />
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <div className="relative w-full">
+                                <input
+                                    id="confirmPassword" name='confirmPassword'
+                                    type={passwordVisible.confirmPassword ? "text" : "password"}
+                                    style={{
+                                        outline: "none"
+                                    }}
+                                    placeholder="Password"
+                                    className="w-full px-3 py-3  border-solid border-2 border-gray-200 rounded-md pr-10"
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+                                    onClick={() => togglePasswordVisibility("confirmPassword")}
+                                >
+                                    <FontAwesomeIcon icon={passwordVisible.confirmPassword ? faEyeSlash : faEye} />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Change Password" />
+                    </div>
+                </form>
+            </div>
+        </section>
     );
 };
 
