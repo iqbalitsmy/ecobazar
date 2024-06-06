@@ -203,7 +203,7 @@ const Region = () => {
         <>
             <label htmlFor="country">Country / Region</label>
             <select
-                className='pl-3 py-2 w-full border-solid border-2 border-gray-200 rounded-sm bg-transparent'
+                className='pl-3 py-2 w-full border-solid border-2 border-gray-100 focus:border-green-500 rounded-sm bg-transparent'
                 id="country"
             >
                 {
