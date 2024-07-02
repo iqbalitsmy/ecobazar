@@ -1,18 +1,32 @@
 import React from 'react';
 import logo from '../../../assets/Logo.png'
+import { Link } from 'react-router-dom';
 
 const MiddleNav = () => {
     return (
         <div className='py-3 flex justify-between items-center'>
             <figure>
-                <img className='max-w-[20vW] h-auto' src={logo} alt="Ecobazar" />
+                <Link to={"/"}>
+                    <img className='max-w-[20vW] h-auto' src={logo} alt="Ecobazar" />
+                </Link>
             </figure>
             <div className='relative flex items-center'>
                 <div className='absolute pl-2'>
                     <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 </div>
-                <input className='pl-10 py-2 w-[22vw] text-sm rounded-sm border-solid border-[1px] border-gray-300' type="text" name="search" id="" placeholder='Search' />
-                <button className='p-[9px] lg:px-6 text-white text-sm rounded-r-md' style={{background: "var(--success-color)"}} type="button">Search</button>
+                <input
+                    className='pl-10 py-2 w-[22vw] text-sm rounded-sm border-solid border-[1px] border-gray-300'
+                    style={{
+                        outline: "none"
+                    }}
+                    type="text" name="search" id=""
+                    placeholder='Search' />
+                <button
+                    className=' p-[9px] lg:px-6 text-white text-sm rounded-r-md'
+                    style={{ background: "var(--success-color)" }} type="button"
+                >
+                    Search
+                </button>
             </div>
             <div className='flex items-center gap-3'>
                 <div>

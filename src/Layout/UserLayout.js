@@ -4,6 +4,7 @@ import MiddleNav from '../Shared/Navigation/MiddleNav/MiddleNav';
 import BottomNav from '../Shared/Navigation/BottomNav/BottomNav';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Shared/Footer/Footer';
+import Newsletter from '../Shared/Newsletter/Newsletter';
 
 const UserLayout = () => {
     return (
@@ -19,7 +20,7 @@ const UserLayout = () => {
                 <Outlet></Outlet>
             </main>
             <footer>
-                {/* <Newsletter></Newsletter> */}
+                <Newsletter></Newsletter>
                 <Footer></Footer>
             </footer>
 

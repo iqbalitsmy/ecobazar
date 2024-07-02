@@ -13,7 +13,7 @@ const RegistrationPage = () => {
     return (
         <>
             <ProductNav titles={["Account", "Create Account"]} newStyle={true}></ProductNav>
-            <section className='min-h-[70vh] flex justify-center pt-8'>
+            <section className='min-h-[80vh] flex justify-center pt-20'>
                 <div className='mx-2 px-6 py-6 h-fit shadow-md rounded-md w-full md:max-w-[480px]'>
                     <h1 className='text-4xl font-bold text-center mb-8'>Create Account</h1>
                     <form className='space-y-3 w-full mx-auto'>
