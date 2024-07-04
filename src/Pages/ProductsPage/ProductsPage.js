@@ -44,6 +44,7 @@ const ProductsPage = () => {
         setSelectedValue(event.target.value);
     };
 
+    // radio button
     const controlProps = (item) => ({
         checked: selectedValue === item,
         onChange: handleRadioBtnChange,
@@ -52,6 +53,13 @@ const ProductsPage = () => {
         inputProps: { 'aria-label': item },
     });
 
+    // categories toggle
+    const [categoriesToggle, setCategoriesToggle] = useState({
+        categoryToggle: false,
+        priceToggle: false,
+        ratingToggle: false,
+        popularTagToggle: false,
+    });
 
     return (
         <section className='container mx-auto mb-10'>
@@ -67,17 +75,20 @@ const ProductsPage = () => {
                         </div>
                     </div>
                     <div className='mb-3 pb-3 border-1px border-solid border-gray-200 border-0 border-b-2'>
-                        <div className='flex items-center justify-between text-xl font-semibold mb-3'>
+                        <div className='flex items-center justify-between text-xl font-medium mb-3'>
                             <h4 className=''>All Categories</h4>
                             <div className=''>
-                                <FontAwesomeIcon icon={faAngleDown} />
-                                {/* <FontAwesomeIcon icon={faAngleUp} /> */}
+                                <button type="button" onClick={() => setCategoriesToggle({ ...categoriesToggle, categoryToggle: !categoriesToggle.categoryToggle })}>
+                                    {
+                                        categoriesToggle.categoryToggle ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} />
+                                    }
+                                </button>
                             </div>
                         </div>
-                        <div className='space-y-1'>
+                        <div className={`overflow-auto transition-all ease-out duration-500 ${categoriesToggle.categoryToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}>
                             {
                                 allCategories.map((allCategori, i) => (
-                                    <div key={i} className='flex items-center gap-2'>
+                                    <div key={i} className=''>
                                         <FormControlLabel
                                             value={allCategori}
                                             control={
@@ -97,46 +108,58 @@ const ProductsPage = () => {
                             }
                         </div>
                     </div>
+                    {/* price category */}
                     <div className='mb-3 pb-6 border-1px border-solid border-gray-200 border-0 border-b-2'>
                         <div className='flex items-center justify-between text-xl font-semibold mb-4'>
                             <h4>Price</h4>
                             <div>
-                                <FontAwesomeIcon icon={faAngleDown} />
-                                {/* <FontAwesomeIcon icon={faAngleUp} /> */}
+                                <button type="button" onClick={() => setCategoriesToggle({ ...categoriesToggle, priceToggle: !categoriesToggle.priceToggle })}>
+                                    {
+                                        categoriesToggle.priceToggle ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} />
+                                    }
+                                </button>
                             </div>
                         </div>
-                        <Box sx={{}}>
-                            <Slider
-                                getAriaLabel={() => "Minimum distance shift"}
-                                value={value}
-                                onChange={handleChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                sx={{
-                                    color: "#00B207",
-                                    height: 8,
-                                    '& .MuiSlider-thumb': {
-                                        backgroundColor: '#fff',
-                                        border: '2px solid currentColor',
-                                    },
-                                    '& .MuiSlider-rail': {
-                                        backgroundColor: '#ccc',
-                                    }
-                                }}
-                                disableSwap
-                            />
-                        </Box>
-                        <p className=''><span className='text-gray-500'>Price:</span> 50 <span className=''><FontAwesomeIcon icon={faMinus} /></span> 1,500</p>
+                        <div className={`overflow-auto transition-all ease-out duration-500 ${categoriesToggle.priceToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}>
+                            <Box sx={{}}>
+                                <Slider
+                                    getAriaLabel={() => "Minimum distance shift"}
+                                    value={value}
+                                    onChange={handleChange}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    sx={{
+                                        color: "#00B207",
+                                        height: 8,
+                                        '& .MuiSlider-thumb': {
+                                            backgroundColor: '#fff',
+                                            border: '2px solid currentColor',
+                                        },
+                                        '& .MuiSlider-rail': {
+                                            backgroundColor: '#ccc',
+                                        }
+                                    }}
+                                    disableSwap
+                                />
+                            </Box>
+                            <p className=''><span className='text-gray-500'>Price:</span> 50 <span className=''><FontAwesomeIcon icon={faMinus} /></span> 1,500</p>
+                        </div>
                     </div>
+                    {/* rating category */}
                     <div className='mb-3 pb-6 border-1px border-solid border-gray-200 border-0 border-b-2'>
                         <div className='flex items-center justify-between text-xl font-semibold mb-4'>
                             <h4>Rating</h4>
                             <div>
-                                <FontAwesomeIcon icon={faAngleDown} />
-                                {/* <FontAwesomeIcon icon={faAngleUp} /> */}
+                                <button type="button" onClick={() => setCategoriesToggle({ ...categoriesToggle, ratingToggle: !categoriesToggle.ratingToggle })}>
+                                    {
+                                        categoriesToggle.ratingToggle ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} />
+                                    }
+                                </button>
                             </div>
                         </div>
-                        <div className='space-y-2'>
+                        <div
+                            className={`overflow-auto transition-all ease-out duration-500 space-y-2 ${categoriesToggle.ratingToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}
+                        >
                             <div className='flex lg:items-center gap-2'>
                                 <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="5" name="rating" value="5" />
                                 <label className='flex items-center flex-wrap gap-2 cursor-pointer' htmlFor="5">
@@ -174,15 +197,21 @@ const ProductsPage = () => {
                             </div>
                         </div>
                     </div>
+                    {/* popular tag category */}
                     <div className='mb-3 pb-6'>
                         <div className='flex items-center justify-between text-xl font-semibold mb-4'>
                             <h4>Popular Tag</h4>
                             <div>
-                                <FontAwesomeIcon icon={faAngleDown} />
-                                {/* <FontAwesomeIcon icon={faAngleUp} /> */}
+                                <button type="button" onClick={() => setCategoriesToggle({ ...categoriesToggle, popularTagToggle: !categoriesToggle.popularTagToggle })}>
+                                    {
+                                        categoriesToggle.popularTagToggle ? <FontAwesomeIcon icon={faAngleDown} /> : <FontAwesomeIcon icon={faAngleUp} />
+                                    }
+                                </button>
                             </div>
                         </div>
-                        <div className='flex flex-wrap gap-2'>
+                        <div
+                            className={`overflow-auto transition-all ease-out duration-500 flex flex-wrap gap-2 ${categoriesToggle.popularTagToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}
+                        >
                             {
                                 allCategories.map((allCategori, i) => (<button key={i} className='px-2 py-1 text-sm bg-gray-200 hover:bg-[#00B207] hover:text-white rounded-full inline-block' type="button">{allCategori}</button>))
                             }
@@ -217,7 +246,7 @@ const ProductsPage = () => {
                         }
                     </div>
                 </aside>
-                <aside className='col-start-5 md:col-start-4 xl:col-start-3 col-end-13 h-full relative'>
+                <aside className='ml-10 col-start-5 md:col-start-4 xl:col-start-3 col-end-13 h-full relative'>
                     <div className='flex justify-between items-center mb-8'>
                         <div className="flex items-center space-x-4">
                             <label for="sort-by" className="text-gray-600">Sort by:</label>

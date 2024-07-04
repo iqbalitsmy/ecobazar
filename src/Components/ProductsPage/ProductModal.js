@@ -5,13 +5,13 @@ import React, { useState } from 'react';
 
 const ProductModal = ({ productDetail, open, setOpen }) => {
 
-    const { title, newPrice, price, offPercentage, rating, brandImg, description, quantity, category, tags, images } = productDetail;
+    const { title, newPrice, price, offPercentage, rating, brandImg, description, category, tags, images, quantity } = productDetail;
 
     const [productImage, setProductImage] = useState(images[0]);
+    const [productQuantity, setProductQuantity] = useState(0);
 
     // for modal
     const handleClose = () => setOpen(false);
-
     const style = {
         position: 'absolute',
         top: '50%',
@@ -26,6 +26,20 @@ const ProductModal = ({ productDetail, open, setOpen }) => {
         p: 2,
     }
 
+    const handleQuantityDecrement = () => {
+        if (productQuantity > 0) {
+            return setProductQuantity((prevQuantity) => prevQuantity-=1)
+        }
+        return setProductQuantity(0)
+    }
+
+    const handleQuantityIncrement = () => {
+        if (productQuantity <= quantity) {
+            return setProductQuantity((prevQuantity) => prevQuantity+=1)
+        }
+        return;
+    }
+
     return (
         <div>
             <Modal
@@ -33,7 +47,7 @@ const ProductModal = ({ productDetail, open, setOpen }) => {
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
-                
+
             >
                 <Box sx={style} className="max-h-screen">
                     <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:m-6 lg:m-16'>
@@ -124,13 +138,18 @@ const ProductModal = ({ productDetail, open, setOpen }) => {
                                     <button
                                         className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block'
                                         type="button"
+                                        onClick={handleQuantityDecrement}
                                     >
                                         <FontAwesomeIcon icon={faMinus} />
                                     </button>
-                                    <button className='font-medium' type="button">{quantity}</button>
+                                    <div className='font-medium inline-block'>
+                                        <p>{productQuantity}</p>
+                                    </div>
                                     <button
                                         className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block'
-                                        type="button">
+                                        type="button"
+                                        onClick={handleQuantityIncrement}
+                                    >
                                         <FontAwesomeIcon icon={faPlus} />
                                     </button>
                                 </div>

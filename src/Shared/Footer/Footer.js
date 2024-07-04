@@ -7,7 +7,7 @@ import { faApple, faGooglePlay } from '@fortawesome/free-brands-svg-icons';
 const Footer = () => {
     return (
         <section className='bg-[#1A1A1A]'>
-            <div className='container mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 justify-between text-gray-50 gap-6 py-16'>
+            <div className='container mx-5 sm:mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 justify-between text-gray-50 gap-6 py-16'>
                 <div className='space-y-4'>
                     <figure>
                         <img className='max-w-[20vW]' src={logo} alt="Ecobazar" />
