@@ -39,6 +39,14 @@ const router = createBrowserRouter([
             {
                 path: ":id",
                 element: <ProductsDetailsPage></ProductsDetailsPage>,
+                loader: ({ params }) => fetch(`fakeJsonData.json`, {
+                    method: "GET",
+                    credentials: 'include',
+                    headers: {
+                        'content-type': "application/json",
+                    }
+                })
+
             },
             {
                 path: "wishlist",

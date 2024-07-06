@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Box, FormControlLabel, Radio, Rating, Slider } from '@mui/material';
-import productDetails from '../../assets/fakeData/fakeData';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
 import Pagination from '../../Shared/Pagination/Pagination ';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 import adBanner from '../../assets/banner/bannar-produc-page.png'
+import axios from 'axios';
 
 
 const allCategories = ["Fresh Fruit", "Vegetables", "Cooking", "Snacks", "Beverages", "Beauty & Health", "Bread & Bakery"]
@@ -18,6 +18,11 @@ function valuetext(value) {
 
 
 const ProductsPage = () => {
+    // fetch data
+    const [productDetails, setProductDetails] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     const [selectedValue, setSelectedValue] = useState('');
     const [value, setValue] = useState([20, 37]);
 
@@ -60,6 +65,23 @@ const ProductsPage = () => {
         ratingToggle: false,
         popularTagToggle: false,
     });
+
+    // fetch data
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('fakeJsonData.json');
+                setProductDetails(response.data);
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [])
 
     return (
         <section className='container mx-auto mb-10'>
@@ -230,6 +252,7 @@ const ProductsPage = () => {
                             <svg className='fill-green-500 inline-block pl-2 lg:pl-4' height={"22px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" /></svg>
                         </button>
                     </div>
+                    {/* Sale products */}
                     <div className=''>
                         <h2 className='text-xl font-semibold mb-4'>Sale Products</h2>
                         {
@@ -246,10 +269,11 @@ const ProductsPage = () => {
                         }
                     </div>
                 </aside>
+                {/* Product list */}
                 <aside className='ml-10 col-start-5 md:col-start-4 xl:col-start-3 col-end-13 h-full relative'>
                     <div className='flex justify-between items-center mb-8'>
                         <div className="flex items-center space-x-4">
-                            <label for="sort-by" className="text-gray-600">Sort by:</label>
+                            <label htmlFor="sort-by" className="text-gray-600">Sort by:</label>
                             <select id="sort-by" className="px-4 py-2 rounded-md border border-solid border-gray-300 bg-transparent focus:outline-none focus:border-green-500">
                                 <option value="volvo" className="py-1">Latest</option>
                                 <option value="saab" className="py-1">Top Sales</option>

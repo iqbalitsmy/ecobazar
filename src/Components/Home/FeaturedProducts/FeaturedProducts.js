@@ -21,12 +21,12 @@ import MiniProductCard from '../MiniProductCard/MiniProductCard';
 
 const FeaturedProducts = () => {
     return (
-        <section className='mb-8 container mx-auto'>
+        <section className='mb-8 px-4 sm:px-0 container mx-auto'>
             <div className='flex justify-between items-center mb-10'>
-                <h2 className='text-3xl font-bold'>Featured Products</h2>
-                <button className='text-lg font-medium text-green-500 inline-block' type="button">View All
+                <h2 className='text-3xl font-semibold'>Featured Products</h2>
+                <a href="/products" preventScrollReset={false} className='text-lg font-medium text-green-500 inline-block'>View All
                     <svg className='fill-green-500 inline-block ml-3' height={"22px"} width={"28px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" /></svg>
-                </button>
+                </a>
             </div>
             <div className='mb-6 mx-auto'>
                 <Swiper
@@ -55,7 +55,7 @@ const FeaturedProducts = () => {
                     }
                 </Swiper>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
                 <div className=''>
                     <h2 className='text-lg font-semibold mb-3 text-gray-600'>Hot Deals</h2>
                     {
@@ -90,7 +90,7 @@ const FeaturedProducts = () => {
                     }
                 </div>
                 {
-                    banner && (<div className='h-full'>
+                    banner && (<div className='h-full w-full'>
                         <img className='h-full object-contain' src={banner} alt="" />
                     </div>)
                 }

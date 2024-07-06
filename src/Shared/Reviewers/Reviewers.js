@@ -12,21 +12,21 @@ const Reviewers = ({ name, avatar, rating, time, review }) => {
                         <img
                             src={avatar}
                             alt="avatar"
-                            className="relative inline-block h-12 w-12 !rounded-full  object-cover object-center"
+                            className="relative inline-block h-11 w-11 !rounded-full  object-cover object-center"
                         />
                     </div>
                     <div>
-                        <h3 className='font-semibold'>{name}</h3>
+                        <h3 className='font-medium text-sm'>{name}</h3>
                         <div>
                             <Rating name="read-only" size='small' value={rating} readOnly precision={0.5} />
                         </div>
                     </div>
                 </div>
-                <div className='text-gray-400'>
+                <div className='text-gray-400 text-sm'>
                     <p>{elapsed}</p>
                 </div>
             </div>
-            <p className='text-gray-500'>{review}</p>
+            <p className='text-gray-500 text-sm'>{review}</p>
         </div>
     );
 };

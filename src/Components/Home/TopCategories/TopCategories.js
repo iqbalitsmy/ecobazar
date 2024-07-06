@@ -26,7 +26,7 @@ const categoriesImgs = [category1, category2, category3, category4, category5, c
 
 const TopCategories = () => {
     return (
-        <section className='mb-8 container mx-auto'>
+        <section className='mb-8 px-4 sm:px-0 container mx-auto'>
             <h2 className='text-3xl font-bold pb-8 text-center'>Top Categories</h2>
             <Swiper
                 slidesPerView={2}
@@ -47,7 +47,7 @@ const TopCategories = () => {
             >
                 {
                     categoriesImgs.map((categoriesImg, i) => (<SwiperSlide
-                        className='p-2 border-solid border-[1px] border-gray-200 hover:border-[#00B207] shadow-sm hover:shadow-lg hover:shadow-green-100 hover:text-green-800 cursor-pointer'
+                        className='border-solid border-[1px] border-gray-200 hover:border-[#00B207] shadow-sm hover:shadow-lg hover:shadow-green-100 hover:text-green-800 cursor-pointer pb-2'
                         key={i}
                     >
                         <img className='p-2' src={categoriesImg} alt="" />

@@ -12,7 +12,7 @@ const MiniProductCard = ({ productDetail, productPage }) => {
 
     return (
         <div
-            className={`max-h-[120px] min-h-24 w-full border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-lg hover:shadow-green-300 cursor-pointer flex mb-3 ${productPage ? "gap-0 lg:gap-4" : "gap-4"}`}
+            className={`max-h-[120px] min-h-24 w-full border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-md hover:shadow-green-300 cursor-pointer flex mb-3 ${productPage ? "gap-0 lg:gap-4" : "gap-4"}`}
             onMouseEnter={() => setIsHovered(!productPage && true)}
             onMouseLeave={() => setIsHovered(false)}
         >

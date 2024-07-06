@@ -4,9 +4,9 @@ import logo from "../../assets/Logo.png"
 
 const Newsletter = () => {
     return (
-        <section className='bg-[#F2F2F2] p-10'>
+        <section className='bg-[#F2F2F2] py-10 px-4'>
             <div className='container mx-auto flex justify-center md:justify-between items-center flex-wrap gap-10'>
-                <figure>
+                <figure className='hidden sm:block'>
                     <img className='max-w-[20vW]' src={logo} alt="Ecobazar" />
                 </figure>
                 <div className='text-center md:text-left'>

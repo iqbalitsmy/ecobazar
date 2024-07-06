@@ -15,13 +15,27 @@ import productDetails from '../../assets/fakeData/fakeData';
 import ProductsDes from './ProductsDes';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
+import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 
 const ProductsDetailsPage = () => {
     return (
-        <section className='container mx-auto'>
+        <section className='px-2 sm:px-0 container mx-auto'>
             <ProductNav titles={["Category", "Vegetables", "Chinese Cabbage"]}></ProductNav>
-            <div className='mt-8 mb-12'>
-                <ProductDetails productDetail={productDetails[0]}></ProductDetails>
+            <div className='mt-8 mb-12 '>
+                <div className='flex gap-6 lg:gap-10 mb-8'>
+                    <div>
+                        <ProductDetails productDetail={productDetails[0]}></ProductDetails>
+                    </div>
+                    <div className='min-w-44 overflow-auto hidden md:block'>
+                        <h2 className='text-lg font-semibold mb-3 text-gray-600'>Related Products</h2>
+                        {
+                            productDetails.slice(0, 4).map((productDetail, i) => (
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
+                                </MiniProductCard>
+                            ))
+                        }
+                    </div>
+                </div>
                 <ProductsDes></ProductsDes>
             </div>
             <div className='mb-6 mx-auto'>
@@ -30,7 +44,7 @@ const ProductsDetailsPage = () => {
                 </div>
                 <Swiper
                     slidesPerView={1}
-                    spaceBetween={20}
+                    spaceBetween={0}
                     freeMode={true}
                     pagination={{
                         clickable: true,

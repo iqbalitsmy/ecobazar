@@ -88,10 +88,11 @@ const ProductsDes = () => {
     }
 
     return (
-        <div className='grid grid-cols-2 pt-5 border-solid border-0 border-t-[1px] border-opacity-20 border-gray-500'>
-            <div className='md:w-[90%]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-4 pt-5 border-solid border-0 border-t-[1px] border-opacity-20 border-gray-500'>
+            {/* product description */}
+            <div className=''>
                 <h2 className='text-2xl font-semibold text-gray-700 mb-4'>Descriptions</h2>
-                <div className='text-gray-600 font-medium text-justify'>
+                <div className='text-gray-600 font-normal text-sm text-justify'>
                     <p className='pb-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit at quaerat explicabo ullam distinctio natus dolorum assumenda veritatis quasi, ipsa exercitationem. Sint tempore officia esse dicta quidem animi error perspiciatis mollitia consectetur. Ipsa veniam dolores illum pariatur totam minima placeat sequi alias, aliquid nobis, hic suscipit assumenda! Repudiandae at, animi culpa vero porro et nobis dicta iste qui adipisci molestias obcaecati voluptas atque omnis, eveniet ea ducimus, beatae doloribus eaque aspernatur veniam fugiat temporibus voluptates! Soluta maiores molestiae eius dignissimos!</p>
                     <ul className='text-left space-y-2 mb-4'>
                         <li><span className='bg-green-500 px-1 rounded-full text-white mr-1'><FontAwesomeIcon icon={faCheck} /></span>100 g of fresh leaves provides.</li>
@@ -102,11 +103,12 @@ const ProductsDes = () => {
                     <p>Cras et diam maximus, accumsan sapien et, sollicitudin velit. Nulla blandit eros non turpis lobortis iaculis at ut massa. </p>
                 </div>
             </div>
+            {/* customer feedback */}
             <div>
                 <h2 className='text-2xl font-semibold text-gray-700 mb-4'>Customer Feedback</h2>
                 <div className='flex flex-col lg:flex-row gap-6 justify-between mb-8'>
                     <div className='lg:mr-14'>
-                        <div className='flex  items-center gap-4'>
+                        <div className='flex items-center gap-4'>
                             <h1 className='text-2xl font-semibold'>3.7</h1>
                             <p className='text-gray-700'>104 rating</p>
                         </div>
@@ -142,7 +144,7 @@ const ProductsDes = () => {
                         }
                     </div>
                 </div>
-                <div>
+                <div className='relative'>
                     {
                         currentPageData.map((data, i) => {
                             return (
@@ -156,9 +158,9 @@ const ProductsDes = () => {
                     {
                         currentPageData.length <= 2 && currentPage === 1 && (<div>
                             <button
-                                className='rounded-2xl bg-green-100 text-green-600 px-5 py-2 font-semibold'
+                                className='rounded-xl bg-green-50 hover:bg-green-100 text-green-600 hover:text-green-700 px-5 py-2 font-medium'
                                 onClick={handleLoadMoreReviews}
-                            >Load More</button>
+                            >Load More...</button>
                         </div>)
                     }
                     {

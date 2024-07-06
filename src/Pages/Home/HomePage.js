@@ -12,7 +12,7 @@ const HomePage = () => {
 
     return (
         <>
-            <section className='mb-8 container mx-auto'>
+            <section className='mb-10 container mx-auto'>
                 <HeaderSection open={open} setOpen={setOpen}></HeaderSection>
                 <Feature></Feature>
             </section>

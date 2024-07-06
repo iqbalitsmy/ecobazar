@@ -3,63 +3,61 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-
-// import required modules
-import { Pagination } from 'swiper/modules';
 
 const ProductDetails = ({ productDetail }) => {
     const { title, newPrice, price, offPercentage, rating, brandImg, description, quantity, category, tags, images } = productDetail;
     const [productImage, setProductImage] = useState(images[0]);
 
+    const [productQuantity, setProductQuantity] = useState(0);
+
+    const handleQuantityDecrement = () => {
+        if (productQuantity > 0) {
+            return setProductQuantity((prevQuantity) => prevQuantity -= 1)
+        }
+        return setProductQuantity(0)
+    }
+
+    const handleQuantityIncrement = () => {
+        if (productQuantity <= quantity) {
+            return setProductQuantity((prevQuantity) => prevQuantity += 1)
+        }
+        return;
+    }
+
+
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-6 lg:m-6 pb-6'>
-            <div className=''>
+        <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-6'>
+            {/* products image */}
+            <div className='w-full gap-4'>
                 <figure className='h-full w-full'>
-                    <img className='max-h-[400px] w-auto mx-auto' src={productImage} alt="Product" />
+                    <img className='max-h-[350px] w-auto mx-auto' src={productImage} alt="Product" />
                 </figure>
-                <Swiper
-                    slidesPerView={4}
-                    spaceBetween={10}
-                    // pagination={{
-                    //     clickable: true,
-                    // }}
-                    modules={[Pagination]}
-                    className='mySwiper max-h-40'>
+                <div className='flex justify-center items-center gap-4'>
                     {
-                        images.map((image, i) => {
-                            return (
-                                <SwiperSlide
-                                    className='max-w-14  border-solid border-[1px] hover:border-2 border-gray-300 hover:shadow-md cursor-pointer'
-                                    key={i}
-                                    onClick={() => setProductImage(image)}
-                                >
-                                    <img className='h-16' src={image} alt="Product" />
-                                </SwiperSlide>
-                            )
-                        })
+                        images.map((image, i) => (<figure
+                            className='h-11 md:h-14 w-12 md:w-14 border-solid border-[1px] hover:border-2 border-gray-300 hover:shadow-md cursor-pointer'
+                            key={i}
+                            onClick={() => setProductImage(image)}>
+                            <img className='h-full w-full' src={image} alt="Product" />
+                        </figure>))
                     }
-                </Swiper>
+                </div>
             </div>
+            {/* product details */}
             <div className=''>
                 <div className='space-y-4 pb-6 mb-4 border-solid border-0 border-b-[1px] border-gray-300'>
                     <div className='flex gap-4 flex-wrap items-center'>
-                        <h1 className='text-3xl font-bold'>{title}</h1>
-                        <p className='py-[2px] px-3 font-light bg-green-200 rounded-md text-green-900'>In Stock</p>
+                        <h1 className='text-4xl font-semibold'>{title}</h1>
+                        <p className='py-[2px] px-3 text-sm bg-green-200 rounded-md text-[#2C742F]'>In Stock</p>
                     </div>
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 text-sm'>
                         <Rating name="read-only" value={rating} readOnly precision={0.5} />
                         <div className='text-gray-600'>
                             <p>{rating} Review</p>
                         </div>
                     </div>
-                    <div className='flex items-center gap-2 text-lg font-semibold'>
-                        <p className='text-green-800'><del className='text-gray-400'>${price.toFixed(2)}</del> ${newPrice.toFixed(2)}</p>
+                    <div className='flex items-center gap-2 text-lg font-medium'>
+                        <p className='text-green-800 text-2xl'><del className='text-gray-300 text-xl font-normal'>${price.toFixed(2)}</del> ${newPrice.toFixed(2)}</p>
                         <p className='text-sm text-red-500 bg-red-100 p-1 px-2 rounded-lg'>{offPercentage}% Off</p>
                     </div>
                 </div>
@@ -109,28 +107,34 @@ const ProductDetails = ({ productDetail }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='text-gray-500 font-medium'>
+                    <div className='text-gray-500 text-sm'>
                         <p>{description}</p>
                     </div>
                 </div>
                 <div className='flex items-center justify-between gap-4 flex-wrap pb-6 mb-6 border-solid border-0 border-b-[1px] border-gray-300'>
-                    <div className='p-[6px] border-solid border-[1px] border-gray-200 flex items-center gap-4 text-gray-600 rounded-full'>
+                    {/* product quantity */}
+                    <div className=' p-[6px] border-solid border-[1px] border-gray-200 flex items-center gap-3 text-gray-600 rounded-full'>
                         <button
                             className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block'
                             type="button"
+                            onClick={handleQuantityDecrement}
                         >
                             <FontAwesomeIcon icon={faMinus} />
                         </button>
-                        <button className='text-lg font-semibold' type="button">{quantity}</button>
+                        <div className='font-medium inline-block w-2'>
+                            <p>{productQuantity}</p>
+                        </div>
                         <button
                             className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block'
-                            type="button">
+                            type="button"
+                            onClick={handleQuantityIncrement}
+                        >
                             <FontAwesomeIcon icon={faPlus} />
                         </button>
                     </div>
                     <div className='flex-grow'>
                         <button
-                            className='py-[12px] text-lg font-semibold text-white w-full rounded-full bg-[#00B207]'
+                            className='py-[12px] px-1 font-semibold text-white w-full rounded-full bg-[#00B207]'
                             type="button"
                         >
                             <span>Add to Cart</span>
@@ -148,11 +152,11 @@ const ProductDetails = ({ productDetail }) => {
                         </button>
                     </div>
                 </div>
-                <div className='space-y-2'>
-                    <p className='font-semibold'>Category: <span className='font-normal text-gray-400'>{category}</span></p>
+                <div className='space-y-2 text-sm text-gray-900'>
+                    <p className='font-medium'>Category: <span className='font-normal text-gray-500'>{category}</span></p>
                     <div>
-                        <p className='font-semibold'>Tag:{tags.map((tag, i) => (<span
-                            className='font-normal text-gray-400'
+                        <p className='font-medium'>Tag:{tags.map((tag, i) => (<span
+                            className='font-normal text-gray-500'
                             key={i}> {tag}</span>))}</p>
                     </div>
                 </div>
