@@ -15,7 +15,7 @@ const Newsletter = () => {
                 </div>
                 <div className='relative max-w-md w-full'>
                     <input
-                        className='py-2 pl-6 rounded-l-full font-medium'
+                        className='py-2 pl-6 rounded-l-full font-medium w-full'
                         style={{
                             outline: "none"
                         }}

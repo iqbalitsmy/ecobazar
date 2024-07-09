@@ -8,6 +8,7 @@ const UserDashboard = () => {
                 <aside className='text-center flex flex-col justify-center items-center space-y-1 border-solid border-2 border-gray-100 rounded-md w-full py-6'>
                     <img
                         className='h-24 w-24 rounded-full object-cover'
+                        loading="lazy"
                         src="https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
                         alt="Profile"
                     />

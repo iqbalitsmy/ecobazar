@@ -87,7 +87,7 @@ const UserSetting = () => {
                         <div className="flex flex-col items-center justify-center">
                             {selectedImage && (
                                 <div className="mb-4">
-                                    <img src={selectedImage} alt="Selected" className="h-28 w-28 md:h-36 md:w-36 lg:h-52 lg:w-52 rounded-full shadow-md object-contain" />
+                                    <img src={selectedImage} loading="lazy" alt="Selected" className="h-28 w-28 md:h-36 md:w-36 lg:h-52 lg:w-52 rounded-full shadow-md object-contain" />
                                 </div>
                             )}
                             <label className="cursor-pointer px-2 md:px-4 py-2 md:py-2 text-sm font-semibold text-primary-color rounded-full shadow-md border-solid border-2 border-primary-color hover:bg-gray-50">

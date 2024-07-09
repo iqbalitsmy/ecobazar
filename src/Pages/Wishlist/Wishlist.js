@@ -23,7 +23,7 @@ const Wishlist = () => {
                     <tbody>
                         <tr className='border-solid border-gray-200 border-2'>
                             <td className='flex items-center gap-2 text-start pl-3'>
-                                <img className='max-h-28 w-auto' src={productDetails[0].thumbnail} alt="" />
+                                <img className='max-h-28 w-auto' loading="lazy" src={productDetails[0].thumbnail} alt="" />
                                 <h3>{productDetails[0].title}</h3>
                             </td>
                             <td className='font-semibold'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,26 +11,62 @@ import 'swiper/css/pagination';
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
 import ProductDetails from '../../Shared/ProductDetails/ProductDetails';
-import productDetails from '../../assets/fakeData/fakeData';
+// import productDetails from '../../assets/fakeData/fakeData';
 import ProductsDes from './ProductsDes';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 const ProductsDetailsPage = () => {
+    const { id } = useParams();
+    // fetch data
+    const [productDetails, setProductDetails] = useState([]);
+    const [productDetail, setProductDetail] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    // fetch data
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/fakeJsonData.json');
+                setProductDetails(response.data);
+                setProductDetail(response.data.find((data) => data._id == id));
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [id]);
+
+    // console.log(error)
+
+    // console.log(productDetail)
+    // console.log(productDetails)
+
+    if (loading) return <Spinner></Spinner>
+
+    if (error) return <p>Error: {error.message}</p>;
+
     return (
         <section className='px-2 sm:px-0 container mx-auto'>
             <ProductNav titles={["Category", "Vegetables", "Chinese Cabbage"]}></ProductNav>
             <div className='mt-8 mb-12 '>
                 <div className='flex gap-6 lg:gap-10 mb-8'>
                     <div>
-                        <ProductDetails productDetail={productDetails[0]}></ProductDetails>
+                        <ProductDetails productDetail={{ ...productDetail }}></ProductDetails>
                     </div>
                     <div className='min-w-44 overflow-auto hidden md:block'>
                         <h2 className='text-lg font-semibold mb-3 text-gray-600'>Related Products</h2>
                         {
                             productDetails.slice(0, 4).map((productDetail, i) => (
-                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} style={"max-w-[30vw]"} >
                                 </MiniProductCard>
                             ))
                         }

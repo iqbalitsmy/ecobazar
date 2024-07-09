@@ -171,7 +171,7 @@ const Checkout = () => {
                     <div className='flex items-center justify-between mb-4'>
                         <div className='flex gap-2 items-center'>
                             <figure className=''>
-                                <img className='max-h-20 h-full max-w-20' src={productDetails[0].thumbnail} alt={productDetails[0].title} />
+                                <img className='max-h-20 h-full max-w-20' loading="lazy" src={productDetails[0].thumbnail} alt={productDetails[0].title} />
                             </figure>
                             <p>{productDetails[0].title} x1</p>
                         </div>

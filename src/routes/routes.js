@@ -10,12 +10,17 @@ import Checkout from "../Pages/Checkout/Checkout";
 import UserLayout from "../Layout/UserLayout";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
-import UserDashboardLayout from "../Layout/UserDashboardLayout";
-import UserDashboard from "../Pages/UserDashboardPages/UserDashboard";
-import UserOrdersHistory from "../Pages/UserDashboardPages/UserOrdersHistoryPage/UserOrdersHistory";
-import DashboardWishlist from "../Pages/UserDashboardPages/DashboardWishlist";
-import UserSetting from "../Pages/UserDashboardPages/UserSetting";
-import OrderDetails from "../Pages/UserDashboardPages/UserOrdersHistoryPage/OrderDetails";
+
+import { lazy } from "react";
+
+// lazy loading
+// const UserDashboardLayout = lazy(() => wait(3000).then(() => import("../Layout/UserDashboardLayout")));
+const UserDashboardLayout = lazy(() => import("../Layout/UserDashboardLayout"));
+const UserDashboard = lazy(() => import("../Pages/UserDashboardPages/UserDashboard"));
+const UserSetting = lazy(() => import("../Pages/UserDashboardPages/UserSetting"));
+const UserOrdersHistory = lazy(() => import("../Pages/UserDashboardPages/UserOrdersHistoryPage/UserOrdersHistory"));
+const DashboardWishlist = lazy(() => import("../Pages/UserDashboardPages/DashboardWishlist"));
+const OrderDetails = lazy(() => import("../Pages/UserDashboardPages/UserOrdersHistoryPage/OrderDetails"));
 
 const router = createBrowserRouter([
     {
@@ -39,14 +44,12 @@ const router = createBrowserRouter([
             {
                 path: ":id",
                 element: <ProductsDetailsPage></ProductsDetailsPage>,
-                loader: ({ params }) => fetch(`fakeJsonData.json`, {
-                    method: "GET",
-                    credentials: 'include',
-                    headers: {
-                        'content-type': "application/json",
-                    }
-                })
-
+                // loader: ({ params }) => fetch(`fakeJsonData.json`, {
+                //     method: "GET",
+                //     headers: {
+                //         'content-type': "application/json",
+                //     }
+                // })
             },
             {
                 path: "wishlist",
@@ -113,5 +116,11 @@ const router = createBrowserRouter([
         ]
     }
 ])
+
+function wait(time) {
+    return new Promise(resolve => {
+        setTimeout(resolve, time);
+    })
+}
 
 export default router;

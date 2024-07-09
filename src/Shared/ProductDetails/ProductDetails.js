@@ -24,13 +24,12 @@ const ProductDetails = ({ productDetail }) => {
         return;
     }
 
-
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-6'>
             {/* products image */}
-            <div className='w-full gap-4'>
-                <figure className='h-full w-full'>
-                    <img className='max-h-[350px] w-auto mx-auto' src={productImage} alt="Product" />
+            <div className='w-full'>
+                <figure className='h-full w-full mb-8'>
+                    <img className='max-h-[350px] h-full w-auto mx-auto' loading="lazy" src={productImage} alt="Product" />
                 </figure>
                 <div className='flex justify-center items-center gap-4'>
                     {
@@ -38,7 +37,7 @@ const ProductDetails = ({ productDetail }) => {
                             className='h-11 md:h-14 w-12 md:w-14 border-solid border-[1px] hover:border-2 border-gray-300 hover:shadow-md cursor-pointer'
                             key={i}
                             onClick={() => setProductImage(image)}>
-                            <img className='h-full w-full' src={image} alt="Product" />
+                            <img className='h-full w-full' loading="lazy" src={image} alt="Product" />
                         </figure>))
                     }
                 </div>
@@ -65,8 +64,9 @@ const ProductDetails = ({ productDetail }) => {
                     <div className='flex justify-between items-center flex-wrap pb-4'>
                         <div className='flex items-center gap-1'>
                             <p className='text-gray-700 font-medium'>Brand:</p>
-                            <img className='max-h-10 max-w-12' src={brandImg} alt="" />
+                            <img className='max-h-10 max-w-12' loading="lazy" src={brandImg} alt="" />
                         </div>
+                        {/* share item */}
                         <div className='flex items-center gap-2'>
                             <p className='text-gray-700 font-medium'>Share item:</p>
                             <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>

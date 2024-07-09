@@ -10,9 +10,10 @@ const Reviewers = ({ name, avatar, rating, time, review }) => {
                 <div className='flex items-center gap-4'>
                     <div>
                         <img
+                            className="relative inline-block h-11 w-11 !rounded-full  object-cover object-center"
                             src={avatar}
                             alt="avatar"
-                            className="relative inline-block h-11 w-11 !rounded-full  object-cover object-center"
+                            loading="lazy"
                         />
                     </div>
                     <div>

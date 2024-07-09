@@ -8,6 +8,7 @@ import Pagination from '../../Shared/Pagination/Pagination ';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 import adBanner from '../../assets/banner/bannar-produc-page.png'
 import axios from 'axios';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 
 const allCategories = ["Fresh Fruit", "Vegetables", "Cooking", "Snacks", "Beverages", "Beauty & Health", "Bread & Bakery"]
@@ -67,11 +68,10 @@ const ProductsPage = () => {
     });
 
     // fetch data
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('fakeJsonData.json');
+                const response = await axios.get('http://localhost:3000/fakeJsonData.json');
                 setProductDetails(response.data);
                 setLoading(false);
             } catch (error) {
@@ -82,6 +82,11 @@ const ProductsPage = () => {
 
         fetchData();
     }, [])
+
+    // console.log(productDetails)
+    if (loading) return <Spinner></Spinner>
+
+    if (error) return <p>Error: {error.message}</p>;
 
     return (
         <section className='container mx-auto mb-10'>

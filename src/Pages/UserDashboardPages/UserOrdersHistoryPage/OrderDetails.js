@@ -108,7 +108,7 @@ const OrderDetails = () => {
                 <tbody>
                     <tr className='text-sm shadow-sm'>
                         <td className='flex items-center gap-2 text-start border-solid border-gray-100 border-0 border-b-2 pl-4'>
-                            <img className='max-h-24 max-w-24' src={productDetails[0].thumbnail} alt="Product" />
+                            <img className='max-h-24 max-w-24' loading="lazy" src={productDetails[0].thumbnail} alt="Product" />
                             <h3 className='text-sm'>{productDetails[0].title}</h3>
                         </td>
                         <td className='border-solid border-gray-100 border-0 border-b-2'>
