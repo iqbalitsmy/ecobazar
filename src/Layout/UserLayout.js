@@ -7,20 +7,25 @@ import Footer from '../Shared/Footer/Footer';
 import Newsletter from '../Shared/Newsletter/Newsletter';
 import Spinner from '../Shared/Spinner/Spinner';
 import CategoryDrawer from '../Shared/CategoryDrawer/CategoryDrawer';
+import CartDrawer from '../Shared/CartDrawer/CartDrawer';
 
 
 const UserLayout = () => {
     // for menu drawer
-    const [open, setOpen] = useState(false);
-    // console.log(open)
+    const [navOpen, setNavOpen] = useState(false);
+    // for cart drawer
+    const [cartOpen, setCartOpen] = useState(false);
+    // console.log(navOpen)
     return (
         <>
             <header className='container mx-auto'>
-                <nav>
+            <nav>
                     <TopNav></TopNav>
                     <MiddleNav></MiddleNav>
-                    <BottomNav open={open} setOpen={setOpen}></BottomNav>
-                    <CategoryDrawer open={open} setOpen={setOpen} ></CategoryDrawer>
+                    <BottomNav navOpen={navOpen} setNavOpen={setNavOpen} cartOpen={cartOpen} setCartOpen={setCartOpen}></BottomNav>
+                    <CategoryDrawer open={navOpen} setOpen={setNavOpen} ></CategoryDrawer>
+                    {/* cart drawer */}
+                    <CartDrawer open={cartOpen} setOpen={setCartOpen}></CartDrawer>
                 </nav>
             </header>
             <main className='container mx-auto'>

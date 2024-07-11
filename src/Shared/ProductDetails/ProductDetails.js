@@ -2,13 +2,15 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Rating } from '@mui/material';
 import React, { useState } from 'react';
+import addToCartProducts from '../../utils/useAddToCartData';
 
 
 const ProductDetails = ({ productDetail }) => {
     const { title, newPrice, price, offPercentage, rating, brandImg, description, quantity, category, tags, images } = productDetail;
     const [productImage, setProductImage] = useState(images[0]);
 
-    const [productQuantity, setProductQuantity] = useState(0);
+    // handle product quantity
+    const [productQuantity, setProductQuantity] = useState(1);
 
     const handleQuantityDecrement = () => {
         if (productQuantity > 0) {
@@ -22,6 +24,12 @@ const ProductDetails = ({ productDetail }) => {
             return setProductQuantity((prevQuantity) => prevQuantity += 1)
         }
         return;
+    }
+
+    // handle add to cart
+    const handleAddToCartData = (productDetail) => {
+        addToCartProducts(productDetail, productQuantity);
+        setProductQuantity(1)
     }
 
     return (
@@ -115,7 +123,8 @@ const ProductDetails = ({ productDetail }) => {
                     {/* product quantity */}
                     <div className=' p-[6px] border-solid border-[1px] border-gray-200 flex items-center gap-3 text-gray-600 rounded-full'>
                         <button
-                            className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block'
+                            className={`px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block disabled:opacity-40`}
+                            disabled={(productQuantity <= 1)}
                             type="button"
                             onClick={handleQuantityDecrement}
                         >
@@ -132,10 +141,12 @@ const ProductDetails = ({ productDetail }) => {
                             <FontAwesomeIcon icon={faPlus} />
                         </button>
                     </div>
+                    {/* add to cart */}
                     <div className='flex-grow'>
                         <button
                             className='py-[12px] px-1 font-semibold text-white w-full rounded-full bg-[#00B207]'
                             type="button"
+                            onClick={() => handleAddToCartData(productDetail)}
                         >
                             <span>Add to Cart</span>
                             <svg className='inline-block fill-white pl-2' height={"24px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">

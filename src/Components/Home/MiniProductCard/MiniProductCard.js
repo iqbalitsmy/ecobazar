@@ -3,7 +3,7 @@ import { Rating } from '@mui/material';
 import ProductModal from '../../ProductsPage/ProductModal';
 
 const MiniProductCard = ({ productDetail, productPage = false, style }) => {
-    const { _id, title, price, thumbnail, rating } = productDetail;
+    const { _id, title, newPrice, thumbnail, rating } = productDetail;
     const [isHovered, setIsHovered] = useState(false);
 
     // for modal
@@ -48,7 +48,7 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
                     <ProductModal productDetail={{ ...productDetail }} open={open} setOpen={setOpen} ></ProductModal>
                     <div className={`${isHovered ? `hidden` : `block`}`}>
                         <div className=''>
-                            <p className={`${productPage ? "text-base font-semibold" : "text-lg font-semibold"}`}>${price.toFixed(2)}</p>
+                            <p className={`${productPage ? "text-base font-semibold" : "text-lg font-semibold"}`}>${newPrice.toFixed(2)}</p>
                         </div>
                         <div>
                             <Rating name="read-only" size='small' value={rating} readOnly precision={0.5} />
