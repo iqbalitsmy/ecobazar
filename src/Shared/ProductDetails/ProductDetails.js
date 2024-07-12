@@ -25,7 +25,7 @@ const ProductDetails = ({ productDetail }) => {
         }
         return;
     }
-
+    
     // handle add to cart
     const handleAddToCartData = (productDetail) => {
         addToCartProducts(productDetail, productQuantity);

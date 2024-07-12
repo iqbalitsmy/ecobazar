@@ -34,7 +34,6 @@ const Home = () => {
                 <Newsletter></Newsletter>
                 <Footer></Footer>
             </footer>
-
         </>
     );
 };
