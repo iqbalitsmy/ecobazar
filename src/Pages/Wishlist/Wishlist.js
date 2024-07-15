@@ -2,22 +2,22 @@ import React from 'react';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
 import productDetails from '../../assets/fakeData/fakeData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faL, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Wishlist = () => {
 
     return (
-        <section className='container mx-auto min-h-[60vh] lg:min-h-screen'>
+        <section className='container mx-auto min-h-[40vh] md:min-h-screen'>
             <ProductNav titles={["Wishlist"]} newStyle={true}></ProductNav>
-            <div className='mt-10'>
-                <h1 className='text-center text-3xl font-bold mb-6'>My Wishlist</h1>
+            <div className='my-10'>
+                <h1 className='text-center text-[32px] font-semibold mb-6'>My Wishlist</h1>
                 <table className='w-full lg:w-3/4 mx-auto'>
                     <thead>
                         <tr className='text-gray-500 uppercase border-solid border-gray-200 border-2'>
-                            <th className='font-normal text-base text-start pl-3 py-3'>Product</th>
-                            <th className='font-normal text-base text-start pl-3 py-3'>price</th>
-                            <th className='font-normal text-base text-start pl-3 py-3'>Stock Status</th>
-                            <th className='font-normal text-base text-start pl-3 py-3'></th>
+                            <th className='font-medium text-sm text-start pl-3 py-3'>Product</th>
+                            <th className='font-medium text-sm text-start pl-3 py-3'>price</th>
+                            <th className='font-medium text-sm text-start pl-3 py-3'>Stock Status</th>
+                            <th className='font-medium text-sm text-start pl-3 py-3'></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,10 +26,10 @@ const Wishlist = () => {
                                 <img className='max-h-28 w-auto' loading="lazy" src={productDetails[0].thumbnail} alt="" />
                                 <h3>{productDetails[0].title}</h3>
                             </td>
-                            <td className='font-semibold'>
-                                <span>${productDetails[0].newPrice.toFixed(2)}</span><del className='text-gray-400'>${productDetails[0].price.toFixed(2)}</del>
+                            <td className=''>
+                                <span className='font-medium'>${productDetails[0].newPrice.toFixed(2)}</span> <del className='text-gray-400 text-base'>${productDetails[0].price.toFixed(2)}</del>
                             </td>
-                            <td className='text-start'>
+                            <td className='text-start font-normal text-sm'>
                                 {
                                     productDetails[0].quantity ? (
                                         <p className='py-1 px-2 font-normal bg-green-200 rounded-md text-green-900 inline-block'>In Stock</p>
@@ -45,12 +45,12 @@ const Wishlist = () => {
                                         <div className='flex items-center justify-center gap-4'>
                                             <button
                                                 disabled={productDetails[0].quantity ? false : true}
-                                                className={`py-1 px-4 font-semibold rounded-full bg-[#00B207] hover:bg-green-600 text-white disabled:bg-gray-200 disabled:text-gray-400`}
+                                                className={`py-2 px-4 font-semibold text-sm rounded-full bg-[#00B207] hover:bg-green-600 text-white disabled:bg-gray-200 disabled:text-gray-400`}
                                                 type="button"
                                             >
                                                 Add to Cart
                                             </button>
-                                            <button disabled={productDetails[0].quantity ? false : true} className='px-[5px] border-solid border-gray-300 border-2 rounded-full text-gray-600'>
+                                            <button disabled={productDetails[0].quantity ? false : true} className='px-[5px] border-solid border-gray-200 border-2 rounded-full text-gray-600'>
                                                 <FontAwesomeIcon icon={faXmark} />
                                             </button>
                                         </div>
@@ -58,11 +58,13 @@ const Wishlist = () => {
                                 }
                             </td>
                         </tr>
+                        
+                        {/* share */}
                         <tr className='border-solid border-gray-200 border-2'>
                             <td className='flex items-center gap-2 pl-3 py-4'>
-                                <p className='text-gray-700 font-medium'>Share:</p>
+                                <p className='text-gray-700 font-normal text-sm'>Share:</p>
                                 <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>
-                                    <svg height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 290">
+                                    <svg height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 290">
                                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                         <g id="SVGRepo_iconCarrier">
@@ -71,7 +73,7 @@ const Wishlist = () => {
                                     </svg>
                                 </div>
                                 <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>
-                                    <svg height={"24px"} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
+                                    <svg height={"20px"} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
                                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                         <g id="SVGRepo_iconCarrier">
@@ -82,7 +84,7 @@ const Wishlist = () => {
                                     </svg>
                                 </div>
                                 <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>
-                                    <svg height={"24px"} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
+                                    <svg height={"20px"} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
                                         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                         <g id="SVGRepo_iconCarrier">
@@ -93,7 +95,7 @@ const Wishlist = () => {
                                     </svg>
                                 </div>
                                 <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>
-                                    <svg height={"24px"} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg height={"20px"} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9ZM7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM17.5 8C18.3284 8 19 7.32843 19 6.5C19 5.67157 18.3284 5 17.5 5C16.6716 5 16 5.67157 16 6.5C16 7.32843 16.6716 8 17.5 8Z" />
                                     </svg>
                                 </div>

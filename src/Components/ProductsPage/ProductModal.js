@@ -28,7 +28,7 @@ const ProductModal = ({ productDetail, open, setOpen }) => {
 
         >
             <Box sx={style} className="max-h-screen">
-                <div className="md:p-6 lg:p-16">
+                <div className="md:p-6 2xl:p-16">
                     <ProductDetails productDetail={productDetail} ></ProductDetails>
                 </div>
             </Box>
