@@ -1,5 +1,4 @@
-import React from 'react';
-import productDetails from '../../../assets/fakeData/fakeData';
+import React, { useEffect, useState } from 'react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,8 +12,35 @@ import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 import ProductCard from '../../../Shared/ProductCard/ProductCard';
 import { Link } from 'react-router-dom';
+import fetchData from '../../../utils/fetchData';
+import Spinner from '../../../Shared/Spinner/Spinner';
 
 const NewestProducts = () => {
+    // fetch data
+    const [productDetails, setProductDetails] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                setProductDetails(result);
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, []);
+
+    if (loading) return <Spinner></Spinner>
+
+    if (error) return <p className='text-center h-[40vh] text-red-400 font-medium text-lg'>Error: {error.message}</p>;
+
     return (
         <section className='mb-8 pb-5 container mx-auto'>
             <div className='flex justify-between items-center mb-8 px-4 sm:px-0'>
@@ -43,7 +69,7 @@ const NewestProducts = () => {
                 >
                     {
                         productDetails.map((productDetail, i) => (
-                            <SwiperSlide className='pb-6 pt-4' key={i}>
+                            <SwiperSlide className='pb-4' key={i}>
                                 <ProductCard productDetail={productDetail}></ProductCard>
                             </SwiperSlide>
                         ))

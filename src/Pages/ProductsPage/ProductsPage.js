@@ -39,7 +39,7 @@ const ProductsPage = () => {
 
     // Function to handle page change
     const handlePageChange = (page) => {
-        console.log(page)
+        // console.log(page)
         setCurrentPage(page);
     };
 

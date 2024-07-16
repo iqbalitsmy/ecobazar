@@ -1,66 +1,150 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
-import productDetails from '../../assets/fakeData/fakeData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import Spinner from '../../Shared/Spinner/Spinner';
+import fetchData from '../../utils/fetchData';
+import findProductsById from '../../utils/findProductsById';
+import Pagination from '../../Shared/Pagination/Pagination ';
+import addToCartProducts from '../../utils/useAddToCartData';
+import { SnackbarContext } from '../../Layout/ProductsLayout';
 
 const Wishlist = () => {
+    const [wishlistProducts, setWishlistProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // pagination part
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+
+    // Calculate the index range for current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, wishlistProducts.length);
+    // Get the current page data
+    const currentPageData = wishlistProducts.slice(startIndex, endIndex);
+
+    // Function to handle page change
+    const handlePageChange = (page) => {
+        // console.log(page)
+        setCurrentPage(page);
+    };
+
+    // add to wishlist
+    const handleDeleteAddToWishlist = useCallback((_id) => {
+        const stored_ids = JSON.parse(localStorage.getItem("addToWishlist"));
+        if (stored_ids) {
+            const newAddToWishlist = stored_ids.filter((d) => d !== _id);
+
+            // update store data
+            localStorage.setItem("addToWishlist", JSON.stringify(newAddToWishlist));
+            setLoading(true);
+
+            setWishlistProducts(findProductsById(wishlistProducts, newAddToWishlist))
+            return setLoading(false);
+        }
+    }, [wishlistProducts])
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const stored_ids = JSON.parse(localStorage.getItem("addToWishlist"));
+                if (stored_ids) {
+                    const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                    setWishlistProducts(findProductsById(result, stored_ids))
+                }
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, []);
+
+    // snackbar
+    const { snackbar, setSnackbar } = useContext(SnackbarContext);
+
+    // add to cart
+    const handleAddToCartData = useCallback((_id) => {
+        addToCartProducts(_id, 1);
+
+        setSnackbar([...snackbar, {
+            _id: snackbar.length + 1,
+            message: "1 new item(s) have been added to your cart",
+            type: "success",
+            isVisible: true,
+        }]);
+    }, [snackbar, setSnackbar]);
+
+    if (loading) return <Spinner></Spinner>
+
+    if (error) return <p>Error loading data: {error.message}</p>;
 
     return (
-        <section className='container mx-auto min-h-[40vh] md:min-h-screen'>
+        <section className='container mx-auto min-h-[50vh] md:min-h-screen'>
             <ProductNav titles={["Wishlist"]} newStyle={true}></ProductNav>
-            <div className='my-10'>
+            <div className='mt-6 mb-10'>
                 <h1 className='text-center text-[32px] font-semibold mb-6'>My Wishlist</h1>
                 <table className='w-full lg:w-3/4 mx-auto'>
                     <thead>
-                        <tr className='text-gray-500 uppercase border-solid border-gray-200 border-2'>
-                            <th className='font-medium text-sm text-start pl-3 py-3'>Product</th>
-                            <th className='font-medium text-sm text-start pl-3 py-3'>price</th>
-                            <th className='font-medium text-sm text-start pl-3 py-3'>Stock Status</th>
-                            <th className='font-medium text-sm text-start pl-3 py-3'></th>
+                        <tr className='text-gray-500 uppercase border-solid border-gray-200 border-[1px]'>
+                            <th className='font-medium text-sm text-start pl-3 py-2'>Product</th>
+                            <th className='font-medium text-sm text-start pl-3 py-2'>price</th>
+                            <th className='font-medium text-sm text-start pl-3 py-2'>Stock Status</th>
+                            <th className='font-medium text-sm text-start pl-3 py-2'></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className='border-solid border-gray-200 border-2'>
-                            <td className='flex items-center gap-2 text-start pl-3'>
-                                <img className='max-h-28 w-auto' loading="lazy" src={productDetails[0].thumbnail} alt="" />
-                                <h3>{productDetails[0].title}</h3>
-                            </td>
-                            <td className=''>
-                                <span className='font-medium'>${productDetails[0].newPrice.toFixed(2)}</span> <del className='text-gray-400 text-base'>${productDetails[0].price.toFixed(2)}</del>
-                            </td>
-                            <td className='text-start font-normal text-sm'>
-                                {
-                                    productDetails[0].quantity ? (
-                                        <p className='py-1 px-2 font-normal bg-green-200 rounded-md text-green-900 inline-block'>In Stock</p>
-                                    ) :
-                                        (
-                                            <p className='py-1 px-2 bg-red-200 rounded-md text-red-900 inline-block'>Out of Stock</p>
-                                        )
-                                }
-                            </td>
-                            <td >
-                                {
-                                    productDetails[0].quantity && (
-                                        <div className='flex items-center justify-center gap-4'>
-                                            <button
-                                                disabled={productDetails[0].quantity ? false : true}
-                                                className={`py-2 px-4 font-semibold text-sm rounded-full bg-[#00B207] hover:bg-green-600 text-white disabled:bg-gray-200 disabled:text-gray-400`}
-                                                type="button"
-                                            >
-                                                Add to Cart
-                                            </button>
-                                            <button disabled={productDetails[0].quantity ? false : true} className='px-[5px] border-solid border-gray-200 border-2 rounded-full text-gray-600'>
-                                                <FontAwesomeIcon icon={faXmark} />
-                                            </button>
-                                        </div>
-                                    )
-                                }
-                            </td>
-                        </tr>
-                        
+                        {
+                            currentPageData.map((wishlistProduct, i) => (
+                                <tr
+                                    key={i}
+                                    className='border-solid border-gray-200 border-[1px]'
+                                >
+                                    <td className='flex items-center gap-2 text-start pl-3'>
+                                        <img className='max-h-20 w-auto' loading="lazy" src={wishlistProduct.thumbnail} alt="" />
+                                        <h3>{wishlistProduct.title}</h3>
+                                    </td>
+                                    <td className=''>
+                                        <span className='font-medium'>${wishlistProduct.newPrice.toFixed(2)}</span> <del className='text-gray-400 text-base'>${wishlistProduct.price.toFixed(2)}</del>
+                                    </td>
+                                    <td className='text-start font-normal text-sm'>
+                                        {
+                                            wishlistProduct.quantity > 0 ? (
+                                                <p className='py-1 px-2 font-normal bg-green-200 rounded-md text-green-900 inline-block'>In Stock</p>
+                                            ) :
+                                                (
+                                                    <p className='py-1 px-2 bg-red-200 rounded-md text-red-900 inline-block'>Out of Stock</p>
+                                                )
+                                        }
+                                    </td>
+                                    <td >
+                                        {
+                                            <div className='flex items-center justify-center gap-4'>
+                                                <button
+                                                    disabled={wishlistProduct.quantity ? false : true}
+                                                    className={`py-2 px-4 font-semibold text-sm rounded-full bg-[#00B207] hover:bg-green-600 text-white disabled:bg-gray-200 disabled:text-gray-400`}
+                                                    type="button"
+                                                    onClick={() => handleAddToCartData(wishlistProduct._id)}
+                                                >
+                                                    Add to Cart
+                                                </button>
+                                                <button
+                                                    className='px-[5px] border-solid border-gray-200 border-[1px] rounded-full text-gray-600'
+                                                    onClick={() => handleDeleteAddToWishlist(wishlistProduct._id)}
+                                                >
+                                                    <FontAwesomeIcon icon={faXmark} />
+                                                </button>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                            ))
+                        }
                         {/* share */}
-                        <tr className='border-solid border-gray-200 border-2'>
+                        <tr className='border-solid border-gray-200 border-[1px]'>
                             <td className='flex items-center gap-2 pl-3 py-4'>
                                 <p className='text-gray-700 font-normal text-sm'>Share:</p>
                                 <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>
@@ -99,6 +183,19 @@ const Wishlist = () => {
                                         <path fillRule="evenodd" clipRule="evenodd" d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6ZM12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9ZM7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12ZM17.5 8C18.3284 8 19 7.32843 19 6.5C19 5.67157 18.3284 5 17.5 5C16.6716 5 16 5.67157 16 6.5C16 7.32843 16.6716 8 17.5 8Z" />
                                     </svg>
                                 </div>
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                {
+                                    wishlistProducts.length > 0 && <div className=''>
+                                        <Pagination currentPage={currentPage} totalPages={Math.ceil(wishlistProducts.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE={3} />
+                                    </div>
+                                }
                             </td>
                         </tr>
                     </tbody>

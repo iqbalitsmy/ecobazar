@@ -12,9 +12,6 @@ import 'swiper/css/pagination';
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
 
-// fake product data
-// import productDetails from '../../../assets/fakeData/fakeData';
-
 import ProductCard from '../../../Shared/ProductCard/ProductCard';
 import MiniProductCard from '../MiniProductCard/MiniProductCard';
 import axios from 'axios';

@@ -39,8 +39,8 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
     // snackbar
     const { snackbar, setSnackbar } = useContext(SnackbarContext);
 
-    const handleAddToCartData = useCallback(() => {
-        addToCartProducts(productDetail, 1);
+    const handleAddToCartData = useCallback((_id) => {
+        addToCartProducts(_id, 1);
 
         setSnackbar([...snackbar, {
             _id: snackbar.length + 1,
@@ -48,7 +48,7 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
             type: "success",
             isVisible: true,
         }]);
-    }, [snackbar, setSnackbar, productDetail]);
+    }, [snackbar, setSnackbar]);
 
 
     return (
@@ -72,7 +72,7 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
                 <div className={`${productPage ? "" : "relative"}`}>
                     {/* Icons */}
                     <div className={`flex gap-2 mt-4 ${isHovered ? `block` : `hidden`}`}>
-                        <Icons handleOpen={handleOpen} handleAddToCartData={handleAddToCartData}></Icons>
+                        <Icons handleOpen={handleOpen} handleAddToCartData={() => handleAddToCartData(_id)}></Icons>
                     </div>
                     <ProductModal productDetail={{ ...productDetail }} open={open} setOpen={setOpen} ></ProductModal>
                     <div className={`${isHovered ? `hidden` : `block`}`}>

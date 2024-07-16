@@ -1,13 +1,9 @@
 // handle add to cart
-export default function addToCartProducts(productDetail, productQuantity) {
-    const { _id, title, newPrice, thumbnail } = productDetail;
+export default function addToCartProducts(_id, productQuantity) {
 
     const prevStoredProducts = JSON.parse(localStorage.getItem('addToCartData'));
     let storedData = [{
         _id,
-        title,
-        newPrice,
-        thumbnail,
         productQuantity,
     }]
     if (prevStoredProducts) {

@@ -2,30 +2,58 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Drawer } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import fetchData from '../../utils/fetchData';
+import Spinner from '../Spinner/Spinner';
 
 const CartDrawer = ({ open, setOpen }) => {
     const [addToCartsData, setAddToCartsData] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // total price
-    const totalProductsPrice = (storedData) => {
-        setTotalPrice(storedData.reduce((accumulator, item) => (item.productQuantity * item.newPrice) + accumulator, 0));
+    const totalProductsPrice = (cartDetails) => {
+        setTotalPrice(cartDetails.reduce((accumulator, item) => (item.productQuantity * item.newPrice) + accumulator, 0));
     }
 
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('addToCartData'));
-        if (storedData) {
-            setAddToCartsData(storedData);
-            // total price
-            totalProductsPrice(storedData);
-        }
-        return
-    }, [open])
-    // console.log(addToCartsData);
+        const getData = async () => {
+            try {
+                const storedProducts = JSON.parse(localStorage.getItem("addToCartData"));
+                if (storedProducts) {
+                    const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                    // find addToCart products based on id
+                    let cartDetails = [];
+                    for (let i = 0; i < storedProducts.length; i++) {
+                        for (let j = 0; j < result.length; j++) {
+                            if (storedProducts[i]._id === result[j]._id) {
+                                cartDetails.push({
+                                    ...result[j],
+                                    productQuantity: storedProducts[i].productQuantity
+                                })
+                                break;
+                            }
+                        }
+                    }
+                    // total price
+                    totalProductsPrice(cartDetails);
+                    setAddToCartsData(cartDetails)
+                }
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, [open]);
+
+    // console.log(addToCartsData)
 
     // delete data
     const handleDeleteAddToCartData = (_id) => {
-        const newAddToCartsData = addToCartsData.filter((d) => d._id !== _id )
+        const newAddToCartsData = addToCartsData.filter((d) => d._id !== _id)
         setAddToCartsData(newAddToCartsData);
 
         // total price
@@ -35,18 +63,22 @@ const CartDrawer = ({ open, setOpen }) => {
         return localStorage.setItem("addToCartData", JSON.stringify(newAddToCartsData));
     }
 
+    if (loading) return <Spinner></Spinner>
+
+    if (error) return <p>Error loading data: {error.message}</p>;
+
     return (
         <Drawer
             anchor={"right"}
             sx={{
-                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '30vw' },
+
             }}
             open={open} onClose={() => setOpen(false)}
         >
             <div className='p-4 lg:p-10 h-full'>
                 <div className='pt-10 relative h-full'>
                     <div className='mb-4 flex justify-between items-center text-xl font-medium'>
-                        <h3>Shopping Card (2)</h3>
+                        <h3>Shopping Card ({addToCartsData.length})</h3>
                         <button
                             className='cursor-pointer font-light'
                             type='button'
@@ -65,7 +97,7 @@ const CartDrawer = ({ open, setOpen }) => {
                                 productQuantity,
                             }, i) => (
                                 <div key={_id}>
-                                    <div className='flex justify-between items-center'>
+                                    <div className='flex justify-between items-center gap-2'>
                                         <div className='flex items-center'>
                                             <figure className='h-24 w-24 grid place-content-center'>
                                                 <img src={thumbnail} alt="" />
@@ -75,15 +107,13 @@ const CartDrawer = ({ open, setOpen }) => {
                                                 <p className='text-gray-500'>{productQuantity} kg X <span className='font-semibold text-black'>${(newPrice).toFixed(2)}</span></p>
                                             </div>
                                         </div>
-                                        <div className='p-1 px-2 text-sm text-gray-600 border-solid border-gray-200 border-2 rounded-full cursor-pointer'>
-                                            <button
-                                                className=''
-                                                type='button'
-                                                onClick={()=> handleDeleteAddToCartData(_id)}
-                                            >
-                                                <FontAwesomeIcon icon={faX} />
-                                            </button>
-                                        </div>
+                                        <button
+                                            className='p-1 px-2 text-sm text-gray-600 border-solid border-gray-200 border-2 rounded-full cursor-pointer block'
+                                            type='button'
+                                            onClick={() => handleDeleteAddToCartData(_id)}
+                                        >
+                                            <FontAwesomeIcon icon={faX} />
+                                        </button>
                                     </div>
                                     <hr className='border-solid border-gray-100 border-0 border-t-2' />
                                 </div>

@@ -24,7 +24,7 @@ const Home = () => {
         if (snackbar.length > 0) {
             const timer = setTimeout(() => {
                 setSnackbar((prev) => prev.slice(1));
-            }, 7000);
+            }, 3000);
             return () => clearTimeout(timer);
         }
     }, [snackbar]);
