@@ -90,7 +90,7 @@ const ProductsPage = () => {
 
     return (
         <section className='container mx-auto mb-10'>
-            <ProductNav titles={["Category", "Vegetables"]}></ProductNav>
+            <ProductNav titles={["Category", "Vegetables"]} navLink={["/products" ,""]}></ProductNav>
             <div className='grid grid-cols-12 mt-6 h-full'>
                 <aside className='col-start-1 col-end-5 md:col-end-4 xl:col-end-3 px-4 md:px-6'>
                     <div className='inline-block mb-4'>

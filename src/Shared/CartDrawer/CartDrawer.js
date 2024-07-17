@@ -16,6 +16,7 @@ const CartDrawer = ({ open, setOpen }) => {
         setTotalPrice(cartDetails.reduce((accumulator, item) => (item.productQuantity * item.newPrice) + accumulator, 0));
     }
 
+    // get addToCart products details
     useEffect(() => {
         const getData = async () => {
             try {
@@ -54,11 +55,13 @@ const CartDrawer = ({ open, setOpen }) => {
     // delete data
     const handleDeleteAddToCartData = (_id) => {
         const newAddToCartsData = addToCartsData.filter((d) => d._id !== _id)
+        
         setAddToCartsData(newAddToCartsData);
-
         // total price
         totalProductsPrice(newAddToCartsData);
 
+        // new data is empty
+        if (newAddToCartsData.length === 0) return localStorage.removeItem('addToCartData');
         // update store data
         return localStorage.setItem("addToCartData", JSON.stringify(newAddToCartsData));
     }

@@ -1,5 +1,5 @@
 .parent .child:last-child {
-    color: var(--success-color);
+    color: white;
 }
 
 .parent .child:last-child .arrow {

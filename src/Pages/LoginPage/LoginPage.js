@@ -1,7 +1,7 @@
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
 
 const LoginPage = () => {
@@ -11,10 +11,15 @@ const LoginPage = () => {
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
+    const location = useLocation();
+    const currentUrl = location.pathname;
+    const splitPath = currentUrl.split("/")
+
+    console.log(splitPath); // Prints the current URL to the console
 
     return (
         <>
-            <ProductNav titles={["Account", "Login"]} newStyle={true}></ProductNav>
+            <ProductNav titles={["Account", splitPath[splitPath.length - 1]]} newStyle={true} navLink={["/user", `/user/${splitPath[splitPath.length - 1]}`]}></ProductNav>
             <section className='min-h-[80vh] flex justify-center pt-20'>
                 <div className='mx-2 px-6 py-6 h-fit shadow-md rounded-md w-full md:max-w-[480px]'>
                     <h1 className='text-4xl font-bold text-center mb-8'>Sign In</h1>

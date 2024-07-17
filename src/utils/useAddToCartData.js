@@ -6,22 +6,14 @@ export default function addToCartProducts(_id, productQuantity) {
         _id,
         productQuantity,
     }]
-    if (prevStoredProducts) {
+    if (prevStoredProducts && prevStoredProducts.length > 0) {
         // if product already exist just update quantity
-        let existingProducts;
-        // separate existing product also remove them from main array
         for (let i = 0; i < prevStoredProducts.length; i++) {
             if (prevStoredProducts[i]._id === _id) {
-                existingProducts = prevStoredProducts.splice(i, 1)[0];
-                break;
+                prevStoredProducts[i].productQuantity += productQuantity;
+                return localStorage.setItem("addToCartData", JSON.stringify([...prevStoredProducts]));
             }
         }
-        if (existingProducts) {
-            existingProducts.productQuantity += productQuantity;
-
-            return localStorage.setItem("addToCartData", JSON.stringify([...prevStoredProducts, existingProducts]));
-        }
-
         storedData = [...prevStoredProducts, ...storedData]
     }
     return localStorage.setItem("addToCartData", JSON.stringify(storedData))

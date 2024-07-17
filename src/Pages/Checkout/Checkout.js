@@ -32,7 +32,7 @@ const Checkout = () => {
     });
     return (
         <section className='container mx-auto min-h-[60vh] lg:min-h-screen mb-10'>
-            <ProductNav titles={["Shopping Cart", "Checkout"]} newStyle={true}></ProductNav>
+            <ProductNav titles={["Shopping Cart", "Checkout"]} newStyle={true} navLink={["/products/shopping-cart" ,"/products/checkout"]} ></ProductNav>
             <form className='mt-10 flex justify-between gap-4'>
                 <div className='flex-grow'>
                     <h3 className='text-2xl font-semibold mb-4'>Billing Information</h3>

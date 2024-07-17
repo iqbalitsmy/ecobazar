@@ -84,7 +84,7 @@ const Wishlist = () => {
 
     return (
         <section className='container mx-auto min-h-[50vh] md:min-h-screen'>
-            <ProductNav titles={["Wishlist"]} newStyle={true}></ProductNav>
+            <ProductNav titles={["Wishlist"]} navLink={[""]}  newStyle={true}></ProductNav>
             <div className='mt-6 mb-10'>
                 <h1 className='text-center text-[32px] font-semibold mb-6'>My Wishlist</h1>
                 <table className='w-full lg:w-3/4 mx-auto'>

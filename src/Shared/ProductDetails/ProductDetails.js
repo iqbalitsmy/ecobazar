@@ -6,7 +6,7 @@ import addToCartProducts from '../../utils/useAddToCartData';
 
 
 const ProductDetails = ({ productDetail }) => {
-    const { title, newPrice, price, offPercentage, rating, brandImg, description, quantity, category, tags, images } = productDetail;
+    const { _id,title, newPrice, price, offPercentage, rating, brandImg, description, quantity, category, tags, images } = productDetail;
     const [productImage, setProductImage] = useState(images[0]);
 
     // handle product quantity
@@ -27,8 +27,8 @@ const ProductDetails = ({ productDetail }) => {
     }
     
     // handle add to cart
-    const handleAddToCartData = (productDetail) => {
-        addToCartProducts(productDetail, productQuantity);
+    const handleAddToCartData = () => {
+        addToCartProducts(_id, productQuantity);
         setProductQuantity(1)
     }
 

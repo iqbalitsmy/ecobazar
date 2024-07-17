@@ -54,9 +54,11 @@ const ProductsDetailsPage = () => {
 
     if (error) return <p>Error: {error.message}</p>;
 
+    console.log(productDetail.title)
+
     return (
         <section className='px-2 sm:px-0 container mx-auto'>
-            <ProductNav titles={["Category", "Vegetables", "Chinese Cabbage"]}></ProductNav>
+            <ProductNav titles={["Category", productDetail.category, productDetail.title]} navLink={["/products" ,"/products", ""]}></ProductNav>
             <div className='mt-8 mb-12 '>
                 <div className='flex gap-6 lg:gap-10 mb-8'>
                     <div>

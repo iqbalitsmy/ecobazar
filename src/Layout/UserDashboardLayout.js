@@ -7,7 +7,7 @@ import { faArrowRightFromBracket, faBagShopping, faBorderAll, faGears, faHeart, 
 const UserDashboardLayout = () => {
     return (
         <section className='min-h-[80vh]'>
-            <ProductNav titles={["Account", "Dashboard"]} newStyle={true}></ProductNav>
+            <ProductNav titles={["Account", "Dashboard"]} newStyle={true} navLink={["/user/dashboard" ,"/user/dashboard"]}></ProductNav>
             <section className='flex mt-10 gap-6'>
                 <aside className='border-solid border-2 rounded-md border-gray-100 py-4 h-fit'>
                     <h3 className='text-xl font-medium pl-4 pb-4'>Navigation</h3>
