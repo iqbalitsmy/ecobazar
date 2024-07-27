@@ -13,7 +13,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi nemo, veniam cupiditate quia quos eligendi voluptas temporibus ipsa iste tempore itaque alias hic deserunt, quam error tenetur placeat? Recusandae, accusantium.",
         "quantity": 5,
-        "category": "vegetables",
+        "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -30,7 +30,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi nemo, veniam cupiditate quia quos eligendi voluptas temporibus ipsa iste tempore itaque alias hic deserunt, quam error tenetur placeat? Recusandae, accusantium.",
         "quantity": 5,
-        "category": "vegetables",
+        "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -47,7 +47,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi nemo, veniam cupiditate quia quos eligendi voluptas temporibus ipsa iste tempore itaque alias hic deserunt, quam error tenetur placeat? Recusandae, accusantium.",
         "quantity": 5,
-        "category": "vegetables",
+        "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -64,7 +64,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
         "quantity": 5,
-        "category": "Vegetables",
+        "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -81,7 +81,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi nemo, veniam cupiditate quia quos eligendi voluptas temporibus ipsa iste tempore itaque alias hic deserunt, quam error tenetur placeat? Recusandae, accusantium.",
         "quantity": 5,
-        "category": "Vegetables",
+        "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -98,7 +98,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
         "quantity": 5,
-        "category": "Vegetables",
+        "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -115,7 +115,7 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi nemo, veniam cupiditate quia quos eligendi voluptas temporibus ipsa iste tempore itaque alias hic deserunt, quam error tenetur placeat? Recusandae, accusantium.",
         "quantity": 5,
-        "category": "Vegetables",
+        "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     },
@@ -132,7 +132,41 @@
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
         "quantity": 0,
-        "category": "Vegetables",
+        "category": "vegetables",
+        "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
+        "status": ""
+    },
+    {
+        "_id": 9,
+        "title": "Big Potatos",
+        "price": 18.99,
+        "offPercentage": 20,
+        "newPrice": 14.99,
+        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt3sIBVOAtr2WO-M80-ynqyHwmLcLk9alEQ&s",
+        "images": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJfXzq7vZfTv-Bik1vL_-jmkt_G_c_0aUsg&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4sxPx8LjfBhixVP3Quk5VAuQ4NKa0TPfVA&s"],
+        "numOfReview": 3,
+        "rating": 3.5,
+        "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
+        "quantity": 0,
+        "category": "vegetables",
+        "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
+        "status": ""
+    },
+    {
+        "_id": 10,
+        "title": "Eggplant",
+        "price": 18.99,
+        "offPercentage": 20,
+        "newPrice": 16.99,
+        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt3sIBVOAtr2WO-M80-ynqyHwmLcLk9alEQ&s", 
+        "images": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJfXzq7vZfTv-Bik1vL_-jmkt_G_c_0aUsg&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4sxPx8LjfBhixVP3Quk5VAuQ4NKa0TPfVA&s"],
+        "numOfReview": 4,
+        "rating": 4.5,
+        "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
+        "quantity": 0,
+        "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": ""
     }

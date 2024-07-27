@@ -18,7 +18,7 @@ import { lazy } from "react";
 const UserDashboardLayout = lazy(() => import("../Layout/UserDashboardLayout"));
 const UserDashboard = lazy(() => import("../Pages/UserDashboardPages/UserDashboard"));
 const UserSetting = lazy(() => import("../Pages/UserDashboardPages/UserSetting"));
-const UserOrdersHistory = lazy(() => import("../Pages/UserDashboardPages/UserOrdersHistoryPage/UserOrdersHistory"));
+const UserOrdersHistories = lazy(() => import("../Pages/UserDashboardPages/UserOrdersHistoryPage/UserOrdersHistories"));
 const DashboardWishlist = lazy(() => import("../Pages/UserDashboardPages/DashboardWishlist"));
 const OrderDetails = lazy(() => import("../Pages/UserDashboardPages/UserOrdersHistoryPage/OrderDetails"));
 
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
                         children: [
                             {
                                 path: '',
-                                element: <UserOrdersHistory></UserOrdersHistory>
+                                element: <UserOrdersHistories></UserOrdersHistories>
                             },
                             {
                                 path: ':id',

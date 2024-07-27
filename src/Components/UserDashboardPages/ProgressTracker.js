@@ -17,15 +17,15 @@ const ProgressTracker = () => {
                         <div className='rounded-full bg-primary-color w-[50%] h-3'>
                         </div>
                     </div> */}
-                    <div className=''>
-                        <div className='bg-primary-color text-white text-2xl inline-block rounded-full px-4 py-2 mb-4 after:absolute after:w-6 after:h-4 after:bg-primary-color'>
-                            <span>&#10003;</span>
+                    <div className='relative'>
+                        <div className='bg-primary-color text-white text-2xl inline-block rounded-full px-4 py-2 mb-4 after:absolute after:top-1/2 after:transform  after:-translate-y-1/2 after:w-32 after:h-4 after:bg-primary-color after:-z-10'>
+                            <span className=''>&#10003;</span>
                         </div>
                         <p className='text-secondary-color'>Order received</p>
                     </div>
                     <div className=''>
                         <div className='bg-primary-color text-white inline-block rounded-full px-4 py-3 mb-4'>
-                            <span>02</span>
+                            <span className=''>02</span>
                         </div>
                         <p className='text-secondary-color'>Processing</p>
                     </div>

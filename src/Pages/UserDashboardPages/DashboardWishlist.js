@@ -1,10 +1,11 @@
 import React from 'react';
+import WishlistProducts from '../../Shared/WishlistProducts/WishlistProducts';
 
 const DashboardWishlist = () => {
     return (
-        <div>
-            Dashboard Wishlist
-        </div>
+        <>
+            <WishlistProducts></WishlistProducts>
+        </>
     );
 };
 

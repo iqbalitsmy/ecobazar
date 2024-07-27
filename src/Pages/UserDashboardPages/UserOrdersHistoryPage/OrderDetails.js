@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import productDetails from '../../../assets/fakeData/fakeData';
 import ProgressTracker from '../../../Components/UserDashboardPages/ProgressTracker';
@@ -17,10 +17,12 @@ const OrderDetails = () => {
                     </ul>
                 </div>
                 <div className='text-primary-color font-medium'>
-                    <Link>Back to List</Link>
+                    <Link to={"../"}>Back to List</Link>
                 </div>
             </div>
+            {/* order all details */}
             <div className='mx-4 mb-8 flex lg:flex-nowrap flex-wrap gap-6'>
+                {/* user details */}
                 <table className='lg:flex-grow'>
                     <thead className='border-solid border-gray-100 border-2 text-gray-400'>
                         <tr className='text-sm'>
@@ -61,6 +63,7 @@ const OrderDetails = () => {
                         </tr>
                     </tbody>
                 </table>
+                {/* order payment details */}
                 <div className="w-full lg:max-w-md border-solid border-gray-100 border-2">
                     <div className="border-solid border-gray-100 border-0 border-b-2 text-gray-400 p-4 flex justify-between">
                         <div className='border-solid border-gray-100 border-0 border-r-2 w-full'>
@@ -91,11 +94,12 @@ const OrderDetails = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
+            {/* stepper of progress */}
             <div className='mb-8'>
                 <ProgressTracker />
             </div>
+            {/* order products */}
             <table className='w-full mx-auto mb-8'>
                 <thead>
                     <tr className='text-gray-700 bg-gray-100 uppercase text-sm'>

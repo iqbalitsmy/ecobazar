@@ -1,6 +1,5 @@
 import React from 'react';
-
-import navBg from '../../assets/navigation-bg.png'
+import navImg from '../../assets/img-nav.jpg'
 import './ProductNav.css'
 
 
@@ -9,10 +8,10 @@ const ProductNav = ({ titles, newStyle, navLink }) => {
         <div
             className={`w-full flex items-center bg-opacity-0 ${newStyle ? "min-h-12" : "min-h-16"}`}
             style={{
-                backgroundImage: `url(${"https://t4.ftcdn.net/jpg/07/23/73/45/360_F_723734529_MlCdDL8Yxand7qiq1hmHv6qBVvsibIJS.jpg"})`,
+                backgroundImage: `url(${navImg})`,
                 backgroundAttachment: "fixed",
-                backgroundSize: "cover",
-                backgroundPosition: "top",
+                backgroundSize: "auto",
+                backgroundPosition: "auto",
                 backgroundRepeat: "no-repeat",
             }}
         >

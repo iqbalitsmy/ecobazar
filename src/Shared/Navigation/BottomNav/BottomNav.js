@@ -1,9 +1,14 @@
-import React from 'react';
+import { faArrowRightFromBracket, faBagShopping, faGears, faHeart, faRotate } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
+    const [profileOpen, setProfileOpen] = useState(false);
 
     return (
         <div className='bg-black text-white flex justify-between items-center mb-3'>
+            {/* menu drawer */}
             <div className='flex items-center gap-6'>
                 <button type='button'
                     className='p-3'
@@ -14,26 +19,95 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
                 </button>
                 <p className='opacity-90'>All Categories</p>
             </div>
-            <div className='flex items-center gap-4 lg:gap-6 pr-4'>
-                <button
-                    className='cursor-pointer fill-[#ccc] hover:fill-white'
-                    type='button'
+            <div className='relative z-10'>
+                <div className='flex items-center gap-4 lg:gap-6 pr-4'>
+                    <Link
+                        to={"/products/wishlist"}
+                        className='cursor-pointer fill-[#ccc] hover:fill-white'
+                    >
+                        <svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" /></svg>
+                    </Link>
+                    <button
+                        className='cursor-pointer fill-[#ccc] hover:fill-white'
+                        type='button'
+                        onClick={() => setCartOpen(!cartOpen)}
+                    >
+                        <svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2,23H22a1,1,0,0,0,.99-1.142l-2-14A1,1,0,0,0,20,7H17V6A5,5,0,0,0,7,6V7H4a1,1,0,0,0-.99.858l-2,14A1,1,0,0,0,2,23ZM9,6a3,3,0,0,1,6,0V7H9ZM4.867,9H7v3a1,1,0,0,0,2,0V9h6v3a1,1,0,0,0,2,0V9h2.133l1.714,12H3.153Z" /></svg>
+                    </button>
+                    <Link
+                        to={"/user/dashboard"}
+                        className='cursor-pointer fill-[#ccc] hover:fill-white'
+                        type='button'
+                        onMouseEnter={() => setProfileOpen(true)}
+                        onMouseLeave={() => setProfileOpen(false)}
+                    >
+                        <svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" /></svg>
+                    </Link>
+                </div>
+                {/* dropdown menu */}
+                <div className=''
+                    onMouseEnter={() => setProfileOpen(true)}
+                    onMouseLeave={() => setProfileOpen(false)}
                 >
-                    <svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" /></svg>
-                </button>
-                <button
-                    className='cursor-pointer fill-[#ccc] hover:fill-white'
-                    type='button'
-                    onClick={() => setCartOpen(!cartOpen)}
-                >
-                    <svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2,23H22a1,1,0,0,0,.99-1.142l-2-14A1,1,0,0,0,20,7H17V6A5,5,0,0,0,7,6V7H4a1,1,0,0,0-.99.858l-2,14A1,1,0,0,0,2,23ZM9,6a3,3,0,0,1,6,0V7H9ZM4.867,9H7v3a1,1,0,0,0,2,0V9h6v3a1,1,0,0,0,2,0V9h2.133l1.714,12H3.153Z" /></svg>
-                </button>
-                <button
-                    className='cursor-pointer fill-[#ccc] hover:fill-white'
-                    type='button'
-                >
-                    <svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" /></svg>
-                </button>
+                    <div className={`${profileOpen ? "block" : "hidden"} absolute right-0`}>
+                        <div className={`py-4 bg-white text-black shadow-md rounded-sm min-w-[10vw]`}>
+                            <div className='mx-auto text-center grid gap-1 mb-2'>
+                                <img
+                                    src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg" alt=""
+                                    className='h-12 w-12 mx-auto rounded-full'
+                                />
+                                <Link to={"/user/dashboard"} className='text-center hover:text-primary-color hover:underline'>Account</Link>
+                            </div>
+                            <div className='flex flex-col text-[#666666] text-sm'>
+                                <Link
+                                    to={"/products/shopping-cart/"}
+                                    className='flex gap-6 items-center py-2 px-4 hover:text-black hover:bg-[#EDF2EE] fill-[#CCCCCC] hover:fill-black'
+                                >
+                                    <FontAwesomeIcon icon={faBagShopping} />
+                                    <span>Shopping Cart</span>
+                                </Link>
+                                <Link
+                                    to={"/products/wishlist"}
+                                    className='flex gap-6 items-center py-2 px-4 hover:text-black hover:bg-[#EDF2EE] fill-[#CCCCCC] hover:fill-black'
+                                >
+                                    <FontAwesomeIcon icon={faHeart} />
+                                    <span>Wishlist</span>
+                                </Link>
+                                <Link
+                                    to="/user/dashboard"
+                                    className='flex gap-6 items-center py-2 px-4 hover:text-black hover:bg-[#EDF2EE] fill-[#aaa] hover:fill-black'
+                                >
+                                    <div className=''>
+                                        <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18 18H10V12H18V18ZM8 18H0V8H8V18ZM18 10H10V0H18V10ZM8 6H0V0H8V6Z" />
+                                        </svg>
+                                    </div>
+                                    <span>Dashboard</span>
+                                </Link>
+                                <Link
+                                    to={"/user/dashboard/order-history"}
+                                    className='flex gap-6 items-center py-2 px-4 hover:text-black hover:bg-[#EDF2EE] fill-[#CCCCCC] hover:fill-black'
+                                >
+                                    <FontAwesomeIcon icon={faRotate} />
+                                    <span>Order History</span>
+                                </Link>
+                                <Link
+                                    to={"/user/dashboard/setting"}
+                                    className='flex gap-6 items-center py-2 px-4 hover:text-black hover:bg-[#EDF2EE] fill-[#CCCCCC] hover:fill-black'
+                                >
+                                    <FontAwesomeIcon icon={faGears} />
+                                    <span>Settings</span>
+                                </Link>
+                                <Link
+                                    className='flex gap-6 items-center py-2 px-4 hover:text-black hover:bg-[#EDF2EE] fill-[#CCCCCC] hover:fill-black'
+                                >
+                                    <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                                    <span>Log-out</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { orderHistory } from '../../../assets/fakeData/fakeData';
 import Pagination from '../../../Shared/Pagination/Pagination ';
-import formattedDateName from '../../../utils/useGetFormatedDate';
+import OrderHistory from './OrderHistory';
 
-const UserOrdersHistory = () => {
+const UserOrdersHistories = () => {
     // Define initial state
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4; // Change this value according to your requirement
@@ -25,7 +24,9 @@ const UserOrdersHistory = () => {
             <p className='m-4 mb-6 text-xl font-medium text-gray-900'>
                 Order History
             </p>
-            <table className='w-full mb-8'>
+            {/* order history */}
+            <OrderHistory orders={currentPageData}></OrderHistory>
+            {/* <table className='w-full mb-8'>
                 <thead className='text-left'>
                     <tr className='uppercase bg-gray-100 text-gray-700'>
                         <th className='text-xs font-normal py-3 pl-4'>Order ID</th>
@@ -50,7 +51,7 @@ const UserOrdersHistory = () => {
                         ))
                     }
                 </tbody>
-            </table>
+            </table> */}
             <div className='absolute bottom-0 left-0 right-0 mb-4'>
                 <Pagination currentPage={currentPage} totalPages={Math.ceil(orderHistory.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE={2} />
             </div>
@@ -58,4 +59,4 @@ const UserOrdersHistory = () => {
     );
 };
 
-export default UserOrdersHistory;
+export default UserOrdersHistories;

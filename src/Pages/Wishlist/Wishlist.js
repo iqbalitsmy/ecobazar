@@ -1,93 +1,18 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React from 'react';
 import ProductNav from '../../Shared/ProductNav/ProductNav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import Spinner from '../../Shared/Spinner/Spinner';
-import fetchData from '../../utils/fetchData';
-import findProductsById from '../../utils/findProductsById';
-import Pagination from '../../Shared/Pagination/Pagination ';
-import addToCartProducts from '../../utils/useAddToCartData';
-import { SnackbarContext } from '../../Layout/ProductsLayout';
+import WishlistProducts from '../../Shared/WishlistProducts/WishlistProducts';
 
 const Wishlist = () => {
-    const [wishlistProducts, setWishlistProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    // pagination part
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
-
-    // Calculate the index range for current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, wishlistProducts.length);
-    // Get the current page data
-    const currentPageData = wishlistProducts.slice(startIndex, endIndex);
-
-    // Function to handle page change
-    const handlePageChange = (page) => {
-        // console.log(page)
-        setCurrentPage(page);
-    };
-
-    // add to wishlist
-    const handleDeleteAddToWishlist = useCallback((_id) => {
-        const stored_ids = JSON.parse(localStorage.getItem("addToWishlist"));
-        if (stored_ids) {
-            const newAddToWishlist = stored_ids.filter((d) => d !== _id);
-
-            // update store data
-            localStorage.setItem("addToWishlist", JSON.stringify(newAddToWishlist));
-            setLoading(true);
-
-            setWishlistProducts(findProductsById(wishlistProducts, newAddToWishlist))
-            return setLoading(false);
-        }
-    }, [wishlistProducts])
-
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const stored_ids = JSON.parse(localStorage.getItem("addToWishlist"));
-                if (stored_ids) {
-                    const result = await fetchData('http://localhost:3000/fakeJsonData.json');
-                    setWishlistProducts(findProductsById(result, stored_ids))
-                }
-                setLoading(false);
-            } catch (error) {
-                setError(error);
-                setLoading(false);
-            }
-        };
-
-        getData();
-    }, []);
-
-    // snackbar
-    const { snackbar, setSnackbar } = useContext(SnackbarContext);
-
-    // add to cart
-    const handleAddToCartData = useCallback((_id) => {
-        addToCartProducts(_id, 1);
-
-        setSnackbar([...snackbar, {
-            _id: snackbar.length + 1,
-            message: "1 new item(s) have been added to your cart",
-            type: "success",
-            isVisible: true,
-        }]);
-    }, [snackbar, setSnackbar]);
-
-    if (loading) return <Spinner></Spinner>
-
-    if (error) return <p>Error loading data: {error.message}</p>;
 
     return (
         <section className='container mx-auto min-h-[50vh] md:min-h-screen'>
-            <ProductNav titles={["Wishlist"]} navLink={[""]}  newStyle={true}></ProductNav>
+            <ProductNav titles={["Wishlist"]} navLink={[""]} newStyle={true}></ProductNav>
             <div className='mt-6 mb-10'>
                 <h1 className='text-center text-[32px] font-semibold mb-6'>My Wishlist</h1>
-                <table className='w-full lg:w-3/4 mx-auto'>
+                <div className='w-full lg:w-3/4 mx-auto'>
+                    <WishlistProducts></WishlistProducts>
+                </div>
+                {/* <table className='w-full lg:w-3/4 mx-auto'>
                     <thead>
                         <tr className='text-gray-500 uppercase border-solid border-gray-200 border-[1px]'>
                             <th className='font-medium text-sm text-start pl-3 py-2'>Product</th>
@@ -143,7 +68,6 @@ const Wishlist = () => {
                                 </tr>
                             ))
                         }
-                        {/* share */}
                         <tr className='border-solid border-gray-200 border-[1px]'>
                             <td className='flex items-center gap-2 pl-3 py-4'>
                                 <p className='text-gray-700 font-normal text-sm'>Share:</p>
@@ -199,7 +123,7 @@ const Wishlist = () => {
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> */}
             </div>
         </section>
     );
