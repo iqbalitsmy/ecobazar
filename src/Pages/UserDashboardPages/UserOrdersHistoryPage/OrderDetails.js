@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import productDetails from '../../../assets/fakeData/fakeData';
 import ProgressTracker from '../../../Components/UserDashboardPages/ProgressTracker';
+import { PageNavContext } from '../../../Provider/PageNavProvider';
 
 
 const OrderDetails = () => {
+    // for page navigation
+    const { setPageNav } = useContext(PageNavContext);
+
+    useEffect(() => {
+        setPageNav([{ title: "account", navLink: "/user/dashboard" }, { title: "order history", navLink: "/user/dashboard/order-history" }, { title: "order detail", navLink: "" },]);
+    }, [setPageNav]);
 
     return (
         <section className='border-solid border-gray-100 border-2 mb-20'>

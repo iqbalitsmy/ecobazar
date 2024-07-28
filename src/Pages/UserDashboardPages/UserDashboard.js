@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { orderHistory } from '../../assets/fakeData/fakeData';
 import OrderHistory from './UserOrdersHistoryPage/OrderHistory';
+import { PageNavContext } from '../../Provider/PageNavProvider';
 
 const UserDashboard = () => {
+    const { setPageNav } = useContext(PageNavContext);
+
+    useEffect(() => {
+        setPageNav([{ title: "account", navLink: "/user/dashboard" }, { title: "dashboard", navLink: "" }]);
+    }, [setPageNav])
 
     return (
         <>

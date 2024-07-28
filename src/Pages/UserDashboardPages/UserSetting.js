@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Region from '../../Shared/Region/Region';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import productDetails from '../../assets/fakeData/fakeData';
 import './UserSetting.css'
+import { PageNavContext } from '../../Provider/PageNavProvider';
 
 const UserSetting = () => {
+    const { setPageNav } = useContext(PageNavContext);
+
     const [passwordVisible, setPasswordVisible] = useState({
         currentPassword: false,
         newPassword: false,
@@ -28,6 +30,11 @@ const UserSetting = () => {
             setSelectedImage(URL.createObjectURL(file));
         }
     };
+
+    // for page navigation
+    useEffect(() => {
+        setPageNav([{ title: "account", navLink: "/user/dashboard" }, { title: "Settings", navLink: "" }]);
+    }, [setPageNav]);
 
     return (
         <section className='mb-20'>

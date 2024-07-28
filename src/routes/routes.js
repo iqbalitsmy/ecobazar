@@ -12,6 +12,8 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 
 import { lazy } from "react";
+import DashboardShoppingCart from "../Pages/UserDashboardPages/DashboardShoppingCart";
+import PageNavProvider from "../Provider/PageNavProvider";
 
 // lazy loading
 // const UserDashboardLayout = lazy(() => wait(3000).then(() => import("../Layout/UserDashboardLayout")));
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/products",
-        element: <ProductsLayout></ProductsLayout>,
+        element: <PageNavProvider><ProductsLayout /></PageNavProvider>,
         children: [
             {
                 path: "",
@@ -67,7 +69,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/user",
-        element: <UserLayout></UserLayout>,
+        element: <PageNavProvider><UserLayout /></PageNavProvider>,
         children: [
             {
                 path: 'login',
@@ -105,7 +107,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'shopping-cart',
-                        element: <ShoppingCart></ShoppingCart>
+                        element: <DashboardShoppingCart></DashboardShoppingCart>
                     },
                     {
                         path: 'setting',

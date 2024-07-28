@@ -8,6 +8,7 @@ import Newsletter from '../Shared/Newsletter/Newsletter';
 import CategoryDrawer from '../Shared/CategoryDrawer/CategoryDrawer';
 import CartDrawer from '../Shared/CartDrawer/CartDrawer';
 import { MemoSnackbar } from '../Shared/Snackbar/Snackbar';
+import PageNav from '../Shared/ProductNav/PageNav';
 
 export const SnackbarContext = createContext({});
 
@@ -16,8 +17,6 @@ const ProductsLayout = () => {
     const [navOpen, setNavOpen] = useState(false);
     // for cart drawer
     const [cartOpen, setCartOpen] = useState(false);
-    // console.log(navOpen)
-
     // for snackbar
     const [snackbar, setSnackbar] = useState([]);
 
@@ -50,7 +49,8 @@ const ProductsLayout = () => {
                     </div>
                 </nav>
             </header>
-            <main className=''>
+            <main className='container mx-auto'>
+                <PageNav></PageNav>
                 <SnackbarContext.Provider value={{ snackbar, setSnackbar }}>
                     <Outlet></Outlet>
                 </SnackbarContext.Provider>

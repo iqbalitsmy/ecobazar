@@ -18,7 +18,7 @@ const OrderHistory = ({ orders }) => {
                 {
                     orders.map((data) => (
                         <tr key={data._id} className='text-gray-800'>
-                            <td className='text-sm py-3 pl-4'>#{data.id}</td>
+                            <td className='text-sm py-3 pl-4'>#{data._id}</td>
                             <td className='text-sm py-3'>{formattedDateName(data.date)}</td>
                             <td className='text-sm py-3'><span className='font-medium'>${data.totalPrice.toFixed(2)}</span> ({data.numberOfItems} Products)</td>
                             <td className='text-sm py-3'>{data.deliveryStatus}</td>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,16 +11,17 @@ import 'swiper/css/pagination';
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
 import ProductDetails from '../../Shared/ProductDetails/ProductDetails';
-// import productDetails from '../../assets/fakeData/fakeData';
 import ProductsDes from './ProductsDes';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
-import ProductNav from '../../Shared/ProductNav/ProductNav';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Spinner from '../../Shared/Spinner/Spinner';
+import { PageNavContext } from '../../Provider/PageNavProvider';
 
 const ProductsDetailsPage = () => {
+    const { setPageNav } = useContext(PageNavContext);
+
     const { id } = useParams();
     // fetch data
     const [productDetails, setProductDetails] = useState([]);
@@ -45,20 +46,18 @@ const ProductsDetailsPage = () => {
         fetchData();
     }, [id]);
 
-    // console.log(error)
+    // for page navigation
+    useEffect(() => {
+        setPageNav([{ title: "Categories", navLink: "/products" }, { title: "Categories", navLink: "/products/" }, { title: `${productDetail?.title}`, navLink: "" }]);
+    }, [setPageNav, productDetail]);
 
-    // console.log(productDetail)
-    // console.log(productDetails)
 
     if (loading) return <Spinner></Spinner>
 
     if (error) return <p>Error: {error.message}</p>;
 
-    console.log(productDetail.title)
-
     return (
-        <section className='px-2 sm:px-0 container mx-auto'>
-            <ProductNav titles={["Category", productDetail.category, productDetail.title]} navLink={["/products" ,"/products", ""]}></ProductNav>
+        <section className='px-2 sm:px-0'>
             <div className='mt-8 mb-12 '>
                 <div className='flex gap-6 lg:gap-10 mb-8'>
                     <div>

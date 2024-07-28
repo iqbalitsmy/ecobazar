@@ -8,6 +8,7 @@ import Newsletter from '../Shared/Newsletter/Newsletter';
 import Spinner from '../Shared/Spinner/Spinner';
 import CategoryDrawer from '../Shared/CategoryDrawer/CategoryDrawer';
 import CartDrawer from '../Shared/CartDrawer/CartDrawer';
+import PageNav from '../Shared/ProductNav/PageNav';
 
 
 const UserLayout = () => {
@@ -19,7 +20,7 @@ const UserLayout = () => {
     return (
         <>
             <header className='container mx-auto'>
-            <nav>
+                <nav>
                     <TopNav></TopNav>
                     <MiddleNav></MiddleNav>
                     <BottomNav navOpen={navOpen} setNavOpen={setNavOpen} cartOpen={cartOpen} setCartOpen={setCartOpen}></BottomNav>
@@ -29,6 +30,7 @@ const UserLayout = () => {
                 </nav>
             </header>
             <main className='container mx-auto'>
+                <PageNav></PageNav>
                 <Suspense fallback={<Spinner></Spinner>}>
                     <Outlet></Outlet>
                 </Suspense>

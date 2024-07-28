@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import ProductNav from '../../Shared/ProductNav/ProductNav';
+import React, { useContext, useEffect, useState } from 'react';
 import productDetails from '../../assets/fakeData/fakeData';
 import { FormControlLabel, Radio } from '@mui/material';
 import Region from '../../Shared/Region/Region';
+import { PageNavContext } from '../../Provider/PageNavProvider';
 
 const bangladeshStates = [
     "Barisal",
@@ -17,6 +17,7 @@ const bangladeshStates = [
 
 
 const Checkout = () => {
+    const { setPageNav } = useContext(PageNavContext);
     const [selectedValue, setSelectedValue] = useState('');
 
     const handleRadioBtnChange = (event) => {
@@ -30,9 +31,14 @@ const Checkout = () => {
         name: 'color-radio-button',
         inputProps: { 'aria-label': item },
     });
+
+    // for page navigation
+    useEffect(() => {
+        setPageNav([{ title: "Shopping Cart", navLink: "/products/shopping-cart/" }, { title: "Checkout", navLink: "/products/checkout" }]);
+    }, [setPageNav]);
+
     return (
-        <section className='container mx-auto min-h-[60vh] lg:min-h-screen mb-10'>
-            <ProductNav titles={["Shopping Cart", "Checkout"]} newStyle={true} navLink={["/products/shopping-cart" ,"/products/checkout"]} ></ProductNav>
+        <section className='container mx-auto min-h-[60vh] lg:min-h-screen lg:w-[90%] mb-10'>
             <form className='mt-10 flex justify-between gap-4'>
                 <div className='flex-grow'>
                     <h3 className='text-2xl font-semibold mb-4'>Billing Information</h3>
