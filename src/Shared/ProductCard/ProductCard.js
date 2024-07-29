@@ -31,7 +31,7 @@ const Icons = React.memo(({ handleOpen, handleAddWishlistData }) => (
 ));
 
 const ProductCard = ({ productDetail }) => {
-    const { _id, title, price, thumbnail, rating } = productDetail;
+    const { _id, title, newPrice, thumbnail, rating } = productDetail;
     const [isHovered, setIsHovered] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -85,7 +85,7 @@ const ProductCard = ({ productDetail }) => {
                             <h1>{title}</h1>
                         </div>
                     </Link>
-                    <p className='font-medium'>${price.toFixed(2)}</p>
+                    <p className='font-medium'>${newPrice.toFixed(2)}</p>
                     <div>
                         <Rating name="read-only" value={rating} readOnly precision={0.5} size='small' />
                     </div>

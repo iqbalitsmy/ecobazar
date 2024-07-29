@@ -5,7 +5,7 @@
         "title": "Green Apple",
         "price": 20,
         "offPercentage": 20,
-        "newPrice": 16,
+        "newPrice": 5,
         "thumbnail": "https://yodeli.in/cdn/shop/products/green-apple-organic-fruit.png",
         "images": ["https://yodeli.in/cdn/shop/products/green-apple-organic-fruit.png", "https://images.squarespace-cdn.com/content/v1/5a8d04ec4c0dbfcf5f37aa83/1530549561267-EB9AZHTWDYOYMGUGKXI5/greenapple.886511184.1200x1200.jpg"],
         "numOfReview": 3,
@@ -15,7 +15,9 @@
         "quantity": 5,
         "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 100,
+        "date": "2023-01-15"
     },
     {
         "_id": 2,
@@ -32,7 +34,9 @@
         "quantity": 5,
         "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 85,
+        "date": "2023-02-10"
     },
     {
         "_id": 3,
@@ -49,7 +53,9 @@
         "quantity": 5,
         "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 90,
+        "date": "2023-03-05"
     },
     {
         "_id": 4,
@@ -66,7 +72,9 @@
         "quantity": 5,
         "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 75,
+        "date": "2023-04-15"
     },
     {
         "_id": 5,
@@ -83,7 +91,9 @@
         "quantity": 5,
         "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 95,
+        "date": "2023-05-20"
     },
     {
         "_id": 6,
@@ -100,24 +110,28 @@
         "quantity": 5,
         "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 110,
+        "date": "2023-06-25"
     },
     {
         "_id": 7,
-        "title": "Green Apple",
-        "price": 20,
+        "title": "Chanise Cabbage",
+        "price": 20.05,
         "offPercentage": 20,
         "newPrice": 16,
-        "thumbnail": "https://yodeli.in/cdn/shop/products/green-apple-organic-fruit.png",
-        "images": ["https://yodeli.in/cdn/shop/products/green-apple-organic-fruit.png", "https://images.squarespace-cdn.com/content/v1/5a8d04ec4c0dbfcf5f37aa83/1530549561267-EB9AZHTWDYOYMGUGKXI5/greenapple.886511184.1200x1200.jpg"],
+        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt3sIBVOAtr2WO-M80-ynqyHwmLcLk9alEQ&s",
+        "images": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJfXzq7vZfTv-Bik1vL_-jmkt_G_c_0aUsg&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4sxPx8LjfBhixVP3Quk5VAuQ4NKa0TPfVA&s"],
         "numOfReview": 3,
-        "rating": 2.5,
+        "rating": 4.5,
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi nemo, veniam cupiditate quia quos eligendi voluptas temporibus ipsa iste tempore itaque alias hic deserunt, quam error tenetur placeat? Recusandae, accusantium.",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
         "quantity": 5,
-        "category": "fresh fruit",
+        "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 110,
+        "date": "2023-06-25"
     },
     {
         "_id": 8,
@@ -131,10 +145,12 @@
         "rating": 4.5,
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
-        "quantity": 0,
+        "quantity": 4,
         "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 45,
+        "date": "2023-06-09"
     },
     {
         "_id": 9,
@@ -142,16 +158,18 @@
         "price": 18.99,
         "offPercentage": 20,
         "newPrice": 14.99,
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt3sIBVOAtr2WO-M80-ynqyHwmLcLk9alEQ&s",
-        "images": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJfXzq7vZfTv-Bik1vL_-jmkt_G_c_0aUsg&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4sxPx8LjfBhixVP3Quk5VAuQ4NKa0TPfVA&s"],
+        "thumbnail": "https://5.imimg.com/data5/GX/JA/RT/SELLER-46333074/big-fresh-potato-500x500.jpg",
+        "images": ["https://5.imimg.com/data5/GX/JA/RT/SELLER-46333074/big-fresh-potato-500x500.jpg", "https://c8.alamy.com/comp/E4Y0FF/big-heap-of-raw-potatoes-E4Y0FF.jpg"],
         "numOfReview": 3,
         "rating": 3.5,
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
-        "quantity": 0,
+        "quantity": 10,
         "category": "vegetables",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "status": "",
+        "noOfSale": 67,
+        "date": "2023-06-03"
     },
     {
         "_id": 10,
@@ -159,16 +177,37 @@
         "price": 18.99,
         "offPercentage": 20,
         "newPrice": 16.99,
-        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt3sIBVOAtr2WO-M80-ynqyHwmLcLk9alEQ&s", 
-        "images": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJfXzq7vZfTv-Bik1vL_-jmkt_G_c_0aUsg&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4sxPx8LjfBhixVP3Quk5VAuQ4NKa0TPfVA&s"],
+        "thumbnail": "https://www.tastingtable.com/img/gallery/why-you-should-always-buy-small-eggplants/intro-1658245418.jpg", 
+        "images": ["https://www.tastingtable.com/img/gallery/why-you-should-always-buy-small-eggplants/intro-1658245418.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT78mHPj7TZ_3n8f9SnpQbjSgMq81qykbTlgw&s"],
+        "numOfReview": 4,
+        "rating": 5,
+        "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
+        "quantity": 8,
+        "category": "vegetables",
+        "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
+        "status": "",
+        "noOfSale": 74,
+        "date": "2023-06-15"
+    },
+    {
+        "_id": 11,
+        "title": "Fresh Mango",
+        "price": 18.99,
+        "offPercentage": 20,
+        "newPrice": 11,
+        "thumbnail": "https://rukminim2.flixcart.com/image/750/900/xif0q/fruit/t/6/i/-original-imagq9gcapn5jrxy.jpeg", 
+        "images": ["https://rukminim2.flixcart.com/image/750/900/xif0q/fruit/t/6/i/-original-imagq9gcapn5jrxy.jpeg", "https://pgmobile.puregold.com.ph/images/8242.jpg"],
         "numOfReview": 4,
         "rating": 4.5,
         "brandImg": "https://www.madeinmarket.eu/cdn/shop/collections/Nestle.jpg?crop=center&height=500&v=1670788869&width=600",
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur perspiciatis nulla fugit, unde ad aspernatur obcaecati cum doloremque sunt voluptatum fugiat delectus voluptate itaque.",
-        "quantity": 0,
-        "category": "vegetables",
-        "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
-        "status": ""
+        "quantity": 4,
+        "category": "fresh fruit",
+        "tags": ["Fresh Fruit", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
+        "status": "",
+        "noOfSale": 84,
+        "date": "2023-06-01"
     }
 ]
 

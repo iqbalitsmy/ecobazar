@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Box, FormControlLabel, Radio, Rating, Slider } from '@mui/material';
-import ProductNav from '../../Shared/ProductNav/PageNav';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
 import Pagination from '../../Shared/Pagination/Pagination ';
 import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
@@ -14,55 +13,8 @@ import { PageNavContext } from '../../Provider/PageNavProvider';
 
 const allCategories = ["Fresh Fruit", "Vegetables", "Cooking", "Snacks", "Beverages", "Beauty & Health", "Bread & Bakery"]
 
-function valuetext(value) {
-    return `${value}°C`;
-}
-
 
 const ProductsPage = () => {
-    // for page navigation
-    const { setPageNav } = useContext(PageNavContext);
-
-    // fetch data
-    const [productDetails, setProductDetails] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    const [selectedValue, setSelectedValue] = useState('');
-    const [value, setValue] = useState([20, 37]);
-
-    // pagination part
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 20;
-
-    // Calculate the index range for current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, productDetails.length);
-    // Get the current page data
-    const currentPageData = productDetails.slice(startIndex, endIndex);
-
-    // Function to handle page change
-    const handlePageChange = (page) => {
-        // console.log(page)
-        setCurrentPage(page);
-    };
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const handleRadioBtnChange = (event) => {
-        setSelectedValue(event.target.value);
-    };
-
-    // radio button
-    const controlProps = (item) => ({
-        checked: selectedValue === item,
-        onChange: handleRadioBtnChange,
-        value: item,
-        name: 'color-radio-button',
-        inputProps: { 'aria-label': item },
-    });
-
     // categories toggle
     const [categoriesToggle, setCategoriesToggle] = useState({
         categoryToggle: false,
@@ -71,12 +23,37 @@ const ProductsPage = () => {
         popularTagToggle: false,
     });
 
+    // for page navigation
+    const { setPageNav } = useContext(PageNavContext);
+
+    // fetch data
+    const [allProducts, setAllProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // All Categories
+    const [selectedCategories, setSelectedCategories] = useState('All Categories');
+    // price slider
+    const [priceRange, setPriceRange] = useState([0, 100]);
+    // filter by rating
+    const [ratingFilter, setRatingFilter] = useState([]);
+    // sort by
+    const [sortBy, setSortBy] = useState('latest');
+    // filter by popular tag
+    const [popularTag, setPopularTag] = useState(['Fresh Fruit', "Vegetables"]);
+
+    // pagination part
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20;
+
     // fetch data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/fakeJsonData.json');
-                setProductDetails(response.data);
+                const products = response.data;
+                setAllProducts(products);
+
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -85,15 +62,114 @@ const ProductsPage = () => {
         };
 
         fetchData();
-    }, [])
+    }, []);
+
+
+    // categories and filter products
+    const filteredProducts = useMemo(() => {
+        let products = allProducts;
+        // category filtering
+        if (selectedCategories !== 'All Categories') {
+            products = products.filter(product => product.category === selectedCategories);
+        }
+        // price filtering
+        if (priceRange[0] !== 0 || priceRange[1] !== 100) {
+            products = products.filter(product => product.newPrice >= priceRange[0] && product.newPrice <= priceRange[1]);
+        }
+        // rating filtering
+        if (ratingFilter.length > 0) {
+            products = products.filter(product => ratingFilter.includes(Math.floor(product.rating)));
+        }
+        // sort by
+        switch (sortBy) {
+            case 'price-low-to-high':
+                products = products.sort((a, b) => a.newPrice - b.newPrice);
+                break;
+            case 'price-high-to-low':
+                products = products.sort((a, b) => b.newPrice - a.newPrice);
+                break;
+            // sort by number of sales
+            case 'top-sales':
+                products = products.sort((a, b) => b.sales - a.sales);
+                break;
+            // sort by date of add
+            default:
+                products = products.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+                break;
+        }
+        // filter by Popular Tag
+        if (popularTag) {
+            let p = [];
+            for (let i = 0; i < products.length; i++) {
+                for (let j = 0; j < products[i].tags.length; j++) {
+                    for (let k = 0; k < popularTag.length; k++) {
+                        if (products[i].tags[j] === popularTag[k]) {
+                            p.push(products[i]);
+                            break;
+                        }
+
+                    }
+                }
+            }
+            console.log(p)
+        }
+
+        return products;
+    }, [allProducts, selectedCategories, priceRange, ratingFilter, sortBy, popularTag]);
+
+    // pagination
+    const currentPageData = useMemo(() => {
+        // Calculate the index range for current page
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, filteredProducts.length);
+
+        // Get the current page data
+        return filteredProducts.slice(startIndex, endIndex);
+    }, [filteredProducts, currentPage, itemsPerPage]);
+
+
+    // Function to handle page change
+    const handlePageChange = useCallback((page) => {
+        // console.log(page)
+        setCurrentPage(page);
+    }, []);
+
+    const handlePriceChange = useCallback((event, newRange) => {
+        // console.log(newRange)
+        setPriceRange(newRange);
+    }, []);
+
+    // handle categories Radio btn
+    const handleCategoriesBtnChange = useCallback((event) => {
+        const categoryName = event.target.value;
+        setSelectedCategories(categoryName);
+    }, []);
+
+    // categories radio button
+    const controlProps = (item) => ({
+        checked: selectedCategories === item,
+        onChange: handleCategoriesBtnChange,
+        value: item,
+        name: 'color-radio-button',
+        inputProps: { 'aria-label': item },
+    });
+
+    // handle rating
+    const handleRatingChange = useCallback((event) => {
+        const rating = parseInt(event.target.value);
+        setRatingFilter(prev => prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]);
+    }, []);
+
+    // handle sorting
+    const handleSortChange = useCallback((event) => {
+        setSortBy(event.target.value);
+    }, []);
+
 
     // for page navigation
     useEffect(() => {
-        setPageNav([{ title: "Categories", navLink: "/products" }, { title: "Vegetables", navLink: "" }]);
-    }, [setPageNav]);
-
-    // console.log(productDetails)
-    if (loading) return <Spinner></Spinner>
+        setPageNav([{ title: "Categories", navLink: "/products" }, { title: selectedCategories, navLink: "" }]);
+    }, [setPageNav, selectedCategories]);
 
     if (error) return <p>Error: {error.message}</p>;
 
@@ -123,13 +199,13 @@ const ProductsPage = () => {
                     </div>
                     <div className={`overflow-auto transition-all ease-out duration-500 grid gap-1 ${categoriesToggle.categoryToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}>
                         {
-                            allCategories.map((allCategori, i) => (
+                            allCategories.map((allCategory, i) => (
                                 <div key={i} className=''>
                                     <FormControlLabel
-                                        value={allCategori}
+                                        value={allCategories}
                                         control={
                                             <Radio
-                                                {...controlProps(allCategori)}
+                                                {...controlProps(allCategory.toLowerCase())}
                                                 sx={{
                                                     color: "#ccc",
                                                     '&.Mui-checked': {
@@ -137,7 +213,7 @@ const ProductsPage = () => {
                                                     },
                                                 }}
                                             />}
-                                        label={allCategori}
+                                        label={allCategory}
                                     />
                                 </div>
                             ))
@@ -157,16 +233,19 @@ const ProductsPage = () => {
                         </div>
                     </div>
                     <div className={`overflow-auto transition-all ease-out duration-500 ${categoriesToggle.priceToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}>
-                        <Box sx={{}}>
+                        <Box sx={{
+                            px: 3,
+                            pt: 1,
+                        }}>
                             <Slider
                                 getAriaLabel={() => "Minimum distance shift"}
-                                value={value}
-                                onChange={handleChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
+                                value={priceRange}
+                                onChange={handlePriceChange}
+                                // valueLabelDisplay="auto"
+                                // getAriaValueText={valuetext}
                                 sx={{
                                     color: "#00B207",
-                                    height: 8,
+                                    height: 6,
                                     '& .MuiSlider-thumb': {
                                         backgroundColor: '#fff',
                                         border: '2px solid currentColor',
@@ -178,7 +257,7 @@ const ProductsPage = () => {
                                 disableSwap
                             />
                         </Box>
-                        <p className=''><span className='text-gray-500'>Price:</span> 50 <span className=''><FontAwesomeIcon icon={faMinus} /></span> 1,500</p>
+                        <p className=''><span className='text-gray-500'>Price:</span> {priceRange[0].toLocaleString()}$ <span className=''><FontAwesomeIcon icon={faMinus} /></span> {priceRange[1].toLocaleString()}$</p>
                     </div>
                 </div>
                 {/* rating category */}
@@ -196,41 +275,24 @@ const ProductsPage = () => {
                     <div
                         className={`overflow-auto transition-all ease-out duration-500 space-y-2 ${categoriesToggle.ratingToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}
                     >
-                        <div className='flex lg:items-center gap-2'>
-                            <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="5" name="rating" value="5" />
-                            <label className='flex items-center flex-wrap gap-2 cursor-pointer' htmlFor="5">
-                                <Rating name="read-only" size='small' value={5} readOnly />
-                                <span className=''>5.0</span>
-                            </label>
-                        </div>
-                        <div className='flex lg:items-center gap-2'>
-                            <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="4" name="rating" value="4" />
-                            <label className='flex items-center flex-wrap gap-2 cursor-pointer' htmlFor="4">
-                                <Rating name="read-only" size='small' value={4} readOnly />
-                                <span>4.0 & up</span>
-                            </label>
-                        </div>
-                        <div className='flex lg:items-center gap-2'>
-                            <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="3" name="rating" value="3" />
-                            <label className='flex items-center flex-wrap gap-2 cursor-pointer' htmlFor="3">
-                                <Rating name="read-only" size='small' value={3} readOnly />
-                                <span>3.0 & up</span>
-                            </label>
-                        </div>
-                        <div className='flex lg:items-center gap-2'>
-                            <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="2" name="rating" value="2" />
-                            <label className='flex items-center flex-wrap gap-2 cursor-pointer' htmlFor="2">
-                                <Rating name="read-only" size='small' value={2} readOnly />
-                                <span>2.0 & up</span>
-                            </label>
-                        </div>
-                        <div className='flex lg:items-center gap-2'>
-                            <input className='w-4 h-4 accent-green-600 cursor-pointer' type="checkbox" id="1" name="rating" value="1" />
-                            <label className='flex items-center flex-wrap gap-2 cursor-pointer' htmlFor="1">
-                                <Rating name="read-only" size='small' value={1} readOnly />
-                                <span>1.0 & up</span>
-                            </label>
-                        </div>
+                        {
+                            [5, 4, 3, 2, 1].map((rating, i) => (
+                                <div key={i} className='flex items-center gap-1 mb-2'>
+                                    <input
+                                        type="checkbox"
+                                        id={`rating-${rating}`}
+                                        value={rating}
+                                        checked={ratingFilter.includes(rating)}
+                                        onChange={handleRatingChange}
+                                        className="checkbox checkbox-sm checkbox-success"
+                                    />
+                                    <label htmlFor={`rating-${rating}`} className='cursor-pointer'>
+                                        <Rating value={rating} readOnly size="small" />
+                                    </label>
+                                    <p className='text-gray-400'>({allProducts.filter(product => Math.floor(product.rating) === rating).length})</p>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
                 {/* popular tag category */}
@@ -270,21 +332,22 @@ const ProductsPage = () => {
                 <div className=''>
                     <h2 className='text-xl font-semibold mb-4'>Sale Products</h2>
                     {
-                        productDetails.slice(0, 3).map((productDetail, i) => (
+                        allProducts.slice(0, 3).map((productDetail, i) => (
                             <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
                             </MiniProductCard>
                         ))
                     }
                     {
-                        productDetails.slice(0, 3).map((productDetail, i) => (
+                        allProducts.slice(0, 3).map((productDetail, i) => (
                             <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
                             </MiniProductCard>
                         ))
                     }
                 </div>
             </aside>
+
             {/* Product list */}
-            <aside className='ml-10 col-start-5 md:col-start-4 xl:col-start-3 col-end-13 h-full relative'>
+            <aside className='ml-8 col-start-5 md:col-start-4 xl:col-start-3 col-end-13 h-full relative'>
                 <div className='flex justify-between items-center mb-8'>
                     <div className="flex items-center space-x-4">
                         <label htmlFor="sort-by" className="text-gray-600">Sort by:</label>
@@ -296,19 +359,32 @@ const ProductsPage = () => {
                         </select>
                     </div>
                     <div>
-                        <p className='text-gray-500'><span className='text-black font-semibold'>{productDetails.length}</span> Results Found</p>
+                        <p className='text-gray-500'><span className='text-black font-semibold'>{filteredProducts.length}</span> Results Found</p>
                     </div>
+
                 </div>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-10'>
-                    {
-                        currentPageData.map((productDetail, i) => (
-                            <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
-                        ))
-                    }
-                </div>
-                <div className='absolute bottom-0 left-0 right-0'>
-                    <Pagination currentPage={currentPage} totalPages={Math.ceil(productDetails.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE={3} />
-                </div>
+                {
+                    loading ? <Spinner /> : (
+                        currentPageData.length === 0 ? (
+                            <div className='grid place-content-center min-h-[20vh]'>
+                                <h1>There are no products listed this category. </h1>
+                            </div>
+                        ) : (
+                            <>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-10'>
+                                    {
+                                        currentPageData.map((productDetail, i) => (
+                                            <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
+                                        ))
+                                    }
+                                </div>
+                                <div className='absolute bottom-0 left-0 right-0'>
+                                    <Pagination currentPage={currentPage} totalPages={Math.ceil(filteredProducts.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE={3} />
+                                </div>
+                            </>
+                        )
+                    )
+                }
             </aside>
         </section>
     );

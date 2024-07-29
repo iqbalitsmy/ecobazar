@@ -22,7 +22,7 @@ const Newsletter = () => {
                         type="text" name="email" id=""
                         placeholder='Your email address'
                     />
-                    <input className='px-8 rounded-3xl text-base font-semibold bg-green-500 hover:bg-green-600 text-white absolute top-0 bottom-0 -right-0' type="button" value="Subscribe" />
+                    <input className='px-8 rounded-3xl text-base font-semibold bg-green-500 hover:bg-green-600 text-white absolute top-0 bottom-0 -right-0 cursor-pointer' type="button" value="Subscribe" />
                 </div>
             </div>
         </section>
