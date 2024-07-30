@@ -17,7 +17,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 100,
-        "date": "2023-01-15"
+        "dateOfAdd": "2023-01-15"
     },
     {
         "_id": 2,
@@ -36,7 +36,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 85,
-        "date": "2023-02-10"
+        "dateOfAdd": "2023-02-10"
     },
     {
         "_id": 3,
@@ -55,7 +55,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 90,
-        "date": "2023-03-05"
+        "dateOfAdd": "2023-03-05"
     },
     {
         "_id": 4,
@@ -74,7 +74,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 75,
-        "date": "2023-04-15"
+        "dateOfAdd": "2023-04-15"
     },
     {
         "_id": 5,
@@ -93,7 +93,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 95,
-        "date": "2023-05-20"
+        "dateOfAdd": "2023-05-20"
     },
     {
         "_id": 6,
@@ -112,7 +112,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 110,
-        "date": "2023-06-25"
+        "dateOfAdd": "2023-06-25"
     },
     {
         "_id": 7,
@@ -131,7 +131,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 110,
-        "date": "2023-06-25"
+        "dateOfAdd": "2023-06-25"
     },
     {
         "_id": 8,
@@ -150,7 +150,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 45,
-        "date": "2023-06-09"
+        "dateOfAdd": "2023-06-09"
     },
     {
         "_id": 9,
@@ -169,7 +169,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 67,
-        "date": "2023-06-03"
+        "dateOfAdd": "2023-06-03"
     },
     {
         "_id": 10,
@@ -188,7 +188,7 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 74,
-        "date": "2023-06-15"
+        "dateOfAdd": "2023-06-15"
     },
     {
         "_id": 11,
@@ -207,7 +207,7 @@
         "tags": ["Fresh Fruit", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 84,
-        "date": "2023-06-01"
+        "dateOfAdd": "2023-06-01"
     }
 ]
 

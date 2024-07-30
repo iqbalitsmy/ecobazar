@@ -40,7 +40,7 @@ const ProductsPage = () => {
     // sort by
     const [sortBy, setSortBy] = useState('latest');
     // filter by popular tag
-    const [popularTag, setPopularTag] = useState(['Fresh Fruit', "Vegetables"]);
+    const [popularTags, setPopularTags] = useState([]);
 
     // pagination part
     const [currentPage, setCurrentPage] = useState(1);
@@ -51,7 +51,8 @@ const ProductsPage = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/fakeJsonData.json');
-                const products = response.data;
+                let products = response.data;
+
                 setAllProducts(products);
 
                 setLoading(false);
@@ -68,6 +69,7 @@ const ProductsPage = () => {
     // categories and filter products
     const filteredProducts = useMemo(() => {
         let products = allProducts;
+
         // category filtering
         if (selectedCategories !== 'All Categories') {
             products = products.filter(product => product.category === selectedCategories);
@@ -80,6 +82,12 @@ const ProductsPage = () => {
         if (ratingFilter.length > 0) {
             products = products.filter(product => ratingFilter.includes(Math.floor(product.rating)));
         }
+        // filter by Popular Tag
+        if (popularTags.length > 0) {
+            products = products.filter(product =>
+                product.tags.some(tag => popularTags.includes(tag))
+            );
+        }
         // sort by
         switch (sortBy) {
             case 'price-low-to-high':
@@ -90,32 +98,16 @@ const ProductsPage = () => {
                 break;
             // sort by number of sales
             case 'top-sales':
-                products = products.sort((a, b) => b.sales - a.sales);
+                products = products.sort((a, b) => b.noOfSale - a.noOfSale);
                 break;
             // sort by date of add
             default:
-                products = products.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+                products = products.sort((a, b) => new Date(b.dateOfAdd) - new Date(a.dateOfAdd));
                 break;
-        }
-        // filter by Popular Tag
-        if (popularTag) {
-            let p = [];
-            for (let i = 0; i < products.length; i++) {
-                for (let j = 0; j < products[i].tags.length; j++) {
-                    for (let k = 0; k < popularTag.length; k++) {
-                        if (products[i].tags[j] === popularTag[k]) {
-                            p.push(products[i]);
-                            break;
-                        }
-
-                    }
-                }
-            }
-            console.log(p)
         }
 
         return products;
-    }, [allProducts, selectedCategories, priceRange, ratingFilter, sortBy, popularTag]);
+    }, [allProducts, selectedCategories, priceRange, ratingFilter, sortBy, popularTags]);
 
     // pagination
     const currentPageData = useMemo(() => {
@@ -125,7 +117,7 @@ const ProductsPage = () => {
 
         // Get the current page data
         return filteredProducts.slice(startIndex, endIndex);
-    }, [filteredProducts, currentPage, itemsPerPage]);
+    }, [filteredProducts, currentPage, itemsPerPage, sortBy]);
 
 
     // Function to handle page change
@@ -145,18 +137,10 @@ const ProductsPage = () => {
         setSelectedCategories(categoryName);
     }, []);
 
-    // categories radio button
-    const controlProps = (item) => ({
-        checked: selectedCategories === item,
-        onChange: handleCategoriesBtnChange,
-        value: item,
-        name: 'color-radio-button',
-        inputProps: { 'aria-label': item },
-    });
-
     // handle rating
     const handleRatingChange = useCallback((event) => {
         const rating = parseInt(event.target.value);
+        // rating already exist or not
         setRatingFilter(prev => prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]);
     }, []);
 
@@ -165,6 +149,20 @@ const ProductsPage = () => {
         setSortBy(event.target.value);
     }, []);
 
+    // handle popular tags
+    const handlePopularTags = useCallback((tag) => {
+        // previous tags exists or not
+        setPopularTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
+    }, []);
+
+    // categories radio button style
+    const controlProps = (item) => ({
+        checked: selectedCategories === item,
+        onChange: handleCategoriesBtnChange,
+        value: item,
+        name: 'color-radio-button',
+        inputProps: { 'aria-label': item },
+    });
 
     // for page navigation
     useEffect(() => {
@@ -311,7 +309,13 @@ const ProductsPage = () => {
                         className={`overflow-auto transition-all ease-out duration-500 flex flex-wrap gap-2 ${categoriesToggle.popularTagToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}
                     >
                         {
-                            allCategories.map((allCategori, i) => (<button key={i} className='px-2 py-1 text-sm bg-gray-200 hover:bg-[#00B207] hover:text-white rounded-full inline-block' type="button">{allCategori}</button>))
+                            allCategories.map((allCategory, i) => (<button key={i}
+                                className={`px-2 py-1 text-sm rounded-full inline-block ${popularTags.includes(allCategory) ? "bg-[#00B207] hover:bg-green-600 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
+                                type="button"
+                                onClick={() => handlePopularTags(allCategory)}
+                            >
+                                {allCategory}
+                            </button>))
                         }
                     </div>
                 </div>
@@ -351,11 +355,35 @@ const ProductsPage = () => {
                 <div className='flex justify-between items-center mb-8'>
                     <div className="flex items-center space-x-4">
                         <label htmlFor="sort-by" className="text-gray-600">Sort by:</label>
-                        <select id="sort-by" className="px-4 py-2 rounded-md border border-solid border-gray-300 bg-transparent focus:outline-none focus:border-green-500">
-                            <option value="volvo" className="py-1">Latest</option>
-                            <option value="saab" className="py-1">Top Sales</option>
-                            <option value="opel" className="py-1">Price Low to High</option>
-                            <option value="audi" className="py-1">Price High to Low</option>
+                        <select
+                            id="sort-by"
+                            className="px-4 py-2 rounded-md border border-solid border-gray-300 bg-transparent focus:outline-none focus:border-green-500 bg-white"
+                            onChange={handleSortChange}
+                        >
+                            <option
+                                value="latest"
+                                className=""
+                            >
+                                Latest
+                            </option>
+                            <option
+                                value="top-sales"
+                                className="py-1"
+                            >
+                                Top Sales
+                            </option>
+                            <option
+                                value="price-low-to-high"
+                                className="py-1"
+                            >
+                                Price Low to High
+                            </option>
+                            <option
+                                value="price-high-to-low"
+                                className="py-1"
+                            >
+                                Price High to Low
+                            </option>
                         </select>
                     </div>
                     <div>
