@@ -1,10 +1,10 @@
 import React, { useContext, useState, useCallback, useMemo, useEffect, memo } from 'react';
 import { Rating } from '@mui/material';
-import ProductModal from '../../Components/ProductsPage/ProductModal';
 import { Link } from 'react-router-dom';
 import addToCartProducts from '../../utils/useAddToCartData';
 import { SnackbarContext } from '../../Layout/ProductsLayout';
 import addToWishlistProducts from '../../utils/useAddToWishlist';
+import ProductModal from '../ProductModal/ProductModal';
 
 // Memoized Icons component to prevent re-renders
 const Icons = memo(({ handleOpen, handleAddWishlistData, Wishlist }) => (
@@ -85,9 +85,9 @@ const ProductCard = ({ productDetail }) => {
     }), []);
 
     return (
-        <div className='max-h-[320px] max-w-[280px] mx-auto border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-md hover:shadow-green-300'>
+        <div className='h-full max-w-[280px] mx-auto border-solid border-gray-200 hover:border-green-600 border-[1px] rounded-md shadow-md hover:shadow-green-300'>
             <div
-                className='h-full w-full relative'
+                className='h-[200px] w-full relative mb-4'
                 {...hoverHandlers}
             >
                 <div className={`absolute right-4 top-4 space-y-2 ${isHovered ? `block` : `hidden`}`}>
@@ -117,7 +117,7 @@ const ProductCard = ({ productDetail }) => {
                         onClick={() => handleAddToCartData(productDetail._id)}
                     >
                         <a className={`${addToCart ? "" : "pointer-events-none"}`} href="/products/shopping-cart/">
-                            <svg height={"28px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                            <svg className={`${addToCart ? "fill-white " : "fill-[#231f20]"}`} height={"28px"} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                                 <path d="M27 25.15 25.28 10.5a2.93 2.93 0 0 0-3-2.5h-1.35c0-.19 0-.38-.06-.57-.22-1.54-.41-2.87-1.59-4a4.51 4.51 0 0 0-6.56 0c-1.18 1.14-1.37 2.47-1.59 4 0 .19 0 .38-.06.57H9.69a2.93 2.93 0 0 0-3 2.5L5 25.15a4.13 4.13 0 0 0 1 3.26A4.87 4.87 0 0 0 9.72 30h12.56a4.87 4.87 0 0 0 3.64-1.59A4.13 4.13 0 0 0 27 25.15zM13.11 7.71c.22-1.52.34-2.21 1-2.85A2.78 2.78 0 0 1 16 4a2.78 2.78 0 0 1 1.89.86c.66.64.78 1.33 1 2.85V8h-5.8c.01-.1.01-.19.02-.29zm11.31 19.37a2.83 2.83 0 0 1-2.14.92H9.72a2.83 2.83 0 0 1-2.14-.92 2.14 2.14 0 0 1-.58-1.7l1.7-14.65a.94.94 0 0 1 1-.73H11c0 .38.05.76.1 1.14a1 1 0 1 0 2-.28c0-.29 0-.57-.06-.86H19c0 .29 0 .57-.06.86a1 1 0 0 0 .8 1.14h.14a1 1 0 0 0 1-.86c.05-.38.08-.76.1-1.14h1.34a.94.94 0 0 1 1 .73L25 25.38a2.14 2.14 0 0 1-.58 1.7z" data-name="shopping bag" />
                             </svg>
                         </a>

@@ -4,7 +4,7 @@
         "_id": 1,
         "title": "Green Apple",
         "price": 20,
-        "offPercentage": 20,
+        "offPercentage": 0,
         "newPrice": 5,
         "thumbnail": "https://yodeli.in/cdn/shop/products/green-apple-organic-fruit.png",
         "images": ["https://yodeli.in/cdn/shop/products/green-apple-organic-fruit.png", "https://images.squarespace-cdn.com/content/v1/5a8d04ec4c0dbfcf5f37aa83/1530549561267-EB9AZHTWDYOYMGUGKXI5/greenapple.886511184.1200x1200.jpg"],
@@ -16,8 +16,9 @@
         "category": "fresh fruit",
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
-        "noOfSale": 100,
-        "dateOfAdd": "2023-01-15"
+        "noOfSale": 1000,
+        "dateOfAdd": "2023-01-15",
+        "isFeatured": false
     },
     {
         "_id": 2,
@@ -36,7 +37,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 85,
-        "dateOfAdd": "2023-02-10"
+        "dateOfAdd": "2023-02-10",
+        "isFeatured": true
     },
     {
         "_id": 3,
@@ -55,13 +57,14 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 90,
-        "dateOfAdd": "2023-03-05"
+        "dateOfAdd": "2023-03-05",
+        "isFeatured": false
     },
     {
         "_id": 4,
         "title": "Chanise Cabbage",
         "price": 20.05,
-        "offPercentage": 20,
+        "offPercentage": 30,
         "newPrice": 16,
         "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt3sIBVOAtr2WO-M80-ynqyHwmLcLk9alEQ&s",
         "images": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJfXzq7vZfTv-Bik1vL_-jmkt_G_c_0aUsg&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU4sxPx8LjfBhixVP3Quk5VAuQ4NKa0TPfVA&s"],
@@ -74,7 +77,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 75,
-        "dateOfAdd": "2023-04-15"
+        "dateOfAdd": "2023-04-15",
+        "isFeatured": true
     },
     {
         "_id": 5,
@@ -93,7 +97,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 95,
-        "dateOfAdd": "2023-05-20"
+        "dateOfAdd": "2023-05-20",
+        "isFeatured": false
     },
     {
         "_id": 6,
@@ -112,7 +117,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 110,
-        "dateOfAdd": "2023-06-25"
+        "dateOfAdd": "2023-06-25",
+        "isFeatured": true
     },
     {
         "_id": 7,
@@ -131,7 +137,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 110,
-        "dateOfAdd": "2023-06-25"
+        "dateOfAdd": "2023-06-25",
+        "isFeatured": false
     },
     {
         "_id": 8,
@@ -150,7 +157,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 45,
-        "dateOfAdd": "2023-06-09"
+        "dateOfAdd": "2023-06-09",
+        "isFeatured": false
     },
     {
         "_id": 9,
@@ -169,7 +177,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 67,
-        "dateOfAdd": "2023-06-03"
+        "dateOfAdd": "2023-06-03",
+        "isFeatured": true
     },
     {
         "_id": 10,
@@ -188,7 +197,8 @@
         "tags": ["Vegetables", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 74,
-        "dateOfAdd": "2023-06-15"
+        "dateOfAdd": "2023-06-15",
+        "isFeatured": true
     },
     {
         "_id": 11,
@@ -207,7 +217,8 @@
         "tags": ["Fresh Fruit", "Healthy", "Chinese", "Cabbage", "Green Cabbage"],
         "status": "",
         "noOfSale": 84,
-        "dateOfAdd": "2023-06-01"
+        "dateOfAdd": "2023-06-01",
+        "isFeatured": true
     }
 ]
 

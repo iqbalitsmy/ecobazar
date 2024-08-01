@@ -1,5 +1,5 @@
 import { Box, Modal } from '@mui/material';
-import ProductDetails from '../../Shared/ProductDetails/ProductDetails';
+import ProductDetails from '../ProductDetails/ProductDetails';
 
 const ProductModal = ({ productDetail, open, setOpen }) => {
 

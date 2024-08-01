@@ -99,8 +99,8 @@ const WishlistProducts = () => {
                             key={i}
                             className='border-solid border-gray-200 border-[1px]'
                         >
-                            <td className='flex items-center gap-2 text-start pl-3'>
-                                <img className='max-h-20 w-auto' loading="lazy" src={wishlistProduct.thumbnail} alt="" />
+                            <td className='flex items-center gap-2 text-start pl-3 my-2'>
+                                <img className='h-20 w-auto max-w-24' loading="lazy" src={wishlistProduct.thumbnail} alt="" />
                                 <h3>{wishlistProduct.title}</h3>
                             </td>
                             <td className=''>

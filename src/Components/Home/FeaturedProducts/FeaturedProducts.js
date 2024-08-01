@@ -13,23 +13,33 @@ import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 
 import ProductCard from '../../../Shared/ProductCard/ProductCard';
-import MiniProductCard from '../MiniProductCard/MiniProductCard';
 import axios from 'axios';
 import Spinner from '../../../Shared/Spinner/Spinner';
+import MiniProductCard from '../../../Shared/MiniProductCard/MiniProductCard';
 
 
 const FeaturedProducts = () => {
     // fetch data
-    const [productDetails, setProductDetails] = useState([]);
+    const [featuredProducts, setFeaturedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [topSales, setTopSales] = useState([]);
+    const [topRated, setTopRated] = useState([]);
+    const [hotDeals, setHotDeals] = useState([]);
 
     // fetch data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/fakeJsonData.json');
-                setProductDetails(response.data);
+                const products = response.data;
+                setFeaturedProducts(products.filter(p => p.isFeatured === true));
+
+                setTopSales(products.toSorted((a, b) => b.noOfSale - a.noOfSale));
+                setTopRated(products.toSorted((a, b) => b.rating - a.rating));
+                setHotDeals(products.toSorted((a, b) => b.offPercentage - a.offPercentage));
+
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -38,9 +48,7 @@ const FeaturedProducts = () => {
         };
 
         fetchData();
-    }, [])
-
-    // console.log(productDetails)
+    }, []);
 
     if (loading) return <Spinner></Spinner>
 
@@ -73,7 +81,7 @@ const FeaturedProducts = () => {
                     className="mySwiper"
                 >
                     {
-                        productDetails.map((productDetail, i) => (
+                        featuredProducts.map((productDetail, i) => (
                             <SwiperSlide className='pb-4' key={i}>
                                 <ProductCard productDetail={productDetail}></ProductCard>
                             </SwiperSlide>
@@ -81,20 +89,20 @@ const FeaturedProducts = () => {
                     }
                 </Swiper>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 <div className=''>
                     <h2 className='text-lg font-semibold mb-3 text-gray-600'>Hot Deals</h2>
                     {
-                        productDetails.slice(0, 3).map((productDetail, i) => (
+                        hotDeals.slice(0, 3).map((productDetail, i) => (
                             <MiniProductCard key={i} productDetail={productDetail} >
                             </MiniProductCard>
                         ))
                     }
                 </div>
                 <div className=''>
-                    <h2 className='text-lg font-semibold mb-3 text-gray-600'>Best Seller</h2>
+                    <h2 className='text-lg font-semibold mb-3 text-gray-600'>Best Sales</h2>
                     {
-                        productDetails.slice(0, 3).map((productDetail, i) => (
+                        topSales.slice(0, 3).map((productDetail, i) => (
                             <MiniProductCard key={i} productDetail={productDetail} >
                             </MiniProductCard>
                         ))
@@ -103,7 +111,7 @@ const FeaturedProducts = () => {
                 <div className=''>
                     <h2 className='text-lg font-semibold mb-3 text-gray-600'>Top Rated</h2>
                     {
-                        productDetails.slice(0, 3).map((productDetail, i) => (
+                        topRated.slice(0, 3).map((productDetail, i) => (
                             <MiniProductCard key={i} productDetail={productDetail} >
                             </MiniProductCard>
                         ))

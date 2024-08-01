@@ -1,8 +1,8 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { Rating } from '@mui/material';
-import ProductModal from '../../ProductsPage/ProductModal';
-import { SnackbarContext } from '../../../Layout/ProductsLayout';
-import addToCartProducts from '../../../utils/useAddToCartData';
+import addToCartProducts from '../../utils/useAddToCartData';
+import { SnackbarContext } from '../../Layout/ProductsLayout';
+import ProductModal from '../ProductModal/ProductModal';
 
 // Memorized Icons component to prevent re-renders
 const Icons = React.memo(({ handleOpen, handleAddToCartData }) => (

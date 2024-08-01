@@ -4,14 +4,15 @@ import { faAngleDown, faAngleUp, faMinus } from '@fortawesome/free-solid-svg-ico
 import { Box, FormControlLabel, Radio, Rating, Slider } from '@mui/material';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
 import Pagination from '../../Shared/Pagination/Pagination ';
-import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
-import adBanner from '../../assets/banner/bannar-produc-page.png'
+import adBanner from '../../assets/banner/bannar-produc-page.png';
 import axios from 'axios';
 import Spinner from '../../Shared/Spinner/Spinner';
 import { PageNavContext } from '../../Provider/PageNavProvider';
+import { useSearchParams } from 'react-router-dom';
+import MiniProductCard from '../../Shared/MiniProductCard/MiniProductCard';
 
 
-const allCategories = ["Fresh Fruit", "Vegetables", "Cooking", "Snacks", "Beverages", "Beauty & Health", "Bread & Bakery"]
+const allCategories = ["All Categories", "Fresh Fruit", "Vegetables", "Fish", "Chicken and Meat", "Drink and Water", "Yogurt and Ice Cream", "Cake and Bread", "Butter and Cream", "Cooking"]
 
 
 const ProductsPage = () => {
@@ -31,8 +32,6 @@ const ProductsPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // All Categories
-    const [selectedCategories, setSelectedCategories] = useState('All Categories');
     // price slider
     const [priceRange, setPriceRange] = useState([0, 100]);
     // filter by rating
@@ -46,13 +45,16 @@ const ProductsPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 20;
 
+    // categories query string
+    const [searchParams, setSearchParams] = useSearchParams({ category: "all categories" });
+
     // fetch data
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/fakeJsonData.json');
                 let products = response.data;
-
+                setSearchParams({ category: searchParams.get('category') });
                 setAllProducts(products);
 
                 setLoading(false);
@@ -63,16 +65,17 @@ const ProductsPage = () => {
         };
 
         fetchData();
-    }, []);
+    }, [searchParams, setSearchParams]);
 
 
     // categories and filter products
     const filteredProducts = useMemo(() => {
         let products = allProducts;
+        const categoryQuery = searchParams.get('category').replaceAll("-", " ");
 
         // category filtering
-        if (selectedCategories !== 'All Categories') {
-            products = products.filter(product => product.category === selectedCategories);
+        if (categoryQuery !== 'all categories') {
+            products = products.filter(product => product.category === categoryQuery);
         }
         // price filtering
         if (priceRange[0] !== 0 || priceRange[1] !== 100) {
@@ -107,7 +110,7 @@ const ProductsPage = () => {
         }
 
         return products;
-    }, [allProducts, selectedCategories, priceRange, ratingFilter, sortBy, popularTags]);
+    }, [allProducts, priceRange, ratingFilter, sortBy, popularTags, searchParams]);
 
     // pagination
     const currentPageData = useMemo(() => {
@@ -126,15 +129,17 @@ const ProductsPage = () => {
         setCurrentPage(page);
     }, []);
 
-    const handlePriceChange = useCallback((event, newRange) => {
-        // console.log(newRange)
-        setPriceRange(newRange);
-    }, []);
-
     // handle categories Radio btn
     const handleCategoriesBtnChange = useCallback((event) => {
         const categoryName = event.target.value;
-        setSelectedCategories(categoryName);
+
+        setSearchParams({ category: categoryName.split(" ").join("-") });
+    }, [setSearchParams]);
+
+    // handle price change
+    const handlePriceChange = useCallback((event, newRange) => {
+        // console.log(newRange)
+        setPriceRange(newRange);
     }, []);
 
     // handle rating
@@ -157,7 +162,7 @@ const ProductsPage = () => {
 
     // categories radio button style
     const controlProps = (item) => ({
-        checked: selectedCategories === item,
+        checked: searchParams.get('category').replaceAll("-", " ") === item,
         onChange: handleCategoriesBtnChange,
         value: item,
         name: 'color-radio-button',
@@ -166,8 +171,8 @@ const ProductsPage = () => {
 
     // for page navigation
     useEffect(() => {
-        setPageNav([{ title: "Categories", navLink: "/products" }, { title: selectedCategories, navLink: "" }]);
-    }, [setPageNav, selectedCategories]);
+        setPageNav([{ title: "Categories", navLink: "/products" }, { title: searchParams.get('category'), navLink: "" }]);
+    }, [setPageNav, searchParams]);
 
     if (error) return <p>Error: {error.message}</p>;
 
@@ -402,7 +407,9 @@ const ProductsPage = () => {
                                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-10'>
                                     {
                                         currentPageData.map((productDetail, i) => (
-                                            <div><ProductCard key={i} productDetail={productDetail}></ProductCard></div>
+                                            <div className='h-full'>
+                                                <ProductCard key={i} productDetail={productDetail}></ProductCard>
+                                            </div>
                                         ))
                                     }
                                 </div>

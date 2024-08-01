@@ -13,11 +13,11 @@ import { FreeMode, Pagination } from 'swiper/modules';
 import ProductDetails from '../../Shared/ProductDetails/ProductDetails';
 import ProductsDes from './ProductsDes';
 import ProductCard from '../../Shared/ProductCard/ProductCard';
-import MiniProductCard from '../../Components/Home/MiniProductCard/MiniProductCard';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Spinner from '../../Shared/Spinner/Spinner';
 import { PageNavContext } from '../../Provider/PageNavProvider';
+import MiniProductCard from '../../Shared/MiniProductCard/MiniProductCard';
 
 const ProductsDetailsPage = () => {
     const { setPageNav } = useContext(PageNavContext);
@@ -48,7 +48,7 @@ const ProductsDetailsPage = () => {
 
     // for page navigation
     useEffect(() => {
-        setPageNav([{ title: "Categories", navLink: "/products" }, { title: "Categories", navLink: "/products/" }, { title: `${productDetail?.title}`, navLink: "" }]);
+        setPageNav([{ title: "Categories", navLink: "/products" }, { title: productDetail?.category, navLink: `/products/` }, { title: `${productDetail?.title}`, navLink: "" }]);
     }, [setPageNav, productDetail]);
 
 

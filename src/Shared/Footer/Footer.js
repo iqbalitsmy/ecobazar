@@ -8,11 +8,15 @@ const Footer = () => {
     return (
         <section className='bg-[#1A1A1A]'>
             <div className='container mx-5 sm:mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 justify-between text-gray-50 gap-6 py-16'>
+
                 <div className='space-y-4'>
                     <figure>
-                        <img className='max-w-[20vW]' src={logo} alt="Ecobazar" />
+                        <a href={"/"}>
+                            <img className='max-w-[20vW]' src={logo} alt="Ecobazar" />
+                        </a>
                     </figure>
                     <p className='text-sm text-gray-400 md:w-3/4'>Morbi cursus porttitor enim lobortis molestie. Duis gravida turpis dui, eget bibendum magn.</p>
+                    {/* social media */}
                     <div className='flex items-center gap-2'>
                         <div className='p-2 rounded-full hover:bg-[#00B207] fill-gray-300 hover:fill-white cursor-pointer'>
                             <svg height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 290">
@@ -52,16 +56,18 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+                {/* My Account */}
                 <div className='space-y-2'>
                     <h4 className='text-xl font-semibold'>My Account</h4>
                     <hr className='border-solid border-b border-green-600 w-[24px]' />
                     <ul className='text-gray-300 space-y-2'>
-                        <li><a className='hover:text-gray-50' href="">My Account</a></li>
-                        <li><a className='hover:text-gray-50' href="">Order History</a></li>
-                        <li><a className='hover:text-gray-50' href="">Shoping Cart</a></li>
-                        <li><a className='hover:text-gray-50' href="">Wishlist</a></li>
+                        <li><a className='hover:text-gray-50' href="/user/dashboard">My Account</a></li>
+                        <li><a className='hover:text-gray-50' href="/user/dashboard/order-history">Order History</a></li>
+                        <li><a className='hover:text-gray-50' href="/user/dashboard/shopping-cart">Shopping Cart</a></li>
+                        <li><a className='hover:text-gray-50' href="/user/dashboard/wishlist">Wishlist</a></li>
                     </ul>
                 </div>
+                {/* Helps */}
                 <div className='space-y-2'>
                     <h4 className='text-xl font-semibold'>Helps</h4>
                     <hr className='border-solid border-b border-green-600 w-[24px]' />
@@ -72,6 +78,7 @@ const Footer = () => {
                         <li><a className='hover:text-gray-50' href="">Privacy Policy</a></li>
                     </ul>
                 </div>
+                {/* proxy */}
                 <div className='space-y-2'>
                     <h4 className='text-xl font-semibold'>Proxy</h4>
                     <hr className='border-solid border-b border-green-600 w-[24px]' />
@@ -82,6 +89,7 @@ const Footer = () => {
                         <li><a className='hover:text-gray-50' href="">Track Order</a></li>
                     </ul>
                 </div>
+                {/* Download Mobile App */}
                 <div className='space-y-4'>
                     <h4 className='text-lg font-semibold'>Download Mobile App</h4>
                     <hr className='border-solid border-b border-green-600 w-[24px]' />
@@ -96,7 +104,7 @@ const Footer = () => {
                         <div className='flex items-center bg-[#444] p-2 gap-2'>
                             <FontAwesomeIcon className='text-2xl' icon={faGooglePlay} />
                             <div>
-                            <p className='text-[12px] text-gray-400'>Download on the</p>
+                                <p className='text-[12px] text-gray-400'>Download on the</p>
                                 <p className='font-semibold'>Google Play</p>
                             </div>
                         </div>

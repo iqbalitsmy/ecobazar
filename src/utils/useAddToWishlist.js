@@ -1,7 +1,7 @@
 // handle add to wishlist
 export default function addToWishlistProducts(_id) {
     const prevStoredProducts = JSON.parse(localStorage.getItem('addToWishlist'));
-    console.log(prevStoredProducts)
+    // console.log(prevStoredProducts)
 
     if (prevStoredProducts) {
         // if product already exist than remove

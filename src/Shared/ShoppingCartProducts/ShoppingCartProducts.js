@@ -114,8 +114,8 @@ const ShoppingCartProducts = () => {
                         {
                             addToCartsProducts.map((addToCartsProduct, i) => (
                                 <tr key={i} className='border-solid border-gray-100 border-2'>
-                                    <td className='flex items-center gap-2 text-start pl-3'>
-                                        <img className='max-h-28 w-auto' loading="lazy" src={addToCartsProduct.thumbnail} alt="" />
+                                    <td className='flex items-center gap-2 text-start pl-3 py-2'>
+                                        <img className='h-24 w-28' loading="lazy" src={addToCartsProduct.thumbnail} alt="" />
                                         <h3>{addToCartsProduct.title}</h3>
                                     </td>
                                     <td className=''>
