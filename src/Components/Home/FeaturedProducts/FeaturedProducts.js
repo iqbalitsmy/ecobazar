@@ -90,36 +90,42 @@ const FeaturedProducts = () => {
                 </Swiper>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-                <div className=''>
+                <div className='h-full'>
                     <h2 className='text-lg font-semibold mb-3 text-gray-600'>Hot Deals</h2>
-                    {
-                        hotDeals.slice(0, 3).map((productDetail, i) => (
-                            <MiniProductCard key={i} productDetail={productDetail} >
-                            </MiniProductCard>
-                        ))
-                    }
+                    <div className='grid gap-4'>
+                        {
+                            hotDeals.slice(0, 3).map((productDetail, i) => (
+                                <MiniProductCard key={i} productDetail={productDetail} >
+                                </MiniProductCard>
+                            ))
+                        }
+                    </div>
                 </div>
-                <div className=''>
+                <div className='h-full'>
                     <h2 className='text-lg font-semibold mb-3 text-gray-600'>Best Sales</h2>
-                    {
-                        topSales.slice(0, 3).map((productDetail, i) => (
-                            <MiniProductCard key={i} productDetail={productDetail} >
-                            </MiniProductCard>
-                        ))
-                    }
+                    <div className='grid gap-4'>
+                        {
+                            topSales.slice(0, 3).map((productDetail, i) => (
+                                <MiniProductCard key={i} productDetail={productDetail} >
+                                </MiniProductCard>
+                            ))
+                        }
+                    </div>
                 </div>
-                <div className=''>
+                <div className='h-full'>
                     <h2 className='text-lg font-semibold mb-3 text-gray-600'>Top Rated</h2>
-                    {
-                        topRated.slice(0, 3).map((productDetail, i) => (
-                            <MiniProductCard key={i} productDetail={productDetail} >
-                            </MiniProductCard>
-                        ))
-                    }
+                    <div className='grid gap-4'>
+                        {
+                            topRated.slice(0, 3).map((productDetail, i) => (
+                                <MiniProductCard key={i} productDetail={productDetail} >
+                                </MiniProductCard>
+                            ))
+                        }
+                    </div>
                 </div>
                 {
                     banner && (<div className='h-full w-full'>
-                        <img className='h-full object-contain' loading="lazy" src={banner} alt="" />
+                        <img className='h-full object-contain mx-auto' loading="lazy" src={banner} alt="" />
                     </div>)
                 }
             </div>

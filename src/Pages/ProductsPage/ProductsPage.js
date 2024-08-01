@@ -338,20 +338,22 @@ const ProductsPage = () => {
                     </button>
                 </div>
                 {/* Sale products */}
-                <div className=''>
+                <div>
                     <h2 className='text-xl font-semibold mb-4'>Sale Products</h2>
-                    {
-                        allProducts.slice(0, 3).map((productDetail, i) => (
-                            <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
-                            </MiniProductCard>
-                        ))
-                    }
-                    {
-                        allProducts.slice(0, 3).map((productDetail, i) => (
-                            <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
-                            </MiniProductCard>
-                        ))
-                    }
+                    <div className='grid gap-2'>
+                        {
+                            allProducts.slice(0, 3).map((productDetail, i) => (
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
+                                </MiniProductCard>
+                            ))
+                        }
+                        {
+                            allProducts.slice(0, 3).map((productDetail, i) => (
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
+                                </MiniProductCard>
+                            ))
+                        }
+                    </div>
                 </div>
             </aside>
 

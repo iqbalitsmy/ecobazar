@@ -65,12 +65,14 @@ const ProductsDetailsPage = () => {
                     </div>
                     <div className='min-w-44 overflow-auto hidden md:block'>
                         <h2 className='text-lg font-semibold mb-3 text-gray-600'>Related Products</h2>
+                        <div className='grid gap-2'>
                         {
                             productDetails.slice(0, 4).map((productDetail, i) => (
                                 <MiniProductCard key={i} productPage={true} productDetail={productDetail} style={"max-w-[30vw]"} >
                                 </MiniProductCard>
                             ))
                         }
+                        </div>
                     </div>
                 </div>
                 <ProductsDes></ProductsDes>

@@ -134,7 +134,8 @@ const ProductDetails = ({ productDetail }) => {
                             <p>{productQuantity}</p>
                         </div>
                         <button
-                            className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block'
+                            className='px-[10px] py-[6px] rounded-full bg-gray-100 border-none inline-block disabled:opacity-50'
+                            disabled={(productQuantity >= quantity)}
                             type="button"
                             onClick={handleQuantityIncrement}
                         >
