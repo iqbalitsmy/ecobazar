@@ -1,0 +1,27 @@
+.swiper-button-prev {
+    background-image: url(../../../assets/icon/left-arrow.svg);
+}
+
+.swiper-button-next {
+    background-image: url(../../../assets/icon/right-arrow.svg);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-repeat: no-repeat;
+    background-size: 18px auto;
+    background-position: center;
+    padding: 21px 21px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid rgb(219, 216, 216);
+    opacity: 0.9;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none;
+}
+
+.mySwiper {
+}

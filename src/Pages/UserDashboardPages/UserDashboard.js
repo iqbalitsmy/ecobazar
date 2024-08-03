@@ -1,15 +1,37 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { orderHistory } from '../../assets/fakeData/fakeData';
 import OrderHistory from './UserOrdersHistoryPage/OrderHistory';
 import { PageNavContext } from '../../Provider/PageNavProvider';
+import fetchData from '../../utils/fetchData';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 const UserDashboard = () => {
     const { setPageNav } = useContext(PageNavContext);
+    // fetch data
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const result = await fetchData('http://localhost:3000/fakeOrders.json');
+                setOrders(result);
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, []);
 
     useEffect(() => {
         setPageNav([{ title: "account", navLink: "/user/dashboard" }, { title: "dashboard", navLink: "" }]);
     }, [setPageNav])
+
+    if (error) return <p className='text-center h-[40vh] text-red-400 font-medium text-lg'>Error: {error.message}</p>;
 
     return (
         <>
@@ -39,7 +61,10 @@ const UserDashboard = () => {
                     <p>Recent Order History</p>
                     <Link to={"/user/dashboard/order-history"} className='text-[#00B207] font-medium'>View All</Link>
                 </div>
-                <OrderHistory orders={orderHistory.slice(0, 3)}></OrderHistory>
+                {
+                    loading ? <Spinner></Spinner> : (<OrderHistory orders={orders.slice(0, 3)}></OrderHistory>)
+
+                }
             </div>
         </>
     );

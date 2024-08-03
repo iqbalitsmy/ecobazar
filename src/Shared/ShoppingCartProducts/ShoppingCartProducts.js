@@ -115,7 +115,9 @@ const ShoppingCartProducts = () => {
                             addToCartsProducts.map((addToCartsProduct, i) => (
                                 <tr key={i} className='border-solid border-gray-100 border-2'>
                                     <td className='flex items-center gap-2 text-start pl-3 py-2'>
-                                        <img className='h-24 w-28' loading="lazy" src={addToCartsProduct.thumbnail} alt="" />
+                                        <figure className='h-20 w-24 grid place-items-center'>
+                                            <img className='h-20 w-auto object-center' loading="lazy" src={addToCartsProduct.thumbnail} alt="" />
+                                        </figure>
                                         <h3>{addToCartsProduct.title}</h3>
                                     </td>
                                     <td className=''>
@@ -207,8 +209,14 @@ const ShoppingCartProducts = () => {
                     <p>Total</p>
                     <p className='font-medium text-black'>${totalPrice.toFixed(2)}</p>
                 </div>
+                {/* Proceed to checkout */}
                 <div className='w-full'>
-                    <input className='w-full px-6 py-2 rounded-3xl text-base font-semibold bg-primary-color hover:bg-green-500 text-white cursor-pointer' type="button" value="Proceed to checkout" />
+                    <a
+                        href="/products/checkout"
+                        className={`w-full px-6 py-2 rounded-3xl text-base font-semibold bg-primary-color hover:bg-green-600 text-white ${addToCartsProducts.length > 0 ? "" : "pointer-events-none bg-gray-400"}`}
+                    >
+                        Proceed to checkout
+                    </a>
                 </div>
             </div>
         </div>

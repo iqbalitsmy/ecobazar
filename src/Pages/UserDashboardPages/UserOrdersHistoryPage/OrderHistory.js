@@ -1,6 +1,5 @@
 import React from 'react';
 import formattedDateName from '../../../utils/useGetFormatedDate';
-import { Link } from 'react-router-dom';
 
 const OrderHistory = ({ orders }) => {
     return (
@@ -16,14 +15,14 @@ const OrderHistory = ({ orders }) => {
             </thead>
             <tbody>
                 {
-                    orders.map((data) => (
-                        <tr key={data._id} className='text-gray-800'>
-                            <td className='text-sm py-3 pl-4'>#{data._id}</td>
-                            <td className='text-sm py-3'>{formattedDateName(data.date)}</td>
-                            <td className='text-sm py-3'><span className='font-medium'>${data.totalPrice.toFixed(2)}</span> ({data.numberOfItems} Products)</td>
-                            <td className='text-sm py-3'>{data.deliveryStatus}</td>
+                    orders.map((order) => (
+                        <tr key={order._id} className='text-gray-800'>
+                            <td className='text-sm py-3 pl-4'>#{order._id}</td>
+                            <td className='text-sm py-3'>{formattedDateName(order.orderDate)}</td>
+                            <td className='text-sm py-3'><span className='font-medium'>${order.totalAmount.toFixed(2)}</span> ({order.productList.length} Products)</td>
+                            <td className='text-sm py-3 capitalize'>{order.orderStatus}</td>
                             <td className='text-center'>
-                                <Link to={`/user/dashboard/order-history/${data._id}`} className='text-[#00B207] font-medium'>View Details</Link>
+                                <a href={`/user/dashboard/order-history/${order._id}`} className='text-[#00B207] font-medium'>View Details</a>
                             </td>
                         </tr>
                     ))

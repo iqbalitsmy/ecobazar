@@ -40,6 +40,7 @@ const Checkout = () => {
     return (
         <section className='container mx-auto min-h-[60vh] lg:min-h-screen lg:w-[90%] mb-10'>
             <form className='mt-10 flex justify-between gap-4'>
+                {/* Billing Information */}
                 <div className='flex-grow'>
                     <h3 className='text-2xl font-semibold mb-4'>Billing Information</h3>
                     <div className='text-gray-700'>
@@ -172,7 +173,8 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-                <div className='p-4 border-solid border-[1px] border-gray-200 min-w-80 rounded-md'>
+                {/* Order Summery */}
+                <div className='p-4 h-fit border-solid border-[1px] border-gray-200 min-w-80 rounded-md'>
                     <h3 className='text-xl font-semibold mb-4'>Order Summery</h3>
                     <div className='flex items-center justify-between mb-4'>
                         <div className='flex gap-2 items-center'>

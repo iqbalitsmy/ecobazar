@@ -97,49 +97,19 @@ ColorlibStepIcon.propTypes = {
     icon: PropTypes.node,
 };
 
-const steps = ['Order received', 'Processing', 'On the way', 'Delivered'];
+const steps = ['order received', 'processing', 'on the way', 'delivered'];
 
-const ProgressTracker = () => {
+const ProgressTracker = ({ step }) => {
     return (
-        // <div className="w-full max-w-4xl mx-auto p-4">
-        //     <div className=''>
-        //         <div className='w-full flex justify-between items-center text-center'>
-        //             {/* <div className='bg-gray-100 rounded-full absolute z-0 bottom-[60px] right-0 left-0'>
-        //                 <div className='rounded-full bg-primary-color w-[50%] h-3'>
-        //                 </div>
-        //             </div> */}
-        //             <div className='relative'>
-        //                 <div className='bg-primary-color text-white text-2xl inline-block rounded-full px-4 py-2 mb-4 after:absolute after:top-1/2 after:transform  after:-translate-y-1/2 after:w-32 after:h-4 after:bg-primary-color after:-z-10'>
-        //                     <span className=''>&#10003;</span>
-        //                 </div>
-        //                 <p className='text-secondary-color'>Order received</p>
-        //             </div>
-        //             <div className=''>
-        //                 <div className='bg-primary-color text-white inline-block rounded-full px-4 py-3 mb-4'>
-        //                     <span className=''>02</span>
-        //                 </div>
-        //                 <p className='text-secondary-color'>Processing</p>
-        //             </div>
-        //             <div className=''>
-        //                 <div className='bg-white text-secondary-color border-dashed border-secondary-color border-2 inline-block rounded-full px-4 py-3 mb-4'>
-        //                     <span>03</span>
-        //                 </div>
-        //                 <p>On the way</p>
-        //             </div>
-        //             <div className=''>
-        //                 <div className='bg-white text-secondary-color border-dashed border-secondary-color border-2 inline-block rounded-full px-4 py-3 mb-4'>
-        //                     <span>04</span>
-        //                 </div>
-        //                 <p>Delivered</p>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
         <div>
-            <Stepper alternativeLabel activeStep={2} connector={<ColorlibConnector />}>
+            <Stepper alternativeLabel activeStep={steps.indexOf(step) + 1} connector={<ColorlibConnector />}>
                 {steps.map((label) => (
                     <Step key={label}>
-                        <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                        <StepLabel StepIconComponent={ColorlibStepIcon}>
+                            <p className='capitalize'>
+                                {label}
+                            </p>
+                        </StepLabel>
                     </Step>
                 ))}
             </Stepper>

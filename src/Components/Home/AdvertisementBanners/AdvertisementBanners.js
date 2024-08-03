@@ -38,7 +38,6 @@ const bannerDetails = [
     }
 ]
 
-
 const AdvertisementBanners = () => {
     return (
         <div className='py-12 mb-10 bg-[#EDF2EE]'>
@@ -57,8 +56,15 @@ const AdvertisementBanners = () => {
                 className="mySwiper container mx-auto"
             >
                 <SwiperSlide>
-                    <div className='h-64 w-full grid lg:grid-cols-2 items-center px-8 lg:px-12 rounded-lg' style={{ backgroundImage: `url(${bannerDetails[0].bg})`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-                        <div className='text-slate-100 space-y-4'>
+                    <div className='h-64 w-full grid lg:grid-cols-2 items-center px-8 lg:px-12 rounded-lg'
+                        style={{
+                            backgroundImage: `url(${bannerDetails[0].bg})`,
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover"
+                        }}
+                    >
+                        <div className='text-slate-100 grid gap-2'>
                             <h1 className='text-4xl font-bold'>{bannerDetails[0].title}</h1>
                             <p className='text-[#ccc]'>Starting at <span className='text-white text-lg font-semibold'>$14.99</span></p>
                             <button className='px-5 py-1 rounded-3xl font-semibold text-green-500 bg-white hover:bg-slate-100 ' type="button">Shop Now
