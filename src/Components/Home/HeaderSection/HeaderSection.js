@@ -28,7 +28,7 @@ const bannerDetails = [
         offerPercent: 0,
         link: "/products?category=fresh-fruit",
         bg: banner2,
-    }
+    },
 ]
 
 const HeaderSection = () => {

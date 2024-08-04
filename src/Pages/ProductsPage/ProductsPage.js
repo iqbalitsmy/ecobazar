@@ -171,7 +171,7 @@ const ProductsPage = () => {
 
     // for page navigation
     useEffect(() => {
-        setPageNav([{ title: "Categories", navLink: "/products" }, { title: searchParams.get('category'), navLink: "" }]);
+        setPageNav([{ title: "Categories", navLink: "/products" }, { title: searchParams.get('category').replaceAll("-", " "), navLink: "" }]);
     }, [setPageNav, searchParams]);
 
     if (error) return <p>Error: {error.message}</p>;

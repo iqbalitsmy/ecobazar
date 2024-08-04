@@ -1,0 +1,26 @@
+[
+    {
+        "_id": 1,
+        "order_id": 1,
+        "payment_method": "Credit Card",
+        "payment_status": "completed",
+        "amount": 150.00,
+        "payment_date": "2024-07-15T10:30:00Z"
+    },
+    {
+        "_id": 2,
+        "order_id": 2,
+        "payment_method": "PayPal",
+        "payment_status": "pending",
+        "amount": 85.50,
+        "payment_date": "2024-07-20T12:30:00Z"
+    },
+    {
+        "_id": 3,
+        "order_id": 3,
+        "payment_method": "Credit Card",
+        "payment_status": "completed",
+        "amount": 200.00,
+        "payment_date": "2024-07-25T14:30:00Z"
+    }
+]

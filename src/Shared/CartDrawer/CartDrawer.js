@@ -55,7 +55,7 @@ const CartDrawer = ({ open, setOpen }) => {
     // delete data
     const handleDeleteAddToCartData = (_id) => {
         const newAddToCartsData = addToCartsData.filter((d) => d._id !== _id)
-        
+
         setAddToCartsData(newAddToCartsData);
         // total price
         totalProductsPrice(newAddToCartsData);
@@ -74,13 +74,13 @@ const CartDrawer = ({ open, setOpen }) => {
         <Drawer
             anchor={"right"}
             sx={{
-
+                width: ""
             }}
             open={open} onClose={() => setOpen(false)}
         >
-            <div className='p-4 lg:p-10 h-full'>
-                <div className='pt-10 relative h-full'>
-                    <div className='mb-4 flex justify-between items-center text-xl font-medium'>
+            <div className='px-4 py-2 lg:p-10 h-full w-[75vw] sm:w-[50vw] lg:w-[35vw] min-w-fit'>
+                {/* <div className='pt-10 relative h-full'> */}
+                    <div className='h-[6%] pb-2 flex justify-between items-center text-xl font-medium'>
                         <h3>Shopping Card ({addToCartsData.length})</h3>
                         <button
                             className='cursor-pointer font-light'
@@ -90,7 +90,7 @@ const CartDrawer = ({ open, setOpen }) => {
                             <FontAwesomeIcon icon={faX} />
                         </button>
                     </div>
-                    <div className='overflow-auto'>
+                    <div className='overflow-auto h-[75%]'>
                         {
                             addToCartsData && addToCartsData.map(({
                                 _id,
@@ -99,7 +99,7 @@ const CartDrawer = ({ open, setOpen }) => {
                                 thumbnail,
                                 productQuantity,
                             }, i) => (
-                                <div key={_id}>
+                                <div key={_id} className='px-4'>
                                     <div className='flex justify-between items-center gap-2'>
                                         <div className='flex items-center'>
                                             <figure className='h-24 w-24 grid place-content-center'>
@@ -123,32 +123,32 @@ const CartDrawer = ({ open, setOpen }) => {
                             ))
                         }
                     </div>
-                    <div className='absolute bottom-0 w-full'>
-                        <div className='flex justify-between mb-6'>
+                    <div className='mb-4 h-[18%] pt-4'>
+                        <div className='flex justify-between mb-4'>
                             <p>{addToCartsData.length} Product</p>
                             <p className='font-semibold'>${totalPrice.toFixed(2)}</p>
                         </div>
                         <div className=''>
                             <div className='mb-4'>
-                                <button
-                                    className='py-[12px] px-1 font-semibold text-white w-full rounded-full bg-[#00B207]'
-                                    type="button"
+                                <a
+                                    href='/products/checkout'
+                                    className='py-[12px] px-1 font-semibold text-white w-full rounded-full bg-[#00B207] hover:bg-green-600 block text-center'
                                 >
                                     Checkout
-                                </button>
+                                </a>
                             </div>
                             <div>
-                                <button
-                                    className='py-[12px] px-1 font-semibold w-full rounded-full text-[#00B207] bg-green-50'
-                                    type="button"
+                                <a
+                                    href='/products/shopping-cart/'
+                                    className='py-[12px] px-1 font-semibold w-full rounded-full text-[#00B207] hover:bg-green-100 bg-green-50 block text-center'
                                 >
                                     Go To Cart
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
         </Drawer>
     );
 };

@@ -48,7 +48,7 @@ const ProductsDetailsPage = () => {
 
     // for page navigation
     useEffect(() => {
-        setPageNav([{ title: "Categories", navLink: "/products" }, { title: productDetail?.category, navLink: `/products/` }, { title: `${productDetail?.title}`, navLink: "" }]);
+        setPageNav([{ title: "Categories", navLink: "/products" }, { title: productDetail?.category, navLink: `/products/?category=${(productDetail?.category)?.replaceAll("-", " ")}` }, { title: `${productDetail?.title}`, navLink: "" }]);
     }, [setPageNav, productDetail]);
 
 
