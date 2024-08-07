@@ -10,7 +10,7 @@ import CartDrawer from '../Shared/CartDrawer/CartDrawer';
 import { MemoSnackbar } from '../Shared/Snackbar/Snackbar';
 import { SnackbarContext } from './ProductsLayout';
 
-const Home = () => {
+const Main = () => {
     // for menu drawer
     const [navOpen, setNavOpen] = useState(false);
     // for cart drawer
@@ -34,7 +34,7 @@ const Home = () => {
     return (
         <>
             <header className='container mx-auto'>
-                <nav>
+                <nav className=''>
                     <TopNav></TopNav>
                     <MiddleNav></MiddleNav>
                     <BottomNav navOpen={navOpen} setNavOpen={setNavOpen} cartOpen={cartOpen} setCartOpen={setCartOpen}></BottomNav>
@@ -49,7 +49,7 @@ const Home = () => {
                     </div>
                 </nav>
             </header>
-            <main className=''>
+            <main className='container mx-auto'>
                 <SnackbarContext.Provider value={{ snackbar, setSnackbar }}>
                     <Outlet></Outlet>
                 </SnackbarContext.Provider>
@@ -62,4 +62,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Main;

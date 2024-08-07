@@ -5,6 +5,7 @@ import addToCartProducts from '../../utils/useAddToCartData';
 import { SnackbarContext } from '../../Layout/ProductsLayout';
 import addToWishlistProducts from '../../utils/useAddToWishlist';
 import ProductModal from '../ProductModal/ProductModal';
+import { BadgeContext } from '../../Provider/BadgeProvider';
 
 // Memoized Icons component to prevent re-renders
 const Icons = memo(({ handleOpen, handleAddWishlistData, wishlist }) => (
@@ -33,6 +34,9 @@ const Icons = memo(({ handleOpen, handleAddWishlistData, wishlist }) => (
 ));
 
 const ProductCard = ({ productDetail }) => {
+    // get length of wishlist and cart products
+    const { updateBadgeDataFromLocalStorage } = useContext(BadgeContext);
+
     const { _id, title, newPrice, thumbnail, rating } = productDetail;
     // for preview and wishlist
     const [isHovered, setIsHovered] = useState(false);
@@ -53,31 +57,38 @@ const ProductCard = ({ productDetail }) => {
         const addToCartProducts = JSON.parse(localStorage.getItem("addToCartData"));
         const addToWishlist = JSON.parse(localStorage.getItem("addToWishlist"));
 
+        // to get length of wishlist and cart products
+        updateBadgeDataFromLocalStorage();
+
         if (addToCartProducts) {
             setAddToCart(() => addToCartProducts.some((a) => a._id === _id));
         }
         if (addToWishlist) {
             setWishlist(() => addToWishlist.includes(_id));
         }
-    }, [_id]);
+    }, [_id, updateBadgeDataFromLocalStorage]);
 
     const handleAddToCartData = useCallback((_id) => {
         addToCartProducts(_id, 1);
         setAddToCart(true)
-
-        setSnackbar([...snackbar, {
-            _id: snackbar.length + 1,
-            message: "1 new item(s) have been added to your cart",
-            type: "success",
-            isVisible: true,
-        }]);
-    }, [snackbar, setSnackbar]);
+        // badge change
+        updateBadgeDataFromLocalStorage();
+        // setSnackbar([...snackbar, {
+        //     _id: snackbar.length + 1,
+        //     message: "1 new item(s) have been added to your cart",
+        //     type: "success",
+        //     isVisible: true,
+        // }]);
+    }, [snackbar, setSnackbar, updateBadgeDataFromLocalStorage]);
 
     // add in wishlist
     const handleAddWishlistData = useCallback(() => {
         addToWishlistProducts(_id);
         setWishlist((prev) => !prev);
-    }, [_id]);
+        // badge change
+        updateBadgeDataFromLocalStorage();
+
+    }, [_id, updateBadgeDataFromLocalStorage]);
 
     // hover to show icon
     const hoverHandlers = useMemo(() => ({

@@ -1,11 +1,15 @@
 import { faMinus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Spinner from '../Spinner/Spinner';
 import fetchData from '../../utils/fetchData';
 import addToCartProducts from '../../utils/useAddToCartData';
+import { BadgeContext } from '../../Provider/BadgeProvider';
 
 const ShoppingCartProducts = () => {
+    // get length of wishlist and cart products
+    const { updateBadgeDataFromLocalStorage } = useContext(BadgeContext);
+
     const [addToCartsProducts, setAddToCartsProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -86,10 +90,15 @@ const ShoppingCartProducts = () => {
         // total price
         setTotalPrice(totalProductsPrice(newAddToCartsData));
 
-        // if new data is empty
-        if (newAddToCartsData.length === 0) return localStorage.removeItem('addToCartData');
-        // update store data
-        return localStorage.setItem("addToCartData", JSON.stringify(newAddToCartsData));
+        // Update local storage
+        if (newAddToCartsData.length === 0) {
+            localStorage.removeItem('addToCartData');
+        } else {
+            localStorage.setItem('addToCartData', JSON.stringify(newAddToCartsData));
+        }
+
+        // to get length of wishlist and cart products
+        return updateBadgeDataFromLocalStorage();
     }
 
 

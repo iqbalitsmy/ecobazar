@@ -7,8 +7,12 @@ import { SnackbarContext } from '../../Layout/ProductsLayout';
 import findProductsById from '../../utils/findProductsById';
 import fetchData from '../../utils/fetchData';
 import addToCartProducts from '../../utils/useAddToCartData';
+import { BadgeContext } from '../../Provider/BadgeProvider';
 
 const WishlistProducts = () => {
+    // get length of wishlist and cart products
+    const { updateBadgeDataFromLocalStorage } = useContext(BadgeContext);
+
     const [wishlistProducts, setWishlistProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -39,10 +43,14 @@ const WishlistProducts = () => {
             localStorage.setItem("addToWishlist", JSON.stringify(newAddToWishlist));
             setLoading(true);
 
-            setWishlistProducts(findProductsById(wishlistProducts, newAddToWishlist))
+            setWishlistProducts(findProductsById(wishlistProducts, newAddToWishlist));
+
+            // to get length of wishlist and cart products
+            updateBadgeDataFromLocalStorage();
+
             return setLoading(false);
         }
-    }, [wishlistProducts])
+    }, [wishlistProducts, updateBadgeDataFromLocalStorage])
 
     useEffect(() => {
         const getData = async () => {
@@ -52,6 +60,9 @@ const WishlistProducts = () => {
                     const result = await fetchData('http://localhost:3000/fakeJsonData.json');
                     setWishlistProducts(findProductsById(result, stored_ids))
                 }
+                // to get length of wishlist and cart products
+                // updateBadgeDataFromLocalStorage();
+
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -69,20 +80,23 @@ const WishlistProducts = () => {
     const handleAddToCartData = useCallback((_id) => {
         addToCartProducts(_id, 1);
 
-        setSnackbar([...snackbar, {
-            _id: snackbar.length + 1,
-            message: "1 new item(s) have been added to your cart",
-            type: "success",
-            isVisible: true,
-        }]);
-    }, [snackbar, setSnackbar]);
+        // to get length of wishlist and cart products
+        updateBadgeDataFromLocalStorage();
+
+        // setSnackbar([...snackbar, {
+        //     _id: snackbar.length + 1,
+        //     message: "1 new item(s) have been added to your cart",
+        //     type: "success",
+        //     isVisible: true,
+        // }]);
+    }, [snackbar, setSnackbar, updateBadgeDataFromLocalStorage]);
 
     if (loading) return <Spinner></Spinner>
 
     if (error) return <p>Error loading data: {error.message}</p>;
 
     return (
-        
+
         <table className='w-full'>
             <thead>
                 <tr className='text-gray-500 uppercase border-solid border-gray-200 border-[1px]'>

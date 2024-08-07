@@ -1,14 +1,39 @@
-import { faArrowRightFromBracket, faBagShopping, faGears, faHeart, faRotate } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBagShopping, faGears, faHeart, faL, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BadgeContext } from '../../../Provider/BadgeProvider';
 
 const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
     const [profileOpen, setProfileOpen] = useState(false);
+    const { wishlistProductsNo, cartProductsNo } = useContext(BadgeContext);
+
+    // for sticky nav
+    const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window !== undefined) {
+                let windowHeight = window.scrollY;
+                // window height changed
+                windowHeight > 110 ? setIsSticky(true) : setIsSticky(false);
+              }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    console.log(isSticky)
 
     return (
-        <div className='bg-black text-white flex justify-between items-center mb-3'>
+        <div
+            className={`bg-black text-white flex justify-between items-center mb-3 w-full container mx-auto overflow-hidden ${isSticky ? 'fixed top-0 z-10' : ''}`}
+        >
             {/* menu drawer */}
             <div className='flex items-center gap-6'>
                 <button type='button'
@@ -23,7 +48,7 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
             <div className='relative z-10'>
                 <div className='flex items-center gap-4 lg:gap-6 pr-4'>
                     {/* wishlist */}
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={wishlistProductsNo !== 0 ? wishlistProductsNo : 0} color="primary">
                         <Link
                             to={"/products/wishlist"}
                             className='cursor-pointer fill-[#ccc] hover:fill-white'
@@ -32,7 +57,7 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
                         </Link>
                     </Badge>
                     {/* cart */}
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={cartProductsNo !== 0 ? cartProductsNo : 0} color="primary">
                         {/* for smaller screen navigate to cart page */}
                         {
                             window.innerWidth < 400 ? (

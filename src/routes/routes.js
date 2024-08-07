@@ -1,19 +1,20 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
-import Home from "../Layout/Home";
+import Main from "../Layout/Main";
 import HomePage from "../Pages/Home/HomePage";
-import ProductsLayout from "../Layout/ProductsLayout";
 import ProductsPage from "../Pages/ProductsPage/ProductsPage";
 import ProductsDetailsPage from "../Pages/ProductsDetails/ProductsDetailsPage";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import ShoppingCart from "../Pages/ShoppingCart/ShoppingCart";
 import Checkout from "../Pages/Checkout/Checkout";
-import UserLayout from "../Layout/UserLayout";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegistrationPage from "../Pages/RegistrationPage/RegistrationPage";
 
 import { lazy } from "react";
 import DashboardShoppingCart from "../Pages/UserDashboardPages/DashboardShoppingCart";
 import PageNavProvider from "../Provider/PageNavProvider";
+import UserLayout from "../Layout/UserLayout";
+import ProductsLayout from "../Layout/ProductsLayout";
+import BadgeProvider from "../Provider/BadgeProvider";
 
 // lazy loading
 // const UserDashboardLayout = lazy(() => wait(3000).then(() => import("../Layout/UserDashboardLayout")));
@@ -27,96 +28,96 @@ const OrderDetails = lazy(() => import("../Pages/UserDashboardPages/UserOrdersHi
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home></Home>,
+        element: <BadgeProvider><Main /></BadgeProvider>,
         children: [
             {
                 path: "/",
                 element: <HomePage></HomePage>,
             },
-        ]
-    },
-    {
-        path: "/products",
-        element: <PageNavProvider><ProductsLayout /></PageNavProvider>,
-        children: [
             {
-                path: "",
-                element: <ProductsPage></ProductsPage>,
-            },
-            {
-                path: ":id",
-                element: <ProductsDetailsPage></ProductsDetailsPage>,
-                // loader: ({ params }) => fetch(`fakeJsonData.json`, {
-                //     method: "GET",
-                //     headers: {
-                //         'content-type': "application/json",
-                //     }
-                // })
-            },
-            {
-                path: "wishlist",
-                element: <Wishlist></Wishlist>,
-            },
-            {
-                path: "shopping-cart",
-                element: <ShoppingCart></ShoppingCart>,
-            },
-            {
-                path: "checkout",
-                element: <Checkout></Checkout>,
-            }
-        ]
-    },
-    {
-        path: "/user",
-        element: <PageNavProvider><UserLayout /></PageNavProvider>,
-        children: [
-            {
-                path: 'login',
-                element: <LoginPage></LoginPage>
-            },
-            {
-                path: 'register',
-                element: <RegistrationPage></RegistrationPage>
-            },
-            {
-                path: 'dashboard',
-                element: <UserDashboardLayout></UserDashboardLayout>,
+                path: "/products",
+                element: <PageNavProvider><ProductsLayout /></PageNavProvider>,
                 children: [
                     {
-                        path: '',
-                        element: <UserDashboard></UserDashboard>
+                        path: "",
+                        element: <ProductsPage />,
                     },
                     {
-                        path: 'order-history',
-                        element: <Outlet></Outlet>,
+                        path: ":id",
+                        element: <ProductsDetailsPage></ProductsDetailsPage>,
+                        // loader: ({ params }) => fetch(`fakeJsonData.json`, {
+                        //     method: "GET",
+                        //     headers: {
+                        //         'content-type': "application/json",
+                        //     }
+                        // })
+                    },
+                    {
+                        path: "wishlist",
+                        element: <Wishlist></Wishlist>,
+                    },
+                    {
+                        path: "shopping-cart",
+                        element: <ShoppingCart></ShoppingCart>,
+                    },
+                    {
+                        path: "checkout",
+                        element: <Checkout></Checkout>,
+                    }
+                ]
+            },
+            {
+                path: "/user",
+                element: <PageNavProvider><UserLayout></UserLayout></PageNavProvider>,
+                children: [
+                    {
+                        path: 'login',
+                        element: <LoginPage></LoginPage>
+                    },
+                    {
+                        path: 'register',
+                        element: <RegistrationPage></RegistrationPage>
+                    },
+                    {
+                        path: 'dashboard',
+                        element: <UserDashboardLayout></UserDashboardLayout>,
                         children: [
                             {
                                 path: '',
-                                element: <UserOrdersHistories></UserOrdersHistories>
+                                element: <UserDashboard></UserDashboard>
                             },
                             {
-                                path: ':id',
-                                element: <OrderDetails></OrderDetails>
+                                path: 'order-history',
+                                element: <Outlet></Outlet>,
+                                children: [
+                                    {
+                                        path: '',
+                                        element: <UserOrdersHistories></UserOrdersHistories>
+                                    },
+                                    {
+                                        path: ':id',
+                                        element: <OrderDetails></OrderDetails>
+                                    },
+                                ]
+                            },
+                            {
+                                path: 'wishlist',
+                                element: <DashboardWishlist></DashboardWishlist>
+                            },
+                            {
+                                path: 'shopping-cart',
+                                element: <DashboardShoppingCart></DashboardShoppingCart>
+                            },
+                            {
+                                path: 'setting',
+                                element: <UserSetting></UserSetting>
                             },
                         ]
                     },
-                    {
-                        path: 'wishlist',
-                        element: <DashboardWishlist></DashboardWishlist>
-                    },
-                    {
-                        path: 'shopping-cart',
-                        element: <DashboardShoppingCart></DashboardShoppingCart>
-                    },
-                    {
-                        path: 'setting',
-                        element: <UserSetting></UserSetting>
-                    },
                 ]
-            },
+            }
         ]
-    }
+    },
 ])
 
 function wait(time) {

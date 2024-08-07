@@ -4,6 +4,7 @@ import addToCartProducts from '../../utils/useAddToCartData';
 import { SnackbarContext } from '../../Layout/ProductsLayout';
 import ProductModal from '../ProductModal/ProductModal';
 import addToWishlistProducts from '../../utils/useAddToWishlist';
+import { BadgeContext } from '../../Provider/BadgeProvider';
 
 // Memorized Icons component to prevent re-renders
 const Icons = React.memo(({ handleOpen, handleAddToCartData, handleAddWishlistData, addToCart, wishlist }) => (
@@ -42,6 +43,9 @@ const Icons = React.memo(({ handleOpen, handleAddToCartData, handleAddWishlistDa
 ))
 
 const MiniProductCard = ({ productDetail, productPage = false, style }) => {
+    // get length of wishlist and cart products
+    const { updateBadgeDataFromLocalStorage } = useContext(BadgeContext);
+
     const { _id, title, newPrice, thumbnail, rating } = productDetail;
     const [isHovered, setIsHovered] = useState(false);
 
@@ -74,19 +78,25 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
         addToCartProducts(_id, 1);
         setAddToCart(true)
 
-        setSnackbar([...snackbar, {
-            _id: snackbar.length + 1,
-            message: "1 new item(s) have been added to your cart",
-            type: "success",
-            isVisible: true,
-        }]);
-    }, [snackbar, setSnackbar]);
+        // to get length of wishlist and cart products
+        updateBadgeDataFromLocalStorage();
+
+        // setSnackbar([...snackbar, {
+        //     _id: snackbar.length + 1,
+        //     message: "1 new item(s) have been added to your cart",
+        //     type: "success",
+        //     isVisible: true,
+        // }]);
+    }, [snackbar, setSnackbar, updateBadgeDataFromLocalStorage]);
 
     // add in wishlist
     const handleAddWishlistData = useCallback(() => {
         addToWishlistProducts(_id);
         setWishlist((prev) => !prev);
-    }, [_id]);
+
+        // to get length of wishlist and cart products
+        updateBadgeDataFromLocalStorage();
+    }, [_id, updateBadgeDataFromLocalStorage]);
 
     return (
         <div
