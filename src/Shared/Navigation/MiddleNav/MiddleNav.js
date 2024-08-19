@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const MiddleNav = () => {
     return (
-        <div className='py-3 mx-3 sm:mx-0 flex justify-between items-center'>
+        <div className='py-2 mx-3 sm:mx-0 flex justify-between items-center'>
             <figure className='w-1/3 sm:w-auto'>
                 <Link to={"/"}>
                     <img className='max-w-[20vW] min-w-[100px] h-auto' src={logo} alt="Ecobazar" />

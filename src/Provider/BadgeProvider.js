@@ -22,7 +22,7 @@ const BadgeProvider = ({ children }) => {
         }
     }
 
-    console.log(wishlistProductsNo, cartProductsNo);
+    // console.log(wishlistProductsNo, cartProductsNo);
 
     useEffect(() => {
         updateBadgeDataFromLocalStorage();

@@ -1,7 +1,7 @@
-import { faArrowRightFromBracket, faBagShopping, faGears, faHeart, faL, faRotate } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBagShopping, faGears, faHeart, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge } from '@mui/material';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BadgeContext } from '../../../Provider/BadgeProvider';
 
@@ -12,23 +12,34 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
     // for sticky nav
     const [isSticky, setIsSticky] = useState(false);
 
+    // for button disable
+    const [isDisabled, setIsDisabled] = useState(false);
+
     useEffect(() => {
         const handleScroll = () => {
-            if (window !== undefined) {
-                let windowHeight = window.scrollY;
-                // window height changed
-                windowHeight > 110 ? setIsSticky(true) : setIsSticky(false);
-              }
+            setIsSticky(window.scrollY > 50);
         };
 
-        window.addEventListener('scroll', handleScroll);
+        const handleResize = () => {
+            setIsDisabled(window.innerWidth >= 768);
+        };
 
+        // Initial setup
+        handleScroll();
+        handleResize();
+
+        // Event listeners
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+
+        // Clean up event listener on component unmount
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
-    console.log(isSticky)
+    // console.log(isSticky)
 
     return (
         <div
@@ -36,8 +47,10 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
         >
             {/* menu drawer */}
             <div className='flex items-center gap-6'>
-                <button type='button'
+                <button
                     className='p-3'
+                    type='button'
+                    disabled={isDisabled}
                     style={{ background: "var(--success-color)" }}
                     onClick={() => setNavOpen(!navOpen)}
                 >
@@ -45,7 +58,7 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
                 </button>
                 <p className='opacity-90'>All Categories</p>
             </div>
-            <div className='relative z-10'>
+            <div className='relative z-20'>
                 <div className='flex items-center gap-4 lg:gap-6 pr-4'>
                     {/* wishlist */}
                     <Badge badgeContent={wishlistProductsNo !== 0 ? wishlistProductsNo : 0} color="primary">
@@ -93,7 +106,7 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
                     onMouseEnter={() => setProfileOpen(true)}
                     onMouseLeave={() => setProfileOpen(false)}
                 >
-                    <div className={`${profileOpen ? "block" : "hidden"} absolute right-0`}>
+                    <div className={`${profileOpen ? "block" : "hidden"} absolute right-0 z-30`}>
                         <div className={`py-4 bg-white text-black shadow-md rounded-sm min-w-[10vw]`}>
                             <div className='mx-auto text-center grid gap-1 mb-2'>
                                 <img

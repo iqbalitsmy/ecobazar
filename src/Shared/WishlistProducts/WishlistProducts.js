@@ -95,8 +95,21 @@ const WishlistProducts = () => {
 
     if (error) return <p>Error loading data: {error.message}</p>;
 
-    return (
+    // if wishlist is empty
+    if (wishlistProducts.length === 0)
+        return (
+            <div className='grid place-content-center gap-4 h-[30vh]'>
+                <h3>There are no items in wishlist</h3>
+                <a
+                    href='/products/'
+                    className='py-2 px-4 text-center font-semibold rounded-full text-gray-900 bg-gray-200 hover:bg-gray-100'
+                >
+                    Return to shop
+                </a>
+            </div>
+        )
 
+    return (
         <table className='w-full'>
             <thead>
                 <tr className='text-gray-500 uppercase border-solid border-gray-200 border-[1px]'>
