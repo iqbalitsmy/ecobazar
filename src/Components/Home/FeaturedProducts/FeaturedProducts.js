@@ -32,7 +32,8 @@ const FeaturedProducts = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/fakeJsonData.json');
+                // const response = await axios.get('http://localhost:3000/fakeJsonData.json');
+                const response = await axios.get('fakeJsonData.json');
                 const products = response.data;
                 setFeaturedProducts(products.filter(p => p.isFeatured === true));
 

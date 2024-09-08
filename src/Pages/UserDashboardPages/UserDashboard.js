@@ -15,7 +15,8 @@ const UserDashboard = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const result = await fetchData('http://localhost:3000/fakeOrders.json');
+                // const result = await fetchData('http://localhost:3000/fakeOrders.json');
+                const result = await fetchData('./fakeOrders.json');
                 setOrders(result);
                 setLoading(false);
             } catch (error) {

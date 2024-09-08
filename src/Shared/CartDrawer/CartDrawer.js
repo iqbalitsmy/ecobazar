@@ -27,7 +27,8 @@ const CartDrawer = ({ open, setOpen }) => {
             try {
                 const storedProducts = JSON.parse(localStorage.getItem("addToCartData"));
                 if (storedProducts) {
-                    const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                    // const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                    const result = await fetchData('./fakeJsonData.json');
                     // find addToCart products based on id
                     let resultMap = {};
 

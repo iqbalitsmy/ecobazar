@@ -24,7 +24,8 @@ const NewestProducts = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const products = await fetchData('http://localhost:3000/fakeJsonData.json');
+                // const products = await fetchData('http://localhost:3000/fakeJsonData.json');
+                const products = await fetchData('./fakeJsonData.json');
                 setProductDetails(products.sort((a, b) => new Date(b.dateOfAdd) - new Date(a.dateOfAdd)));
                 setLoading(false);
             } catch (error) {

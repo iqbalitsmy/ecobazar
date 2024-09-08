@@ -11,7 +11,8 @@ const OrderProducts = ({ productId, quantity }) => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const products = await fetchData('http://localhost:3000/fakeJsonData.json');
+                // const products = await fetchData('http://localhost:3000/fakeJsonData.json');
+                const products = await fetchData('./fakeJsonData.json');
                 setProduct(products.find(p => p._id === productId));
                 setLoading(false);
             } catch (error) {

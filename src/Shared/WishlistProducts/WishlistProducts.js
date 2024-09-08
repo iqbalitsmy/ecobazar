@@ -57,7 +57,8 @@ const WishlistProducts = () => {
             try {
                 const stored_ids = JSON.parse(localStorage.getItem("addToWishlist"));
                 if (stored_ids) {
-                    const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                    // const result = await fetchData('http://localhost:3000/fakeJsonData.json');
+                    const result = await fetchData('./fakeJsonData.json');
                     setWishlistProducts(findProductsById(result, stored_ids))
                 }
                 // to get length of wishlist and cart products
