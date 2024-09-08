@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import fetchData from '../../utils/fetchData';
 import Spinner from '../../Shared/Spinner/Spinner';
+import fetchData from '../../utils/fetchData';
 
 
 const OrderProducts = ({ productId, quantity }) => {
@@ -11,8 +11,7 @@ const OrderProducts = ({ productId, quantity }) => {
     useEffect(() => {
         const getData = async () => {
             try {
-                // const products = await fetchData('http://localhost:3000/fakeJsonData.json');
-                const products = await fetchData('./fakeJsonData.json');
+                const products = await fetchData(window.location.origin+'/fakeJsonData.json');
                 setProduct(products.find(p => p._id === productId));
                 setLoading(false);
             } catch (error) {

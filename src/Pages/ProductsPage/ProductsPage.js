@@ -53,7 +53,7 @@ const ProductsPage = () => {
         const fetchData = async () => {
             try {
                 // const response = await axios.get('http://localhost:3000/fakeJsonData.json');
-                const response = await axios.get('./fakeJsonData.json');
+                const response = await axios.get(window.location.origin+'/fakeJsonData.json');
                 let products = response.data;
                 setSearchParams({ category: searchParams.get('category') });
                 setAllProducts(products);

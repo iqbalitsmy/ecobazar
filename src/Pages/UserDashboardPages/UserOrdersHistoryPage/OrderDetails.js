@@ -20,10 +20,8 @@ const OrderDetails = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                // const orders = await fetchData('http://localhost:3000/fakeOrders.json');
-                // const users = await fetchData('http://localhost:3000/fakeUserData.json');
-                const orders = await fetchData('./fakeOrders.json');
-                const users = await fetchData('./fakeUserData.json');
+                const orders = await fetchData(window.location.origin+'/fakeOrders.json');
+                const users = await fetchData(window.location.origin+'/fakeUserData.json');
                 const order = orders.find(o => o._id === parseInt(id))
                 setOrder(order);
                 setUser(users.find(u => u._id === order.userId));

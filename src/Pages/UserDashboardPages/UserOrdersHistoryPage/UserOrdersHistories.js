@@ -21,8 +21,7 @@ const UserOrdersHistories = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                // const result = await fetchData('http://localhost:3000/fakeOrders.json');
-                const result = await fetchData('./fakeOrders.json');
+                const result = await fetchData(window.location.origin+'/fakeOrders.json');
                 setOrders(result);
                 setCurrentPageData(() => result.slice(0, itemsPerPage));
                 setLoading(false);

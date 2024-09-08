@@ -34,8 +34,7 @@ const ProductsDetailsPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const response = await axios.get('http://localhost:3000/fakeJsonData.json');
-                const response = await axios.get('./fakeJsonData.json');
+                const response = await axios.get(window.location.origin+'/fakeJsonData.json');
                 setProductDetails(response.data);
                 setProductDetail(response.data.find((data) => data._id == id));
                 setLoading(false);
