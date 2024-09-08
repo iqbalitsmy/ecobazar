@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkecobazar=self.webpackChunkecobazar||[]).push([[668],{1668:(e,t,a)=>{a.r(t),a.d(t,{default:()=>r});var s=a(5043),n=a(4211),c=a(7489),u=a(579);const r=()=>{const{setPageNav:e}=(0,s.useContext)(c.o);return(0,s.useEffect)((()=>{e([{title:"account",navLink:"/user/dashboard"},{title:"wishlist",navLink:""}])}),[e]),(0,u.jsx)(n.A,{})}}}]);
+//# sourceMappingURL=668.c5694bda.chunk.js.map
