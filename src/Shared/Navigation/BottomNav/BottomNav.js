@@ -61,7 +61,7 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
             <div className='relative z-20'>
                 <div className='flex items-center gap-4 lg:gap-6 pr-4'>
                     {/* wishlist */}
-                    <Badge badgeContent={wishlistProductsNo !== 0 ? wishlistProductsNo : 0} color="primary">
+                    <Badge badgeContent={wishlistProductsNo} color="primary">
                         <Link
                             to={"/products/wishlist"}
                             className='cursor-pointer fill-[#ccc] hover:fill-white'
@@ -70,7 +70,7 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
                         </Link>
                     </Badge>
                     {/* cart */}
-                    <Badge badgeContent={cartProductsNo !== 0 ? cartProductsNo : 0} color="primary">
+                    <Badge badgeContent={cartProductsNo} color="primary">
                         {/* for smaller screen navigate to cart page */}
                         {
                             window.innerWidth < 400 ? (
