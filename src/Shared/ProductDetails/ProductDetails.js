@@ -63,13 +63,12 @@ const ProductDetails = ({ productDetail }) => {
 
     };
 
-    console.log(wishlist)
-
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-6'>
-            {/* products image */}
+
+            {/* ---------products image--------- */}
             <div className='w-full'>
-                <figure className='h-full w-full mb-8'>
+                <figure className='min-h-[40vh] h-full w-full mt-auto mb-8'>
                     <img className='max-h-[350px] h-full w-auto mx-auto' loading="lazy" src={productImage} alt="Product" />
                 </figure>
                 <div className='flex justify-center items-center gap-4'>
@@ -83,7 +82,7 @@ const ProductDetails = ({ productDetail }) => {
                     }
                 </div>
             </div>
-            {/* product details */}
+            {/* ---------product details----------- */}
             <div className=''>
                 <div className='space-y-4 pb-6 mb-4 border-solid border-0 border-b-[1px] border-gray-300'>
                     <div className='flex gap-4 flex-wrap items-center'>
@@ -107,7 +106,7 @@ const ProductDetails = ({ productDetail }) => {
                             <p className='text-gray-700 font-medium'>Brand:</p>
                             <img className='max-h-10 max-w-12' loading="lazy" src={brandImg} alt="" />
                         </div>
-                        {/* share item */}
+                        {/* -------------share item------------- */}
                         <div className='flex items-center gap-2'>
                             <p className='text-gray-700 font-medium'>Share item:</p>
                             <div className='p-2 rounded-full hover:bg-[#00B207] fill-black hover:fill-white cursor-pointer'>
