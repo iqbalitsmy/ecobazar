@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './UserSetting.css'
 import { PageNavContext } from '../../Provider/PageNavProvider';
+import profile from "../../assets/avatar.jpg"
 
 const UserSetting = () => {
     const { setPageNav } = useContext(PageNavContext);
@@ -22,7 +23,7 @@ const UserSetting = () => {
     };
 
     // handle image
-    const [selectedImage, setSelectedImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsPJ9cm0-r5p50py0yUzvM5ZtEB-xWoJRPRA&s");
+    const [selectedImage, setSelectedImage] = useState(profile);
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];

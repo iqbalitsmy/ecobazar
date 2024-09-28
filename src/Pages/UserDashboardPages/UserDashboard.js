@@ -4,6 +4,7 @@ import OrderHistory from './UserOrdersHistoryPage/OrderHistory';
 import { PageNavContext } from '../../Provider/PageNavProvider';
 import fetchData from '../../utils/fetchData';
 import Spinner from '../../Shared/Spinner/Spinner';
+import avatar from "../../assets/avatar.jpg"
 
 const UserDashboard = () => {
     const { setPageNav } = useContext(PageNavContext);
@@ -40,7 +41,7 @@ const UserDashboard = () => {
                     <img
                         className='h-24 w-24 rounded-full object-cover'
                         loading="lazy"
-                        src="https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
+                        src={avatar}
                         alt="Profile"
                     />
                     <h3 className='text-lg font-semibold'>Dianne Russell</h3>

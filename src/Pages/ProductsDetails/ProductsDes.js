@@ -4,6 +4,10 @@ import { Rating } from '@mui/material';
 import React, { useState } from 'react';
 import Reviewers from '../../Shared/Reviewers/Reviewers';
 import Pagination from '../../Shared/Pagination/Pagination ';
+import face1 from "../../assets/face/face-1.jpg"
+import face2 from "../../assets/face/face-2.avif"
+import face3 from "../../assets/face/face-3.avif"
+import face4 from "../../assets/face/face-4.avif"
 
 const ratings = [
     {
@@ -31,35 +35,35 @@ const ratings = [
 const reviews = [
     {
         name: "Kristin Watson",
-        avatar: "https://docs.material-tailwind.com/img/face-2.jpg",
+        avatar: face1,
         rating: 3.4,
         time: Date.now() - (30 * 60 * 1000),
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
     },
     {
         name: "Jane Cooper",
-        avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
+        avatar: face2,
         rating: 3.4,
         time: Date.now() - (34 * 24 * 60 * 60 * 1000),
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
     },
     {
         name: "Jacob Jones 3",
-        avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436185.jpg",
+        avatar: face3,
         rating: 3.4,
         time: Date.now() - (1 * 365.25 * 24 * 60 * 60 * 1000),
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
     },
     {
         name: "Ralph Edwards 4",
-        avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg",
+        avatar: face4,
         rating: 3.4,
         time: Date.now() - (1 * 30.44 * 24 * 60 * 60 * 1000),
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
     },
     {
         name: "Ralph Edwards",
-        avatar: "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436189.jpg",
+        avatar: face1,
         rating: 3.4,
         time: Date.now() - (1 * 30.44 * 24 * 60 * 60 * 1000),
         review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse modi perspiciatis omnis, delectus quos mollitia maiores. Architecto aspernatur quae odio fuga labore facilis optio nisi!",
@@ -166,7 +170,7 @@ const ProductsDes = () => {
                     {
                         (currentPageData.length === 3 || currentPage !== 1) && (<div className='absolute right-0'>
                             {/* Pagination component */}
-                            <Pagination currentPage={currentPage} totalPages={Math.ceil(reviews.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE = {2} />
+                            <Pagination currentPage={currentPage} totalPages={Math.ceil(reviews.length / itemsPerPage)} onPageChange={handlePageChange} PAGE_RANGE={2} />
                             {/* <Pagination currentPage={currentPage} totalPages={25} onPageChange={handlePageChange} PAGE_RANGE = {2} /> */}
                         </div>)
                     }

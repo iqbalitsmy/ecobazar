@@ -4,6 +4,7 @@ import { Badge } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BadgeContext } from '../../../Provider/BadgeProvider';
+import avatar from "../../../assets/avatar.jpg"
 
 const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
     const [profileOpen, setProfileOpen] = useState(false);
@@ -106,11 +107,11 @@ const BottomNav = ({ navOpen, setNavOpen, cartOpen, setCartOpen }) => {
                     onMouseEnter={() => setProfileOpen(true)}
                     onMouseLeave={() => setProfileOpen(false)}
                 >
-                    <div className={`${profileOpen ? "block" : "hidden"} absolute right-0 z-30`}>
+                    <div className={`${profileOpen ? "block z-50" : "hidden"} absolute right-0 z-30`}>
                         <div className={`py-4 bg-white text-black shadow-md rounded-sm min-w-[10vw]`}>
                             <div className='mx-auto text-center grid gap-1 mb-2'>
                                 <img
-                                    src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg" alt=""
+                                    src={avatar} alt=""
                                     className='h-12 w-12 mx-auto rounded-full'
                                 />
                                 <Link to={"/user/dashboard"} className='text-center hover:text-primary-color hover:underline'>Account</Link>
