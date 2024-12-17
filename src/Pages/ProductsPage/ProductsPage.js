@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Box, FormControlLabel, Radio, Rating, Slider } from '@mui/material';
@@ -53,7 +53,7 @@ const ProductsPage = () => {
         const fetchData = async () => {
             try {
                 // const response = await axios.get('http://localhost:3000/fakeJsonData.json');
-                const response = await axios.get(window.location.origin+'/fakeJsonData.json');
+                const response = await axios.get(window.location.origin + '/fakeJsonData.json');
                 let products = response.data;
                 setSearchParams({ category: searchParams.get('category') });
                 setAllProducts(products);
@@ -113,6 +113,8 @@ const ProductsPage = () => {
         return products;
     }, [allProducts, priceRange, ratingFilter, sortBy, popularTags, searchParams]);
 
+    console.log(filteredProducts)
+
     // pagination
     const currentPageData = useMemo(() => {
         // Calculate the index range for current page
@@ -121,45 +123,45 @@ const ProductsPage = () => {
 
         // Get the current page data
         return filteredProducts.slice(startIndex, endIndex);
-    }, [filteredProducts, currentPage, itemsPerPage, sortBy]);
+    }, [filteredProducts, currentPage, itemsPerPage]);
 
 
     // Function to handle page change
-    const handlePageChange = useCallback((page) => {
+    const handlePageChange = (page) => {
         // console.log(page)
         setCurrentPage(page);
-    }, []);
+    };
 
     // handle categories Radio btn
-    const handleCategoriesBtnChange = useCallback((event) => {
+    const handleCategoriesBtnChange = (event) => {
         const categoryName = event.target.value;
 
         setSearchParams({ category: categoryName.split(" ").join("-") });
-    }, [setSearchParams]);
+    };
 
     // handle price change
-    const handlePriceChange = useCallback((event, newRange) => {
+    const handlePriceChange = (event, newRange) => {
         // console.log(newRange)
         setPriceRange(newRange);
-    }, []);
+    };
 
     // handle rating
-    const handleRatingChange = useCallback((event) => {
+    const handleRatingChange = (event) => {
         const rating = parseInt(event.target.value);
         // rating already exist or not
         setRatingFilter(prev => prev.includes(rating) ? prev.filter(r => r !== rating) : [...prev, rating]);
-    }, []);
+    };
 
     // handle sorting
-    const handleSortChange = useCallback((event) => {
+    const handleSortChange = (event) => {
         setSortBy(event.target.value);
-    }, []);
+    };
 
     // handle popular tags
-    const handlePopularTags = useCallback((tag) => {
+    const handlePopularTags = (tag) => {
         // previous tags exists or not
         setPopularTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
-    }, []);
+    };
 
     // categories radio button style
     const controlProps = (item) => ({
@@ -204,7 +206,7 @@ const ProductsPage = () => {
                     <div className={`overflow-auto transition-all ease-out duration-500 grid gap-1 ${categoriesToggle.categoryToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}>
                         {
                             allCategories.map((allCategory, i) => (
-                                <div key={i} className=''>
+                                <div key={allCategory} className=''>
                                     <FormControlLabel
                                         value={allCategories}
                                         control={
@@ -315,13 +317,15 @@ const ProductsPage = () => {
                         className={`overflow-auto transition-all ease-out duration-500 flex flex-wrap gap-2 ${categoriesToggle.popularTagToggle ? "max-h-0 opacity-0" : "max-h-fit opacity-100"}`}
                     >
                         {
-                            allCategories.map((allCategory, i) => (<button key={i}
-                                className={`px-2 py-1 text-sm rounded-full inline-block ${popularTags.includes(allCategory) ? "bg-[#00B207] hover:bg-green-600 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
-                                type="button"
-                                onClick={() => handlePopularTags(allCategory)}
-                            >
-                                {allCategory}
-                            </button>))
+                            allCategories.map((allCategory, i) => (
+                                <button key={i}
+                                    className={`px-2 py-1 text-sm rounded-full inline-block ${popularTags.includes(allCategory) ? "bg-[#00B207] hover:bg-green-600 text-white" : "bg-gray-200 hover:bg-gray-300"}`}
+                                    type="button"
+                                    onClick={() => handlePopularTags(allCategory)}
+                                >
+                                    {allCategory}
+                                </button>
+                            ))
                         }
                     </div>
                 </div>
@@ -344,13 +348,13 @@ const ProductsPage = () => {
                     <div className='grid gap-2'>
                         {
                             allProducts.slice(0, 3).map((productDetail, i) => (
-                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
+                                <MiniProductCard key={productDetail._id} productPage={true} productDetail={productDetail} >
                                 </MiniProductCard>
                             ))
                         }
                         {
                             allProducts.slice(0, 3).map((productDetail, i) => (
-                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
+                                <MiniProductCard key={productDetail._id} productPage={true} productDetail={productDetail} >
                                 </MiniProductCard>
                             ))
                         }
@@ -411,7 +415,7 @@ const ProductsPage = () => {
                                     {
                                         currentPageData.map((productDetail, i) => (
                                             <div className='h-full'>
-                                                <ProductCard key={i} productDetail={productDetail}></ProductCard>
+                                                <ProductCard key={productDetail._id} productDetail={productDetail}></ProductCard>
                                             </div>
                                         ))
                                     }

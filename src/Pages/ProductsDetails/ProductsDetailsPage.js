@@ -36,7 +36,7 @@ const ProductsDetailsPage = () => {
             try {
                 const response = await axios.get(window.location.origin+'/fakeJsonData.json');
                 setProductDetails(response.data);
-                setProductDetail(response.data.find((data) => data._id == id));
+                setProductDetail(response.data.find((data) => data._id === parseInt(id)));
                 setLoading(false);
             } catch (error) {
                 setError(error);
