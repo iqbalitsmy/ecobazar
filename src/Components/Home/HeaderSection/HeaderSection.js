@@ -1,6 +1,6 @@
 import React from 'react';
-import banner1 from "../../../assets/banner/slider-banner1.png"
-import banner2 from "../../../assets/banner/slider-banner2.jpg"
+import banner1 from "../../../assets/banner/slider-banner1.webp"
+import banner2 from "../../../assets/banner/slider-banner2.webp"
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
