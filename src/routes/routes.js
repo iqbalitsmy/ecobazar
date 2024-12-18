@@ -120,10 +120,10 @@ const router = createBrowserRouter([
     },
 ])
 
-function wait(time) {
-    return new Promise(resolve => {
-        setTimeout(resolve, time);
-    })
-}
+// function wait(time) {
+//     return new Promise(resolve => {
+//         setTimeout(resolve, time);
+//     })
+// }
 
 export default router;

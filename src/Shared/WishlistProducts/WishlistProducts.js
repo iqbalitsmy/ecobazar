@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Pagination } from '@mui/material';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Spinner from '../Spinner/Spinner';
-import { SnackbarContext } from '../../Layout/ProductsLayout';
+// import { SnackbarContext } from '../../Layout/ProductsLayout';
 import findProductsById from '../../utils/findProductsById';
 import fetchData from '../../utils/fetchData';
 import addToCartProducts from '../../utils/useAddToCartData';
@@ -76,7 +76,7 @@ const WishlistProducts = () => {
     }, []);
 
     // snackbar
-    const { snackbar, setSnackbar } = useContext(SnackbarContext);
+    // const { snackbar, setSnackbar } = useContext(SnackbarContext);
 
     // add to cart
     const handleAddToCartData = useCallback((_id) => {
@@ -91,7 +91,7 @@ const WishlistProducts = () => {
         //     type: "success",
         //     isVisible: true,
         // }]);
-    }, [snackbar, setSnackbar, updateBadgeDataFromLocalStorage]);
+    }, [updateBadgeDataFromLocalStorage]);
 
     if (loading) return <Spinner></Spinner>
 

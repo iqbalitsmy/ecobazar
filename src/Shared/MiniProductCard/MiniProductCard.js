@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Rating } from '@mui/material';
 import addToCartProducts from '../../utils/useAddToCartData';
-import { SnackbarContext } from '../../Layout/ProductsLayout';
+// import { SnackbarContext } from '../../Layout/ProductsLayout';
 import ProductModal from '../ProductModal/ProductModal';
 import addToWishlistProducts from '../../utils/useAddToWishlist';
 import { BadgeContext } from '../../Provider/BadgeProvider';
@@ -42,7 +42,7 @@ const Icons = React.memo(({ handleOpen, handleAddToCartData, handleAddWishlistDa
     </>
 ))
 
-const MiniProductCard = ({ productDetail, productPage = false, style }) => {
+const MiniProductCard = ({ productDetail, productPage = false }) => {
     // get length of wishlist and cart products
     const { updateBadgeDataFromLocalStorage } = useContext(BadgeContext);
 
@@ -59,7 +59,7 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
     const handleOpen = () => setOpen(true);
 
     // snackbar
-    const { snackbar, setSnackbar } = useContext(SnackbarContext);
+    // const { snackbar, setSnackbar } = useContext(SnackbarContext);
 
     // wishlist and add to cart button
     useEffect(() => {
@@ -87,7 +87,7 @@ const MiniProductCard = ({ productDetail, productPage = false, style }) => {
         //     type: "success",
         //     isVisible: true,
         // }]);
-    }, [snackbar, setSnackbar, updateBadgeDataFromLocalStorage]);
+    }, [updateBadgeDataFromLocalStorage]);
 
     // add in wishlist
     const handleAddWishlistData = useCallback(() => {

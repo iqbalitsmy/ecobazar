@@ -68,7 +68,7 @@ const ProductsDetailsPage = () => {
                         <div className='grid gap-2'>
                         {
                             productDetails.slice(0, 4).map((productDetail, i) => (
-                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} style={"max-w-[30vw]"} >
+                                <MiniProductCard key={i} productPage={true} productDetail={productDetail} >
                                 </MiniProductCard>
                             ))
                         }

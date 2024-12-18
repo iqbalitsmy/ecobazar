@@ -6,7 +6,7 @@ export default function findProductsById(productDetails, _ids) {
         if (idsSets.has(product._id)) {
             return product;
         }
-        return;
+        return null;
     })
     return matchProducts;
 } 

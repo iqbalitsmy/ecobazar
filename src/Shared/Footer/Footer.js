@@ -19,7 +19,7 @@ const Footer = () => {
                     {/* social media */}
                     <div className='flex items-center gap-2'>
                         <div className='p-2 rounded-full hover:bg-[#00B207] fill-gray-300 hover:fill-white cursor-pointer'>
-                            <svg height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 290">
+                            <svg height="24px"  viewBox="0 0 290 290">
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
@@ -28,7 +28,7 @@ const Footer = () => {
                             </svg>
                         </div>
                         <div className='p-2 rounded-full hover:bg-[#00B207] fill-gray-300 hover:fill-white cursor-pointer'>
-                            <svg height={"24px"} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
+                            <svg height={"24px"} version="1.1" viewBox="0 0 512 512" xmlSpace="preserve">
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
@@ -39,7 +39,7 @@ const Footer = () => {
                             </svg>
                         </div>
                         <div className='p-2 rounded-full hover:bg-[#00B207] fill-gray-300 hover:fill-white cursor-pointer'>
-                            <svg height={"24px"} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xmlSpace="preserve">
+                            <svg height={"24px"} version="1.1" viewBox="0 0 512 512" xmlSpace="preserve">
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
@@ -72,10 +72,10 @@ const Footer = () => {
                     <h4 className='text-xl font-semibold'>Helps</h4>
                     <hr className='border-solid border-b border-green-600 w-[24px]' />
                     <ul className='text-gray-300 space-y-2'>
-                        <li><a className='hover:text-gray-50' href="">Contact</a></li>
-                        <li><a className='hover:text-gray-50' href="">Faqs</a></li>
-                        <li><a className='hover:text-gray-50' href="">Terms & Condition</a></li>
-                        <li><a className='hover:text-gray-50' href="">Privacy Policy</a></li>
+                        <li><a className='hover:text-gray-50' href="/contact">Contact</a></li>
+                        <li><a className='hover:text-gray-50' href="/faqs">Faqs</a></li>
+                        <li><a className='hover:text-gray-50' href="/terms">Terms & Condition</a></li>
+                        <li><a className='hover:text-gray-50' href="/privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
                 {/* proxy */}
@@ -83,10 +83,10 @@ const Footer = () => {
                     <h4 className='text-xl font-semibold'>Proxy</h4>
                     <hr className='border-solid border-b border-green-600 w-[24px]' />
                     <ul className='text-gray-300 space-y-2'>
-                        <li><a className='hover:text-gray-50' href="">About</a></li>
-                        <li><a className='hover:text-gray-50' href="">Shop</a></li>
-                        <li><a className='hover:text-gray-50' href="">Product</a></li>
-                        <li><a className='hover:text-gray-50' href="">Track Order</a></li>
+                        <li><a className='hover:text-gray-50' href="/about">About</a></li>
+                        <li><a className='hover:text-gray-50' href="/shop">Shop</a></li>
+                        <li><a className='hover:text-gray-50' href="/product">Product</a></li>
+                        <li><a className='hover:text-gray-50' href="/track-order">Track Order</a></li>
                     </ul>
                 </div>
                 {/* Download Mobile App */}
